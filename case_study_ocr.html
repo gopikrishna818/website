@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Krectivetimebox OCR Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- RAG Resume Chatbot -->
+  <div class="chatbot-container" id="chatbotContainer">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <i class="fas fa-robot"></i> Resume AI
+      </div>
+      <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <div class="chat-msg ai-msg">Hi! I'm Gopikrishna's AI assistant. Ask me anything about his experience, skills, or projects.</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Ask about OCR, Python, etc..." />
+      <button id="chatSend"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <button class="chatbot-toggle" id="chatbotToggle">
+    <i class="fas fa-comment-dots"></i>
+  </button>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  :root {
+    --bg: #f0ede8;
+    --card: #ffffff;
+    --card-dark: #1a1a1a;
+    --card-blue: #1a6bff;
+    --text: #1a1a1a;
+    --text-muted: #6b6b6b;
+    --text-light: #f0ede8;
+    --accent: #1a6bff;
+    --accent2: #ff4d00;
+    --border: rgba(0,0,0,0.08);
+    --radius: 24px;
+    --radius-sm: 14px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── PERFORMANCE OPTIMIZATION ── */
+  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+  /* ── CUSTOM CURSOR ── */
+  .custom-cursor {
+    position: fixed;
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    animation: cursorPulse 2s ease-in-out infinite;
+    will-change: transform;
+    left: -50px;
+    top: -50px;
+  }
+
+  .custom-cursor::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .custom-cursor.hidden { opacity: 0; }
+  .custom-cursor.hover { transform: translate(-50%, -50%) scale(1.4); border-color: var(--accent2); }
+
+  @keyframes cursorPulse {
+    0%, 100% { opacity: 0.8; }
+    50% { opacity: 0.4; }
+  }
+
+  :root.dark-mode .custom-cursor { border-color: var(--accent); }
+
+  @media (hover: none) and (pointer: coarse) {
+    body { cursor: auto; }
+    .custom-cursor { display: none !important; }
+  }
+
+  /* ── SMOOTH TRANSITIONS ── */
+  a, button, input, textarea, select {
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  button:active, a:active { transform: scale(0.98); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 24px;
+    display: flex; align-items: center; gap: 32px;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); text-decoration: none; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--card-dark); color: #fff;
+    padding: 8px 20px; border-radius: 100px;
+    font-size: 13px; font-weight: 600; text-decoration: none;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--accent); }
+
+  /* ── THEME TOGGLE ── */
+  .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--text-muted);
+    transition: color 0.2s, transform 0.2s;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .theme-toggle:hover {
+    color: var(--text);
+    transform: rotate(20deg);
+  }
+  .theme-toggle i { transition: transform 0.3s; }
+
+  /* ── DARK MODE ── */
+  :root.dark-mode {
+    --bg: #0a0a0a;
+    --card: #1a1a1a;
+    --card-dark: #2a2a2a;
+    --text: #f0ede8;
+    --text-muted: #a0a0a0;
+    --text-light: #f0ede8;
+    --border: rgba(255,255,255,0.08);
+  }
+  .dark-mode body { background: var(--bg); color: var(--text); }
+  .dark-mode nav { background: rgba(26,26,26,0.85); border-color: var(--border); }
+  .dark-mode .card-white { background: #1a1a1a; color: var(--text); }
+  .dark-mode .btn-ghost { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); }
+  .dark-mode .btn-ghost:hover { background: rgba(255,255,255,0.1); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 24px 60px;
+    display: grid;
+    gap: 16px;
+  }
+
+  /* ── BENTO GRID ── */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: minmax(80px, auto);
+    gap: 16px;
+  }
+
+  /* ── PAGE TITLE ── */
+  .page-title {
+    grid-column: span 12;
+    padding: 20px 0;
+  }
+  .page-title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 72px;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .page-title p {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 600px;
+  }
+
+  .section-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: .45; margin-bottom: 20px; }
+
+  /* ── FILTER & SEARCH CARD ── */
+  .filter-card {
+    grid-column: span 12;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 28px;
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.05s forwards;
+    opacity: 0;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-tab {
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+    will-change: transform, background, color;
+    backface-visibility: hidden;
+  }
+  .filter-tab:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .filter-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .search-container {
+    position: relative;
+    min-width: 200px;
+  }
+  .search-container input {
+    width: 100%;
+    padding: 10px 16px 10px 40px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text);
+    font-size: 14px;
+  }
+  .search-container input::placeholder { color: var(--text-muted); }
+  .search-container i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+
+  /* ── PROJECT CARD ── */
+  .project-card {
+    grid-column: span 4;
+    grid-row: span 3;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease, border-color 0.25s;
+    animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) forwards;
+    opacity: 0;
+    will-change: transform, box-shadow;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 100% 0%, rgba(26,107,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .project-card:nth-child(2) { animation-delay: 0.05s; }
+  .project-card:nth-child(3) { animation-delay: 0.1s; }
+  .project-card:nth-child(4) { animation-delay: 0.15s; }
+  .project-card:nth-child(5) { animation-delay: 0.2s; }
+  .project-card:nth-child(6) { animation-delay: 0.25s; }
+  .project-card:nth-child(7) { animation-delay: 0.3s; }
+
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border-color: rgba(26,107,255,0.35);
+  }
+
+  .project-card-dark {
+    background: var(--card-dark);
+    color: var(--text-light);
+    border-color: rgba(255,255,255,0.06);
+  }
+  .project-card-dark::before {
+    background: radial-gradient(ellipse at 100% 0%, rgba(255,255,255,0.08) 0%, transparent 70%);
+  }
+  .project-card-dark:hover {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    border-color: rgba(26,107,255,0.35);
+  }
+
+  .project-card-blue {
+    background: var(--card-blue);
+    color: #fff;
+    border-color: rgba(255,255,255,0.1);
+  }
+  .project-card-blue::before {
+    background: radial-gradient(ellipse at 100% 0%, rgba(255,255,255,0.12) 0%, transparent 60%);
+  }
+  .project-card-blue .proj-year { color: rgba(255,255,255,0.5); }
+  .project-card-blue .proj-title { color: #fff; }
+  .project-card-blue .proj-desc { color: rgba(255,255,255,0.75); }
+  .project-card-blue:hover { border-color: rgba(255,255,255,0.2); }
+
+  .project-card-orange {
+    background: var(--accent2);
+    color: #fff;
+    border-color: rgba(255,255,255,0.1);
+  }
+  .project-card-orange::before {
+    background: radial-gradient(ellipse at 100% 0%, rgba(255,255,255,0.15) 0%, transparent 60%);
+  }
+  .project-card-orange .proj-year { color: rgba(255,255,255,0.5); }
+  .project-card-orange .proj-title { color: #fff; }
+  .project-card-orange .proj-desc { color: rgba(255,255,255,0.75); }
+  .project-card-orange:hover { border-color: rgba(255,255,255,0.2); }
+
+  .project-card-cream {
+    background: #e8e4dd;
+    border-color: rgba(0,0,0,0.06);
+  }
+  .project-card-cream::before { display: none; }
+  .project-card-cream .proj-year { opacity: .45; }
+  .project-card-cream .proj-title { color: var(--text); }
+  .project-card-cream .proj-desc { color: var(--text-muted); }
+  .project-card-cream:hover { border-color: rgba(26,107,255,0.3); }
+
+  .proj-year { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; opacity: .45; margin-bottom: 12px; }
+  .proj-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
+  .proj-desc { font-size: 14px; line-height: 1.6; opacity: .65; flex: 1; margin-bottom: 16px; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .proj-tag { padding: 4px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; background: rgba(0,0,0,0.06); }
+  .proj-tag-light { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); }
+  .proj-link { font-size: 13px; font-weight: 600; opacity: .55; text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 6px; transition: opacity .2s; }
+  .proj-link:hover { opacity: 1; }
+
+  .project-tech-stack {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tech-mini-badge {
+    padding: 4px 8px;
+    background: rgba(0,0,0,0.04);
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  /* ── FEATURED PROJECT CARD (LARGE) ── */
+  .project-card.featured {
+    grid-column: span 6;
+    grid-row: span 4;
+  }
+  .featured .proj-title {
+    font-size: 28px;
+  }
+
+  .projects-grid {
+    display: contents;
+  }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    animation: fadeInOverlay 0.3s ease;
+    will-change: opacity;
+    backface-visibility: hidden;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal-content {
+    background: var(--card);
+    border-radius: var(--radius);
+    max-width: 900px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.4s cubic-bezier(.34,1.56,.64,1);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s, transform 0.2s;
+    padding: 8px;
+  }
+
+  .modal-close:hover {
+    color: var(--text);
+    transform: scale(1.2);
+  }
+
+  /* ── MODAL TABS ── */
+  .modal-tabs-container {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    flex-wrap: wrap;
+  }
+
+  .modal-tab-button {
+    padding: 16px 24px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+    white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .modal-tab-button::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .modal-tab-button:hover {
+    color: var(--text);
+  }
+
+  .modal-tab-button.active {
+    color: var(--accent);
+  }
+
+  .modal-tab-button.active::after {
+    opacity: 1;
+  }
+
+  .modal-body {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+  }
+
+  .tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ── GALLERY TAB ── */
+  .gallery-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    background: linear-gradient(135deg, var(--accent) 0%, #0f55e0 100%);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  .gallery-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .gallery-arrow {
+    background: rgba(0,0,0,0.3);
+    border: none;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+  }
+
+  .gallery-arrow:hover {
+    background: rgba(0,0,0,0.6);
+    transform: scale(1.1);
+  }
+
+  .gallery-dots {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .gallery-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .gallery-dot.active {
+    background: #fff;
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  /* ── CHARTS ── */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+
+  .chart-container {
+    position: relative;
+    height: 300px;
+    background: rgba(0,0,0,0.02);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+
+  .metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  .metrics-table th,
+  .metrics-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+
+  .metrics-table th {
+    font-weight: 700;
+    color: var(--accent);
+    background: rgba(26,107,255,0.05);
+  }
+
+  /* ── FEATURES TAB ── */
+  .features-list {
+    list-style: none;
+  }
+
+  .features-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .features-list li::before {
+    content: '✓';
+    flex-shrink: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .features-list li:last-child {
+    border-bottom: none;
+  }
+
+  /* ── TECH STACK TAB ── */
+  .tech-stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 12px;
+  }
+
+  .tech-item {
+    padding: 16px;
+    background: rgba(0,0,0,0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    transition: all 0.3s;
+  }
+
+  .tech-item:hover {
+    background: rgba(26,107,255,0.05);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── MODAL DESCRIPTION ── */
+  #modalDescription p {
+    line-height: 1.8;
+    margin-bottom: 16px;
+    color: var(--text-muted);
+    font-size: 15px;
+  }
+
+  #modalTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .modal-tag {
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(26, 107, 255, 0.1);
+    color: var(--accent);
+  }
+
+  /* ── MODAL ACTIONS ── */
+  .modal-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
+
+  .modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+    will-change: transform, background, color, border-color;
+    backface-visibility: hidden;
+  }
+
+  .modal-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .dark-mode .modal-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+  }
+
+  .dark-mode .modal-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ── CTA FOOTER ── */
+  .cta-section {
+    background: var(--card-dark);
+    border-radius: 0;
+    padding: 60px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+    animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.35s forwards;
+    opacity: 0;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(26,107,255,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    border-color: rgba(26,107,255,0.35);
+  }
+  .cta-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 44px;
+    letter-spacing: 1px;
+    color: #fff;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.2;
+  }
+  .cta-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-btn {
+    padding: 12px 28px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .cta-btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .cta-btn-primary:hover {
+    background: #0f55e0;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(26,107,255,0.3);
+  }
+  .cta-btn-secondary {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .cta-btn-secondary:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+  .side-socials {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 20px;
+    padding: 16px 10px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  }
+  .side-socials a {
+    width: 38px; height: 38px; border-radius: 12px;
+    background: #f0ede8; border: 1px solid rgba(0,0,0,0.08);
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none; color: #1a1a1a; font-size: 13px; font-weight: 700;
+    transition: all .25s cubic-bezier(.34,1.56,.64,1);
+    will-change: transform, background, border-color;
+    backface-visibility: hidden;
+  }
+  .side-socials a:hover { background: var(--accent); color: #fff; transform: scale(1.15); border-color: var(--accent); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+    .chart-grid {
+      grid-template-columns: 1fr;
+    }
+    .filter-section {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .search-container {
+      min-width: auto;
+    }
+    .hero-section h1 {
+      font-size: 48px;
+    }
+  }
+
+  .project-card.hidden {
+    display: none;
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  /* ── MOBILE RESPONSIVENESS ── */
+  @media (max-width: 860px) {
+    nav { gap: 12px; padding: 8px 16px; width: 90%; max-width: 400px; justify-content: space-between; }
+    .nav-links { display: none; }
+  }
+
+  /* ── RAG CHATBOT ── */
+  .chatbot-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(26,107,255,0.4);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .chatbot-toggle:hover {
+    transform: scale(1.1) translateY(-5px);
+  }
+
+  .chatbot-container {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 350px;
+    height: 500px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .chatbot-container.active {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .dark-mode .chatbot-container {
+    background: rgba(26,26,26,0.85);
+  }
+
+  .chatbot-header {
+    padding: 16px 20px;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .chatbot-title {
+    font-weight: 600;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .chatbot-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  .chatbot-close:hover { opacity: 1; }
+
+  .chatbot-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .chat-msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .ai-msg {
+    background: rgba(0,0,0,0.05);
+    color: var(--text);
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .dark-mode .ai-msg {
+    background: rgba(255,255,255,0.08);
+  }
+  .user-msg {
+    background: var(--accent);
+    color: #fff;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+
+  .chatbot-input {
+    padding: 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+  }
+  .chatbot-input input {
+    flex: 1;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--text);
+    font-size: 13px;
+    outline: none;
+  }
+  .chatbot-input button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 600px) {
+    .chatbot-container {
+      width: 90%;
+      right: 5%;
+      bottom: 90px;
+    }
+    .chatbot-toggle {
+      bottom: 20px;
+      right: 20px;
+    }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="portfolio_v5.html">GC.</a>
+  <div class="nav-links">
+    <a href="about.html">About</a>
+    <a href="projects.html">Projects</a>
+    <a href="experience_new.html">Experience</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+    <i class="fas fa-moon"></i>
+  </button>
+  <a class="nav-cta" href="contact.html">Hire me</a>
+</nav>
+
+
+  <main>
+    <!-- Back Arrow Button -->
+    <a href="projects.html" style="display: inline-block; font-size: 24px; color: var(--text); text-decoration: none; margin-bottom: 20px; transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);" onmouseover="this.style.transform='translateX(-4px)'" onmouseout="this.style.transform='translateX(0)'">
+      <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <div class="page-title">
+      <div class="section-tag">Case Study</div>
+      <h1>Krectivetimebox OCR Pipeline</h1>
+      <p>Intelligent document duplicate detection system using PaddleOCR and image hashing.</p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Image Card -->
+      <div class="project-card featured" style="grid-column: span 12; padding: 0;">
+        <img src="ocr_architecture.png" alt="Architecture Diagram" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; border-radius: var(--radius);" />
+      </div>
+
+      <!-- Problem Statement -->
+      <div class="project-card" style="grid-column: span 6; grid-row: span 2;">
+        <div class="proj-title">The Challenge</div>
+        <div class="proj-desc">
+          Handling thousands of documents daily with varying degrees of duplication. Slight variations in scans, lighting, and angles made simple hashing ineffective. Manual annotation and deduplication were consuming massive resources and time.
+        </div>
+      </div>
+
+      <!-- The Solution -->
+      <div class="project-card project-card-blue" style="grid-column: span 6; grid-row: span 2;">
+        <div class="proj-title">The Solution</div>
+        <div class="proj-desc">
+          An advanced pipeline integrating <strong>PaddleOCR</strong> for robust text extraction combined with perceptual image hashing. This hybrid approach allowed us to identify semantic duplicates even when visual artifacts differed, scaling horizontally across containerized instances.
+        </div>
+      </div>
+
+      <!-- Architecture Breakdown -->
+      <div class="project-card project-card-dark" style="grid-column: span 12; grid-row: span 2;">
+        <div class="proj-title">System Architecture</div>
+        <div class="proj-desc">
+          <ul style="list-style-position: inside; margin-top: 10px; line-height: 1.8;">
+            <li><strong>Ingestion Layer:</strong> FastAPI REST endpoints handling high-throughput asynchronous document uploads.</li>
+            <li><strong>Processing Nodes:</strong> Celery workers executing PaddleOCR text detection & recognition along with perceptual hashing (pHash) generation.</li>
+            <li><strong>Data Persistence:</strong> PostgreSQL with specialized indexing for quick similarity lookups on extracted hashes and text metadata.</li>
+            <li><strong>Annotation Workflow:</strong> Integrated labeling UI allowing human-in-the-loop verification for low-confidence scores, reducing manual efforts by 40%.</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Metrics & Outcomes -->
+      <div class="project-card project-card-cream" style="grid-column: span 12; grid-row: span 2;">
+        <div class="proj-title">Key Outcomes</div>
+        <div class="proj-desc" style="display: flex; gap: 40px; margin-top: 20px; flex-wrap: wrap;">
+          <div>
+            <h2 style="font-size: 48px; color: var(--accent); font-family: 'Bebas Neue', sans-serif;">94.2%</h2>
+            <p style="font-weight: 600; opacity: 0.7;">Overall Accuracy</p>
+          </div>
+          <div>
+            <h2 style="font-size: 48px; color: var(--accent); font-family: 'Bebas Neue', sans-serif;">40%</h2>
+            <p style="font-weight: 600; opacity: 0.7;">Reduction in Manual Effort</p>
+          </div>
+          <div>
+            <h2 style="font-size: 48px; color: var(--accent); font-family: 'Bebas Neue', sans-serif;">96.5%</h2>
+            <p style="font-weight: 600; opacity: 0.7;">Recall on Duplicates</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+<!-- MODAL -->
+<div class="modal-overlay" id="projectModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modalTitle">Project Title</h2>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+
+    <div class="modal-tabs-container" id="modalTabs"></div>
+
+    <div class="modal-body">
+      <!-- Overview Tab -->
+      <div class="tab-content active" data-tab="overview">
+        <div class="gallery-container" id="galleryContainer" style="height: 300px;">
+          <div class="gallery-nav" style="position: absolute; width: 100%; padding: 0 20px; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: auto;">
+            <button class="gallery-arrow" onclick="prevGallery()"><i class="fas fa-chevron-left"></i></button>
+            <button class="gallery-arrow" onclick="nextGallery()"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="gallery-dots" id="galleryDots"></div>
+        </div>
+        <div id="modalDescription"></div>
+        <div id="modalTags"></div>
+        <div class="modal-actions" id="modalActions"></div>
+      </div>
+
+      <!-- Features Tab -->
+      <div class="tab-content" data-tab="features">
+        <h3 style="margin-bottom: 20px;">Key Features</h3>
+        <ul class="features-list" id="featuresList"></ul>
+      </div>
+
+      <!-- Gallery Tab -->
+      <div class="tab-content" data-tab="gallery">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 20px;" id="galleryGrid"></div>
+      </div>
+
+      <!-- Metrics Tab -->
+      <div class="tab-content" data-tab="metrics">
+        <div class="chart-grid">
+          <div class="chart-container">
+            <canvas id="radarChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+        <table class="metrics-table" id="metricsTable">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Value</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="metricsBody"></tbody>
+        </table>
+      </div>
+
+      <!-- Tech Stack Tab -->
+      <div class="tab-content" data-tab="tech">
+        <h3 style="margin-bottom: 20px;">Technologies Used</h3>
+        <div class="tech-stack-grid" id="techGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<footer>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;opacity:.6;margin-bottom:12px;">GOPIKRISHNA CHEGONI</div>
+  <div>© 2025 · AI/ML Engineer · Built with intention.</div>
+</footer>
+
+<script>
+  // Custom Cursor Setup
+  const cursor = document.createElement('div');
+  cursor.classList.add('custom-cursor');
+  document.body.appendChild(cursor);
+
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.2;
+    cursorY += (mouseY - cursorY) * 0.2;
+    cursor.style.left = cursorX + 'px';
+    cursor.style.top = cursorY + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  document.addEventListener('mouseleave', () => {
+    cursor.classList.add('hidden');
+  });
+
+  document.addEventListener('mouseenter', () => {
+    cursor.classList.remove('hidden');
+  });
+
+  const interactiveElements = document.querySelectorAll('a, button, .btn, input, textarea, select, .project-card, .side-socials a, .modal-btn, .filter-tab');
+  interactiveElements.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+  });
+
+  // Project Data
+  const projects = [
+    {
+      id: 1,
+      title: "Document Duplicate Detection",
+      brief: "Intelligent pipeline for identifying duplicate documents using PaddleOCR and image hashing",
+      category: "ML/AI",
+      description: `Developed a sophisticated document duplicate detection system that leverages advanced OCR and image processing techniques. The system combines PaddleOCR for high-accuracy text extraction with intelligent image hashing algorithms to identify duplicate documents even with slight variations. The pipeline integrates REST APIs for seamless data ingestion, featuring automated annotation workflows that reduced manual labeling effort by 40%. Successfully deployed in production processing thousands of documents daily with horizontal scaling capabilities. The system achieves 94% accuracy with precision and recall metrics above 91%, demonstrating robust performance across diverse document types and formats.`,
+      year: "2024 – 2025",
+      tags: ["PaddleOCR", "Image Hashing", "FastAPI", "ML"],
+      techStack: ["Python", "FastAPI", "PaddleOCR", "NumPy", "PostgreSQL", "OpenCV", "Redis"],
+      metrics: {
+        accuracy: 94.2,
+        precision: 91.8,
+        recall: 96.5,
+        processing: 87.3
+      },
+      features: [
+        "High-accuracy text extraction with PaddleOCR",
+        "Sophisticated image hashing for duplicate detection",
+        "REST API for seamless data ingestion",
+        "Reduces manual labeling effort by 40%",
+        "Efficient horizontal scaling",
+        "Automated annotation workflows"
+      ],
+      buttons: [
+        { label: "GitHub", url: "https://github.com", icon: "fab fa-github" },
+        { label: "Live Demo", url: "https://demo.example.com", icon: "fas fa-play" },
+        { label: "Documentation", url: "https://docs.example.com", icon: "fas fa-book" }
+      ]
+    },
+    {
+      id: 2,
+      title: "Iris Flower Classification",
+      brief: "Classic ML project comparing multiple classification algorithms",
+      category: "ML/AI",
+      description: `A comprehensive machine learning project demonstrating the complete ML pipeline from data preprocessing to model evaluation and deployment. This project meticulously compares multiple state-of-the-art classification algorithms including SVM, Random Forest, Gradient Boosting, and Neural Networks on the classic Iris dataset. Implemented rigorous data preprocessing, feature scaling, hyperparameter tuning, and cross-validation techniques to ensure model robustness. Achieved 97%+ accuracy across different models with XGBoost reaching 98.9% accuracy. The project includes detailed visualizations of decision boundaries, feature importance analysis, and comprehensive documentation of methodology and results.`,
+      year: "2024",
+      tags: ["Machine Learning", "Classification"],
+      techStack: ["Scikit-learn", "TensorFlow", "Pandas", "Matplotlib", "Seaborn", "XGBoost", "Jupyter"],
+      metrics: {
+        svm: 96.7,
+        randomForest: 98.3,
+        neuralNet: 97.5,
+        xgboost: 98.9
+      },
+      features: [
+        "Multiple algorithm comparison",
+        "Advanced data preprocessing",
+        "Hyperparameter tuning",
+        "Cross-validation analysis",
+        "Feature importance visualization",
+        "Decision boundary plots"
+      ],
+      buttons: [
+        { label: "GitHub", url: "https://github.com", icon: "fab fa-github" },
+        { label: "Notebook", url: "https://colab.research.google.com", icon: "fas fa-play" },
+        { label: "Report", url: "https://docs.example.com", icon: "fas fa-book" }
+      ]
+    },
+    {
+      id: 3,
+      title: "Sales Analytics Dashboard",
+      brief: "Comprehensive data analysis with interactive visualizations",
+      category: "Data Science",
+      description: `A full-stack data analysis and visualization project that processes sales data from multiple sources and presents actionable business insights through interactive dashboards. The project includes comprehensive data cleaning, transformation, and aggregation using industry-standard Pandas libraries. Created beautiful and informative visualizations using Matplotlib and Seaborn to track essential KPIs including revenue trends, customer segmentation, product performance, and regional analysis. The dashboard provides stakeholders with real-time insights for data-driven decision making. All analysis is reproducible, well-documented with clear insights and strategic recommendations derived from the data patterns.`,
+      year: "2024",
+      tags: ["Data Analysis", "Visualization"],
+      techStack: ["Pandas", "Matplotlib", "Seaborn", "NumPy", "Jupyter", "Python"],
+      metrics: {
+        totalRevenue: 85.4,
+        customerGrowth: 72.8,
+        productPerformance: 88.2,
+        regionCoverage: 91.5
+      },
+      features: [
+        "Data cleaning and transformation",
+        "Interactive visualizations",
+        "Revenue trend analysis",
+        "Customer segment tracking",
+        "Product performance metrics",
+        "Regional analysis with insights"
+      ],
+      buttons: [
+        { label: "GitHub", url: "https://github.com", icon: "fab fa-github" },
+        { label: "Dashboard", url: "https://analytics.example.com", icon: "fas fa-play" },
+        { label: "Analysis", url: "https://docs.example.com", icon: "fas fa-book" }
+      ]
+    },
+    {
+      id: 4,
+      title: "Text Detection & Recognition",
+      brief: "Deep learning for detecting and recognizing text in images",
+      category: "ML/AI",
+      description: `An advanced computer vision project that seamlessly combines text detection and recognition in a unified pipeline. Leveraging DocTR and PyTorch frameworks, the system can accurately identify and extract text from images in various formats, lighting conditions, and orientations. The project implements sophisticated data augmentation strategies to improve model generalization, employs advanced optimization techniques for efficient training, and provides deployment-ready inference code. The model demonstrates 96% character accuracy on diverse datasets including document images, street signs, and handwritten text. Features comprehensive error handling and is optimized for both CPU and GPU inference.`,
+      year: "2024",
+      tags: ["Computer Vision", "OCR", "Deep Learning"],
+      techStack: ["DocTR", "PyTorch", "OpenCV", "TensorFlow", "Python", "FastAPI"],
+      metrics: {
+        detection: 94.3,
+        recognition: 96.1,
+        endToEnd: 92.8,
+        speed: 89.5
+      },
+      features: [
+        "Multi-format document support",
+        "Various lighting conditions handling",
+        "Data augmentation strategies",
+        "Advanced optimization techniques",
+        "Deployment-ready inference code",
+        "Handwritten text support"
+      ],
+      buttons: [
+        { label: "GitHub", url: "https://github.com", icon: "fab fa-github" },
+        { label: "Try It", url: "https://text-ocr.example.com", icon: "fas fa-play" },
+        { label: "Paper", url: "https://arxiv.example.com", icon: "fas fa-book" }
+      ]
+    },
+    {
+      id: 5,
+      title: "REST API Backend",
+      brief: "Scalable FastAPI backend with authentication and DB integration",
+      category: "Web Dev",
+      description: `A production-ready REST API built with FastAPI framework featuring comprehensive security, scalability, and performance optimizations. The API implements JWT token-based authentication combined with role-based access control for fine-grained permission management. Includes automatic OpenAPI documentation generation, request validation using Pydantic models, comprehensive error handling, and structured logging for debugging. The backend integrates with PostgreSQL database using SQLAlchemy ORM for type-safe database operations. Achieves 99.8% uptime with average response time of 45.2ms. Implements rate limiting mechanisms and caching strategies to handle thousands of concurrent requests efficiently.`,
+      year: "2024",
+      tags: ["Web Development", "API", "Backend"],
+      techStack: ["FastAPI", "PostgreSQL", "SQLAlchemy", "Pydantic", "Python", "Docker", "JWT"],
+      metrics: {
+        uptime: 99.8,
+        responseTime: 45.2,
+        throughput: 87.3,
+        reliability: 98.9
+      },
+      features: [
+        "JWT authentication",
+        "Role-based access control",
+        "Automatic API documentation",
+        "Request validation",
+        "Comprehensive logging",
+        "Rate limiting and caching"
+      ],
+      buttons: [
+        { label: "GitHub", url: "https://github.com", icon: "fab fa-github" },
+        { label: "API Docs", url: "https://api.example.com/docs", icon: "fas fa-play" },
+        { label: "README", url: "https://docs.example.com", icon: "fas fa-book" }
+      ]
+    },
+    {
+      id: 6,
+      title: "Data Processing Pipeline",
+      brief: "Automated ETL pipeline for large-scale data processing",
+      category: "Data Science",
+      description: `A robust and scalable data processing pipeline that automates the entire ETL (Extract, Transform, Load) process for enterprise data workflows. The pipeline features comprehensive data validation, intelligent cleansing, sophisticated transformation logic, and reliable loading into data warehouses. Implements advanced error handling with automatic retry mechanisms, detailed logging for audit trails, and real-time monitoring capabilities. Supports multiple data formats including CSV, JSON, and Parquet with automatic format detection. Includes automated quality checks and data lineage tracking for regulatory compliance and troubleshooting. Successfully processes millions of records daily with 99.2% accuracy and 98.7% reliability metrics.`,
+      year: "2024",
+      tags: ["Automation", "Data Engineering", "ETL"],
+      techStack: ["Python", "Pandas", "Apache Airflow", "PostgreSQL", "AWS", "S3"],
+      metrics: {
+        processingSpeed: 93.5,
+        accuracy: 99.2,
+        reliability: 98.7,
+        efficiency: 91.3
+      },
+      features: [
+        "Multi-format data support",
+        "Automated validation",
+        "Error handling and retry",
+        "Monitoring capabilities",
+        "Data lineage tracking",
+        "Regulatory compliance features"
+      ],
+      buttons: [
+        { label: "GitHub", url: "https://github.com", icon: "fab fa-github" },
+        { label: "Dashboard", url: "https://airflow.example.com", icon: "fas fa-play" },
+        { label: "Guide", url: "https://docs.example.com", icon: "fas fa-book" }
+      ]
+    }
+  ];
+
+  let currentProject = null;
+  let currentGalleryIndex = 0;
+  let currentCharts = { radar: null, bar: null };
+  let currentFilter = 'all';
+  let searchTerm = '';
+
+  // Initialize
+  function init() {
+    renderProjects(projects);
+    setupFilterTabs();
+    setupSearch();
+    setupModalTabs();
+  }
+
+  function renderProjects(projectsToRender) {
+    const grid = document.getElementById('projectsGrid');
+    const colors = ['project-card-dark', 'project-card-blue', 'project-card-white', 'project-card-orange', 'project-card-cream', 'project-card-blue'];
+    let html = '';
+
+    projectsToRender.forEach((project) => {
+      const projIndex = projects.indexOf(project);
+      const isFeatured = projIndex === 0;
+      const colorClass = colors[projIndex] || 'project-card-white';
+      const cardClass = `project-card ${isFeatured ? 'featured' : ''} ${colorClass}`;
+      const isLightText = colorClass === 'project-card-blue' || colorClass === 'project-card-orange' || colorClass === 'project-card-dark';
+      const tagClass = isLightText ? 'proj-tag-light' : 'proj-tag';
+
+      html += `
+        <div class="${cardClass}" onclick="openModal(${projIndex})">
+          <div class="proj-year">${project.year}</div>
+          <div class="proj-title">${project.title}</div>
+          <div class="proj-desc">${project.brief}</div>
+          <div class="project-tech-stack">
+            ${project.techStack.slice(0, 3).map(tech =>
+              `<span class="tech-mini-badge" ${isLightText ? 'style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);"' : ''}>${tech}</span>`
+            ).join('')}
+          </div>
+          <div class="proj-tags" style="margin-top: auto; margin-bottom: 0;">
+            ${project.tags.slice(0, 2).map(tag =>
+              `<span class="proj-tag ${tagClass}">${tag}</span>`
+            ).join('')}
+          </div>
+        </div>
+      `;
+    });
+
+    grid.innerHTML = html;
+  }
+
+  function getCategoryIcon(category) {
+    const icons = {
+      'ML/AI': '🤖',
+      'Web Dev': '💻',
+      'Data Science': '📊',
+      'Other': '⚙️'
+    };
+    return icons[category] || '📁';
+  }
+
+  function setupFilterTabs() {
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        e.target.classList.add('active');
+        currentFilter = e.target.dataset.category;
+        filterProjects();
+      });
+    });
+  }
+
+  function setupSearch() {
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchTerm = e.target.value.toLowerCase();
+      filterProjects();
+    });
+  }
+
+  function filterProjects() {
+    const filtered = projects.filter(p => {
+      const matchFilter = currentFilter === 'all' || p.category === currentFilter;
+      const matchSearch = p.title.toLowerCase().includes(searchTerm) ||
+                         p.brief.toLowerCase().includes(searchTerm) ||
+                         p.techStack.some(t => t.toLowerCase().includes(searchTerm));
+      return matchFilter && matchSearch;
+    });
+    renderProjects(filtered);
+  }
+
+  function setupModalTabs() {
+    const tabs = ['overview', 'features', 'gallery', 'metrics', 'tech'];
+    const container = document.getElementById('modalTabs');
+    container.innerHTML = tabs.map(tab =>
+      `<button class="modal-tab-button ${tab === 'overview' ? 'active' : ''}" onclick="switchTab('${tab}')" data-tab="${tab}">${tab.charAt(0).toUpperCase() + tab.slice(1)}</button>`
+    ).join('');
+  }
+
+  function switchTab(tabName) {
+    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+    document.querySelector(`.tab-content[data-tab="${tabName}"]`).classList.add('active');
+    document.querySelectorAll('.modal-tab-button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.modal-tab-button[data-tab="${tabName}"]`).classList.add('active');
+
+    if (tabName === 'metrics') {
+      setTimeout(renderCharts, 100);
+    } else if (tabName === 'gallery') {
+      renderGalleryTab();
+    }
+  }
+
+  function openModal(projectIndex) {
+    currentProject = projects[projectIndex];
+    currentGalleryIndex = 0;
+    const modal = document.getElementById('projectModal');
+
+    document.getElementById('modalTitle').textContent = currentProject.title;
+
+    // Enhanced Description with metadata
+    const description = `
+      <div style="margin-bottom: 32px;">
+        <div style="font-size: 16px; line-height: 1.9; color: var(--text-muted); margin-bottom: 20px;">
+          ${currentProject.description}
+        </div>
+        <div style="display: grid; grid-template-columns: auto 1fr auto 1fr; gap: 40px; margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--border);">
+          <div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: .6; margin-bottom: 10px;">Duration</div>
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 18px; font-weight: 700; color: var(--text);">${currentProject.year}</div>
+          </div>
+          <div>
+            <div style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: .6; margin-bottom: 10px;">Category</div>
+            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent);">${currentProject.category}</div>
+          </div>
+          <div style="grid-column: span 2;">
+            <div style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: .6; margin-bottom: 10px;">Tech Stack</div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              ${currentProject.techStack.map(tech => `<span style="padding: 4px 12px; background: rgba(26,107,255,0.1); color: var(--accent); border-radius: 100px; font-size: 12px; font-weight: 600;">${tech}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.getElementById('modalDescription').innerHTML = description;
+
+    const tagsHTML = currentProject.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('');
+    document.getElementById('modalTags').innerHTML = `<div style="display: flex; gap: 8px; flex-wrap: wrap;">${tagsHTML}</div>`;
+
+    const buttonsHTML = currentProject.buttons.map(btn =>
+      `<a href="${btn.url}" target="_blank" class="modal-btn"><i class="${btn.icon}"></i>${btn.label}</a>`
+    ).join('');
+    document.getElementById('modalActions').innerHTML = buttonsHTML;
+
+    // Setup features
+    const featuresList = document.getElementById('featuresList');
+    featuresList.innerHTML = currentProject.features.map(f => `<li>${f}</li>`).join('');
+
+    // Setup tech stack
+    const techGrid = document.getElementById('techGrid');
+    techGrid.innerHTML = currentProject.techStack.map(tech => `<div class="tech-item">${tech}</div>`).join('');
+
+    // Setup gallery
+    renderGalleryOverview();
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function renderGalleryOverview() {
+    const container = document.getElementById('galleryContainer');
+    container.style.background = `linear-gradient(135deg, var(--accent) 0%, #0f55e0 100%)`;
+    container.innerHTML = `
+      <div class="gallery-nav" style="position: absolute; width: 100%; padding: 0 20px; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: auto;">
+        <button class="gallery-arrow" onclick="prevGallery()"><i class="fas fa-chevron-left"></i></button>
+        <div style="font-size: 64px; color: #fff;">${getCategoryIcon(currentProject.category)}</div>
+        <button class="gallery-arrow" onclick="nextGallery()"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="gallery-dots" id="galleryDots" style="bottom: 16px; left: 50%; transform: translateX(-50%);"></div>
+    `;
+    updateGalleryDots();
+  }
+
+  function renderGalleryTab() {
+    const grid = document.getElementById('galleryGrid');
+    const mockImages = [
+      '📊 Dashboard View',
+      '📈 Performance Chart',
+      '🔍 Detail Analysis',
+      '⚙️ Configuration',
+      '🎯 Results View',
+      '📱 Mobile Layout'
+    ];
+    grid.innerHTML = mockImages.map((img, i) => `
+      <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--accent) 0%, #0f55e0 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">${img}</div>
+    `).join('');
+  }
+
+  function nextGallery() {
+    renderGalleryOverview();
+  }
+
+  function prevGallery() {
+    renderGalleryOverview();
+  }
+
+  function updateGalleryDots() {
+    const dotsContainer = document.getElementById('galleryDots');
+    if (dotsContainer) {
+      dotsContainer.innerHTML = `<div class="gallery-dot active" style="background: #fff; width: 24px; border-radius: 4px;"></div>`;
+    }
+  }
+
+  function renderCharts() {
+    if (currentCharts.radar) currentCharts.radar.destroy();
+    if (currentCharts.bar) currentCharts.bar.destroy();
+
+    const labels = Object.keys(currentProject.metrics).map(k => k.charAt(0).toUpperCase() + k.slice(1));
+    const data = Object.values(currentProject.metrics);
+
+    // Radar Chart
+    const radarCtx = document.getElementById('radarChart');
+    if (radarCtx) {
+      currentCharts.radar = new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Performance',
+            data: data,
+            borderColor: 'rgb(26, 107, 255)',
+            backgroundColor: 'rgba(26, 107, 255, 0.1)',
+            borderWidth: 2,
+            pointRadius: 6,
+            pointBackgroundColor: 'rgb(26, 107, 255)',
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: { r: { beginAtZero: true, max: 100 } },
+          plugins: { legend: { display: true } }
+        }
+      });
+    }
+
+    // Bar Chart
+    const barCtx = document.getElementById('barChart');
+    if (barCtx) {
+      currentCharts.bar = new Chart(barCtx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Metrics',
+            data: data,
+            backgroundColor: 'rgba(26, 107, 255, 0.8)',
+            borderRadius: 8,
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          scales: { x: { beginAtZero: true, max: 100 } }
+        }
+      });
+    }
+
+    // Metrics Table
+    const tbody = document.getElementById('metricsBody');
+    tbody.innerHTML = Object.entries(currentProject.metrics).map(([key, val]) => `
+      <tr>
+        <td>${key}</td>
+        <td>${Math.round(val)}%</td>
+        <td>${val > 90 ? '✅' : val > 80 ? '⚠️' : '❌'}</td>
+      </tr>
+    `).join('');
+  }
+
+  function closeModal() {
+    document.getElementById('projectModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
+    if (currentCharts.radar) currentCharts.radar.destroy();
+    if (currentCharts.bar) currentCharts.bar.destroy();
+  }
+
+  // Close on ESC and outside click
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  document.getElementById('projectModal').addEventListener('click', (e) => {
+    if (e.target.id === 'projectModal') closeModal();
+  });
+
+  // Theme Toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const htmlElement = document.documentElement;
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    htmlElement.classList.add('dark-mode');
+    updateThemeIcon(true);
+  }
+
+  themeToggle.addEventListener('click', () => {
+    htmlElement.classList.toggle('dark-mode');
+    const isDarkMode = htmlElement.classList.contains('dark-mode');
+    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    updateThemeIcon(isDarkMode);
+  });
+
+  function updateThemeIcon(isDarkMode) {
+    const icon = themeToggle.querySelector('i');
+    if (isDarkMode) {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    } else {
+      icon.classList.remove('fa-sun');
+      icon.classList.add('fa-moon');
+    }
+  }
+
+  // Initialize on load
+  window.addEventListener('DOMContentLoaded', init);
+</script>
+
+
+  <script>
+  // Chatbot Logic
+  const chatbotToggle = document.getElementById('chatbotToggle');
+  const chatbotContainer = document.getElementById('chatbotContainer');
+  const chatbotClose = document.getElementById('chatbotClose');
+  const chatInput = document.getElementById('chatInput');
+  const chatSend = document.getElementById('chatSend');
+  const chatbotMessages = document.getElementById('chatbotMessages');
+
+  if(chatbotToggle) {
+    chatbotToggle.addEventListener('click', () => {
+      chatbotContainer.classList.add('active');
+    });
+    chatbotClose.addEventListener('click', () => {
+      chatbotContainer.classList.remove('active');
+    });
+
+    function appendMessage(text, sender) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `chat-msg ${sender}-msg`;
+      msgDiv.textContent = text;
+      chatbotMessages.appendChild(msgDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function handleSend() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+      appendMessage(text, 'user');
+      chatInput.value = '';
+      
+      // Smart RAG response
+      setTimeout(() => {
+        const query = text.toLowerCase();
+        let response = "";
+        
+        if (query.includes("experience") || query.includes("work") || query.includes("intern")) {
+            response = "Gopikrishna worked as a Machine Learning Intern at Kreativetimebox (Sept 2024 - Sept 2025). He built a duplicate detection pipeline reducing redundancy by 30%, designed REST APIs, and implemented PaddleOCR for automating data extraction.";
+        } else if (query.includes("project") || query.includes("portfolio") || query.includes("smartdoc") || query.includes("lead")) {
+            response = "He has two main projects: 1) 'SmartDoc Parser' using DocTR & PaddleOCR for extracting data from invoices/bank statements with 98% accuracy. 2) 'AI Lead-Gen & Outreach Automation Engine' integrating n8n, Retell AI, and Gemini for automated lead qualification.";
+        } else if (query.includes("skill") || query.includes("technology") || query.includes("stack") || query.includes("python") || query.includes("java")) {
+            response = "His technical skills include Python, Java, SQL, Machine Learning (Scikit-learn, PyTorch, TensorFlow), OCR (PaddleOCR, DocTR), and tools like n8n, REST APIs, Git, and AWS.";
+        } else if (query.includes("education") || query.includes("degree") || query.includes("college") || query.includes("university") || query.includes("btech") || query.includes("cgpa")) {
+            response = "He holds a B.Tech in Computer Science (Data Science) from Guru Nanak Institutions Technical Campus (2020-2024) with an 8.42 CGPA, and completed his Intermediate at Narayana Junior College with a 9.78 CGPA.";
+        } else if (query.includes("ocr") || query.includes("document") || query.includes("parser") || query.includes("paddleocr") || query.includes("doctr")) {
+            response = "He has strong expertise in OCR! He built 'SmartDoc Parser' using DocTR and PaddleOCR to extract structured data from invoices and bank statements with 98% accuracy, completely eliminating third-party API dependencies.";
+        } else if (query.includes("contact") || query.includes("email") || query.includes("phone") || query.includes("reach") || query.includes("hire") || query.includes("number")) {
+            response = "You can reach Gopikrishna at gkchegoni@gmail.com or call him at +91-8184835291. He's based in Hyderabad and his GitHub is github.com/gk.";
+        } else if (query.includes("achieve") || query.includes("rank") || query.includes("certif") || query.includes("nptel")) {
+            response = "He secured All India Rank 992 in the Codekaze Naukri Engineers Week Test (out of 1.05M applicants) and holds a Python for Data Science Certification from NPTEL IIT Madras.";
+        } else if (query.includes("hi") || query.includes("hello") || query.includes("hey") || query.includes("greetings")) {
+            response = "Hello! I'm Gopikrishna's AI assistant. You can ask me about his experience, skills, projects, education, or contact info based on his resume.";
+        } else if (query.includes("who are you") || query.includes("what are you") || query.includes("your name")) {
+            response = "I am an AI assistant built to answer questions about Gopikrishna Chegoni's portfolio and resume. Feel free to ask about his skills, education, or projects!";
+        } else {
+            response = "Based on his resume, I don't have the exact answer to that, but Gopikrishna is a passionate AI/ML Engineer with strong skills in Python, OCR, and data pipelines. Would you like to know about his projects or experience?";
+        }
+        
+        appendMessage(response, 'ai');
+      }, 600);
+    }
+
+    if(chatSend) {
+      chatSend.addEventListener('click', handleSend);
+    }
+    if(chatInput) {
+      chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') handleSend();
+      });
+    }
+  }
+  </script>
+
+<div class="side-socials">
+  <a href="https://linkedin.com" title="LinkedIn" target="_blank">in</a>
+  <a href="https://github.com" title="GitHub" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+  </a>
+  <div class="soc-line"></div>
+  <a href="mailto:gopikrishnachegoni@gmail.com" title="Email" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+  </a>
+  <a href="tel:+919848633130" title="Phone">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 13.9 19.79 19.79 0 0 1 1.07 5.27 2 2 0 0 1 3.06 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 17.92z"/></svg>
+  </a>
+</div>
+</body>
+</html>
