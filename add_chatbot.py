@@ -227,7 +227,7 @@ js = """
         } else if (query.includes("ocr") || query.includes("document") || query.includes("parser") || query.includes("paddleocr") || query.includes("doctr")) {
             response = "He has strong expertise in OCR! He built 'SmartDoc Parser' using DocTR and PaddleOCR to extract structured data from invoices and bank statements with 98% accuracy, completely eliminating third-party API dependencies.";
         } else if (query.includes("contact") || query.includes("email") || query.includes("phone") || query.includes("reach") || query.includes("hire") || query.includes("number")) {
-            response = "You can reach Gopikrishna at gkchegoni@gmail.com or call him at +91-8184835291. He's based in Hyderabad and his GitHub is github.com/gk.";
+            response = "You can reach Gopikrishna at chegoni.gk@gmail.com or call him at +91-8184835291. He's based in Hyderabad and his GitHub is github.com/gopikrishna818.";
         } else if (query.includes("achieve") || query.includes("rank") || query.includes("certif") || query.includes("nptel")) {
             response = "He secured All India Rank 992 in the Codekaze Naukri Engineers Week Test (out of 1.05M applicants) and holds a Python for Data Science Certification from NPTEL IIT Madras.";
         } else if (query.includes("hi") || query.includes("hello") || query.includes("hey") || query.includes("greetings")) {
