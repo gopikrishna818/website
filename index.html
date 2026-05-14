@@ -8,23 +8,40 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <!-- GSAP for Physics-Based Motion -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
     :root {
-      --bg: #f0ede8;
+      --bg: #f8f7f4;
       --card: #ffffff;
-      --card-dark: #1a1a1a;
-      --card-blue: #1a6bff;
-      --text: #1a1a1a;
-      --text-muted: #6b6b6b;
-      --text-light: #f0ede8;
-      --accent: #1a6bff;
-      --accent2: #ff4d00;
-      --border: rgba(0, 0, 0, 0.08);
+      --card-dark: #0a0a0a;
+      --card-blue: #0044ee;
+      --text: #050505;
+      --text-muted: #666666;
+      --text-light: #f8f7f4;
+      --accent: #0044ee;
+      --accent2: #ff3300;
+      --border: rgba(0, 0, 0, 0.04);
       --radius: 24px;
-      --radius-sm: 14px;
+      --radius-sm: 12px;
+
+      /* Premium Motion System */
+      --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-linear: cubic-bezier(0, 0, 1, 1);
+      --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+      --transition-slow: 0.8s var(--ease-premium);
+      --transition-medium: 0.5s var(--ease-premium);
+      --transition-fast: 0.3s var(--ease-premium);
+
+      /* Elevation System */
+      --surface-1: #f8f7f4;
+      --surface-2: #ffffff;
+      --surface-3: #fcfbf9;
+      --shadow-premium: 0 10px 40px -10px rgba(0, 0, 0, 0.05), 0 20px 50px -20px rgba(0, 0, 0, 0.1);
     }
 
     *,
@@ -39,13 +56,64 @@
       scroll-behavior: smooth;
     }
 
+    /* ── GLOBAL NOISE ── */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+      mix-blend-mode: soft-light;
+    }
+
+    /* ── REACTIVE MESH GRADIENT (STRIPE-STYLE) ── */
+    .mesh-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(0, 68, 238, 0.2) 0%,
+          transparent 45%),
+        radial-gradient(circle at 80% 20%,
+          rgba(255, 51, 0, 0.1) 0%,
+          transparent 35%),
+        radial-gradient(circle at 10% 80%,
+          rgba(0, 255, 128, 0.05) 0%,
+          transparent 30%);
+      pointer-events: none;
+      filter: blur(80px);
+    }
+
+    .dark-mode .mesh-gradient {
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(0, 68, 238, 0.3) 0%,
+          transparent 60%),
+        radial-gradient(circle at 20% 80%,
+          rgba(255, 51, 0, 0.2) 0%,
+          transparent 50%),
+        radial-gradient(circle at 80% 80%,
+          rgba(0, 255, 128, 0.1) 0%,
+          transparent 40%);
+    }
+
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
       cursor: none;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     /* ── PERFORMANCE OPTIMIZATION ── */
@@ -57,50 +125,29 @@
     /* ── CUSTOM CURSOR ── */
     .custom-cursor {
       position: fixed;
-      width: 28px;
-      height: 28px;
-      border: 2px solid var(--accent);
+      width: 12px;
+      height: 12px;
+      background-color: var(--accent);
       border-radius: 50%;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 99999;
       transform: translate(-50%, -50%);
-      animation: cursorPulse 2s ease-in-out infinite;
-      will-change: transform;
+      will-change: left, top;
+      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease, border 0.2s ease;
       left: -50px;
       top: -50px;
+      border: 1px solid transparent;
     }
 
-    .custom-cursor::after {
-      content: '';
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 50%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    .custom-cursor.hover {
+      width: 45px;
+      height: 45px;
+      background-color: transparent;
+      border: 2px solid var(--accent);
     }
 
     .custom-cursor.hidden {
       opacity: 0;
-    }
-
-    .custom-cursor.hover {
-      transform: translate(-50%, -50%) scale(1.4);
-      border-color: var(--accent2);
-    }
-
-    @keyframes cursorPulse {
-
-      0%,
-      100% {
-        opacity: 0.8;
-      }
-
-      50% {
-        opacity: 0.4;
-      }
     }
 
     :root.dark-mode .custom-cursor {
@@ -113,7 +160,7 @@
     input,
     textarea,
     select {
-      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      transition: all var(--transition-medium);
     }
 
     button:active,
@@ -140,9 +187,10 @@
     }
 
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 2px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
       color: var(--text);
       text-decoration: none;
     }
@@ -179,6 +227,158 @@
       background: var(--accent);
     }
 
+    /* ── NAV COMMAND ── */
+    .nav-cmd {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-premium);
+      color: var(--text-muted);
+      margin-right: 8px;
+    }
+
+    .dark-mode .nav-cmd {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-cmd:hover {
+      border-color: var(--accent);
+      background: rgba(0, 68, 238, 0.05);
+      color: var(--accent);
+      transform: scale(1.1);
+    }
+
+    .nav-cmd i,
+    .nav-cmd svg {
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ── COMMAND PALETTE ── */
+    .cmd-palette-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(12px);
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      padding-top: 15vh;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.4s var(--ease-premium);
+    }
+
+    .cmd-palette-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cmd-palette {
+      width: 90%;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      transform: translateY(-20px) scale(0.98);
+      transition: all 0.4s var(--ease-premium);
+      height: fit-content;
+    }
+
+    .dark-mode .cmd-palette {
+      background: rgba(15, 15, 15, 0.85);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .cmd-palette-overlay.active .cmd-palette {
+      transform: translateY(0) scale(1);
+    }
+
+    .cmd-search-bar {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .dark-mode .cmd-search-bar {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .cmd-search-bar i {
+      font-size: 14px;
+      opacity: 0.5;
+    }
+
+    .cmd-search-bar input {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 15px;
+      outline: none;
+    }
+
+    .cmd-list {
+      padding: 10px;
+    }
+
+    .cmd-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .cmd-item:hover {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .cmd-item:hover i,
+    .cmd-item:hover .cmd-shortcut {
+      color: #fff;
+      opacity: 1;
+    }
+
+    .cmd-item i {
+      width: 20px;
+      text-align: center;
+      opacity: 0.6;
+      font-size: 14px;
+    }
+
+    .cmd-item span {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .cmd-shortcut {
+      font-size: 10px;
+      opacity: 0.3;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600;
+    }
+
     /* ── THEME TOGGLE ── */
     .theme-toggle {
       background: none;
@@ -204,13 +404,18 @@
 
     /* ── DARK MODE ── */
     :root.dark-mode {
-      --bg: #0a0a0a;
-      --card: #1a1a1a;
-      --card-dark: #2a2a2a;
-      --text: #f0ede8;
-      --text-muted: #a0a0a0;
-      --text-light: #f0ede8;
-      --border: rgba(255, 255, 255, 0.08);
+      --bg: #030303;
+      --card: #0a0a0a;
+      --card-dark: #111111;
+      --text: #f0f0f0;
+      --text-muted: #999999;
+      --text-light: #f0f0f0;
+      --border: rgba(255, 255, 255, 0.04);
+
+      --surface-1: #030303;
+      --surface-2: #0a0a0a;
+      --surface-3: #111111;
+      --shadow-premium: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
     }
 
     .dark-mode body {
@@ -274,10 +479,13 @@
       padding: 40px;
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1), box-shadow 0.3s ease;
+      transition: transform var(--transition-medium), box-shadow var(--transition-medium);
       will-change: transform, box-shadow;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
+      border: 1px solid var(--border);
+    }
+
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
     }
 
     .card:hover {
@@ -300,7 +508,7 @@
     }
 
     .card-cream {
-      background: #e8e4dd;
+      background: #f0ece6;
     }
 
     .card-orange {
@@ -331,8 +539,8 @@
     .hero-noise {
       position: absolute;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-      opacity: 0.4;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+      opacity: 0.15;
       pointer-events: none;
     }
 
@@ -374,12 +582,13 @@
     }
 
     .hero-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(72px, 8vw, 110px);
-      line-height: 0.9;
-      letter-spacing: 2px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: clamp(60px, 8vw, 100px);
+      line-height: 0.95;
+      letter-spacing: -3px;
       color: #fff;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .hero-name .blue {
@@ -387,20 +596,21 @@
     }
 
     .hero-role {
-      font-family: 'Space Mono', monospace;
-      font-size: 13px;
-      letter-spacing: 3px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.45);
-      margin-bottom: 20px;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 24px;
     }
 
     .hero-desc {
-      font-size: 16px;
-      color: rgba(255, 255, 255, 0.6);
-      max-width: 400px;
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 480px;
       line-height: 1.6;
-      margin-bottom: 32px;
+      margin-bottom: 40px;
+      font-weight: 400;
     }
 
     .hero-btns {
@@ -486,16 +696,17 @@
     }
 
     .photo-name {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
       font-size: 24px;
       color: #fff;
-      letter-spacing: 2px;
+      letter-spacing: -0.5px;
       margin-bottom: 6px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
     }
 
     .photo-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -674,7 +885,7 @@
     }
 
     .stack-sub {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: 0.5px;
       color: rgba(255, 255, 255, 0.4);
@@ -682,7 +893,7 @@
     }
 
     .stack-cat-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -708,7 +919,7 @@
     }
 
     .stat-label {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
@@ -717,10 +928,11 @@
     }
 
     .stat-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(52px, 5vw, 80px);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: clamp(48px, 5vw, 72px);
       line-height: 1;
-      letter-spacing: 1px;
+      letter-spacing: -2px;
     }
 
     .stat-desc {
@@ -736,7 +948,7 @@
     }
 
     .section-tag {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
@@ -745,11 +957,11 @@
     }
 
     .about-card h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      line-height: 1;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
+      font-weight: 800;
+      font-size: 64px;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
     }
 
     .about-card p {
@@ -766,8 +978,8 @@
     }
 
     .skills-card h2 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 42px;
+      font-weight: 700;
+      font-size: 32px;
       margin-bottom: 24px;
     }
 
@@ -824,7 +1036,7 @@
     }
 
     .section-header h2 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 64px;
       letter-spacing: 2px;
     }
@@ -847,7 +1059,7 @@
     }
 
     .proj-year {
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       letter-spacing: 2px;
       opacity: .45;
@@ -855,7 +1067,7 @@
     }
 
     .proj-accuracy {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 64px;
       line-height: 1;
       margin-bottom: 4px;
@@ -925,7 +1137,7 @@
     }
 
     .exp-card h2 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 52px;
       margin-bottom: 28px;
     }
@@ -946,7 +1158,7 @@
       font-size: 13px;
       opacity: .5;
       margin-bottom: 10px;
-      font-family: 'Space Mono', monospace;
+      font-family: 'JetBrains Mono', monospace;
       letter-spacing: 1px;
     }
 
@@ -978,7 +1190,7 @@
     }
 
     .contact-card h2 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 72px;
       line-height: 1;
       margin-bottom: 8px;
@@ -1095,7 +1307,7 @@
     }
 
     .cert-card h3 {
-      font-family: 'Bebas Neue', sans-serif;
+      font-family: 'Outfit', sans-serif;
       font-size: 28px;
       margin-bottom: 16px;
     }
@@ -1362,9 +1574,11 @@
 
 <body>
 
+  <div class="mesh-gradient"></div>
+
   <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="portfolio_v5.html">GK</a>
+    <a class="nav-logo" href="index.html">GK</a>
     <div class="nav-links">
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
@@ -1374,8 +1588,60 @@
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
       <i class="fas fa-moon"></i>
     </button>
+    <div class="nav-cmd" id="navCommand" title="Search (⌘K)">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path
+          d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z">
+        </path>
+      </svg>
+    </div>
     <a class="nav-cta" href="contact.html">Hire me</a>
   </nav>
+
+  <!-- COMMAND PALETTE MODAL -->
+  <div class="cmd-palette-overlay" id="cmdPalette">
+    <div class="cmd-palette">
+      <div class="cmd-search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Type a command or search..." id="cmdSearch">
+      </div>
+      <div class="cmd-list">
+        <a href="projects.html" class="cmd-item">
+          <i class="fas fa-project-diagram"></i>
+          <span>View Projects</span>
+          <span class="cmd-shortcut">G P</span>
+        </a>
+        <a href="about.html" class="cmd-item">
+          <i class="fas fa-user"></i>
+          <span>About Gopikrishna</span>
+          <span class="cmd-shortcut">G A</span>
+        </a>
+        <a href="experience_new.html" class="cmd-item">
+          <i class="fas fa-briefcase"></i>
+          <span>Work Experience</span>
+          <span class="cmd-shortcut">G E</span>
+        </a>
+        <a href="contact.html" class="cmd-item">
+          <i class="fas fa-paper-plane"></i>
+          <span>Get in Touch</span>
+          <span class="cmd-shortcut">G C</span>
+        </a>
+        <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
+          class="cmd-item">
+          <i class="fas fa-file-pdf"></i>
+          <span>Download Resume</span>
+          <span class="cmd-shortcut">⌘ D</span>
+        </a>
+        <div class="cmd-item"
+          onclick="document.getElementById('chatbotToggle').click(); document.getElementById('cmdPalette').classList.remove('active');">
+          <i class="fas fa-robot"></i>
+          <span>Ask AI Assistant</span>
+          <span class="cmd-shortcut">⌘ J</span>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <main>
 
@@ -1479,7 +1745,7 @@
       <div class="card card-cream"
         style="grid-column:span 3;grid-row:span 3;display:flex;flex-direction:column;justify-content:center;">
         <div
-          style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;color:var(--text);opacity:0.15;position:absolute;bottom:30px;right:30px;">
+          style="font-family:'Outfit',sans-serif;font-size:48px;line-height:1;color:var(--text);opacity:0.15;position:absolute;bottom:30px;right:30px;">
           ML</div>
         <div class="section-tag">Previously</div>
         <div style="font-size:15px;line-height:1.6;color:var(--text-muted);">Worked as Machine Learning Intern at
@@ -1501,9 +1767,9 @@
     <div class="bento-grid" id="projects" style="margin-top:60px;">
       <div class="section-header">
         <div
-          style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:12px;">
+          style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:12px;">
           Featured Work</div>
-        <h2>Projects</h2>
+        <h2>PROJECTS</h2>
       </div>
 
       <!-- SmartDoc Parser -->
@@ -1523,7 +1789,10 @@
             <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">Python</span>
             <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">FastAPI</span>
           </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link" href="https://github.com/gopikrishna818/SmartDoc-Parser-Invoice-Bank-Statement-Extraction" target="_blank" style="color:#fff;"><i class="fab fa-github"></i> GitHub</a><a class="proj-link" href="projects.html" style="color:#fff;">Details →</a></div>
+          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
+              href="https://github.com/gopikrishna818/SmartDoc-Parser-Invoice-Bank-Statement-Extraction" target="_blank"
+              style="color:#fff;"><i class="fab fa-github"></i> GitHub</a><a class="proj-link" href="projects.html"
+              style="color:#fff;">Details →</a></div>
         </div>
       </div>
 
@@ -1546,7 +1815,10 @@
             <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Retell
               AI</span>
           </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link" href="https://github.com/gopikrishna818/AI-Lead-Gen-Outreach-Automation-Engine" target="_blank" style="color:rgba(255,255,255,0.5);"><i class="fab fa-github"></i> GitHub</a><a class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a></div>
+          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
+              href="https://github.com/gopikrishna818/AI-Lead-Gen-Outreach-Automation-Engine" target="_blank"
+              style="color:rgba(255,255,255,0.5);"><i class="fab fa-github"></i> GitHub</a><a class="proj-link"
+              href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a></div>
         </div>
       </div>
 
@@ -1566,7 +1838,15 @@
             <span class="proj-tag">RAG</span>
             <span class="proj-tag">FastAPI</span>
           </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link" href="https://enterprise-multi-agent-rag-production.up.railway.app/" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a><a class="proj-link" href="https://github.com/gopikrishna818/enterprise-multi-agent-rag.git" target="_blank"><i class="fab fa-github"></i> GitHub</a><div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link" href="https://github.com/gopikrishna818/ai_content_strategy_engine" target="_blank"><i class="fab fa-github"></i> GitHub</a><a class="proj-link" href="projects.html">Details →</a></div></div>
+          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
+              href="https://enterprise-multi-agent-rag-production.up.railway.app/" target="_blank"><i
+                class="fas fa-external-link-alt"></i> Live Demo</a><a class="proj-link"
+              href="https://github.com/gopikrishna818/enterprise-multi-agent-rag.git" target="_blank"><i
+                class="fab fa-github"></i> GitHub</a>
+            <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
+                href="https://github.com/gopikrishna818/ai_content_strategy_engine" target="_blank"><i
+                  class="fab fa-github"></i> GitHub</a><a class="proj-link" href="projects.html">Details →</a></div>
+          </div>
         </div>
       </div>
 
@@ -1609,7 +1889,12 @@
               style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">PostgreSQL</span>
             <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Docker</span>
           </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link" href="https://worthy-encouragement-production-6af3.up.railway.app/" target="_blank" style="color:rgba(255,255,255,0.4);"><i class="fas fa-external-link-alt"></i> Live Demo</a><a class="proj-link" href="https://github.com/gopikrishna818" target="_blank" style="color:rgba(255,255,255,0.4);"><i class="fab fa-github"></i> GitHub</a><a class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.4);">Details →</a></div>
+          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
+              href="https://worthy-encouragement-production-6af3.up.railway.app/" target="_blank"
+              style="color:rgba(255,255,255,0.4);"><i class="fas fa-external-link-alt"></i> Live Demo</a><a
+              class="proj-link" href="https://github.com/gopikrishna818" target="_blank"
+              style="color:rgba(255,255,255,0.4);"><i class="fab fa-github"></i> GitHub</a><a class="proj-link"
+              href="projects.html" style="color:rgba(255,255,255,0.4);">Details →</a></div>
         </div>
       </div>
 
@@ -1639,7 +1924,7 @@
     <!-- ══ SKILLS / STACK ══ -->
     <div id="skills" style="margin-top:60px;">
       <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;">
-        <h2 style="font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:2px;line-height:1;">Tech Stack</h2>
+        <h2 style="font-family:'Outfit',sans-serif;font-size:64px;letter-spacing:2px;line-height:1;">TECH STACK</h2>
         <p style="font-size:14px;color:var(--text-muted);max-width:320px;text-align:right;">The tools & technologies I
           use to build intelligent systems</p>
       </div>
@@ -1742,7 +2027,7 @@
       <!-- Category: Tools & Platforms -->
       <div style="margin-bottom:12px;">
         <div
-          style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
+          style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
           Tools & Platforms</div>
         <div class="stack-row">
           <div class="stack-card">
@@ -1793,7 +2078,7 @@
       <!-- Category: Specialisations -->
       <div>
         <div
-          style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
+          style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
           Specialisations</div>
         <div class="stack-row">
           <div class="stack-card stack-card-accent">
@@ -1897,7 +2182,7 @@
       <!-- Achievements -->
       <div class="card card-orange ach-card" style="grid-column:span 4;grid-row:span 2;">
         <div class="section-tag" style="color:rgba(255,255,255,0.9);">Wins</div>
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:38px;color:#fff;margin-bottom:16px;">Achievements
+        <div style="font-family:'Outfit',sans-serif;font-size:38px;color:#fff;margin-bottom:16px;">Achievements
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div
@@ -1925,7 +2210,7 @@
       <div class="card card-dark"
         style="grid-column:span 4;grid-row:span 2;display:flex;align-items:center;justify-content:center;">
         <div style="text-align:center;">
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:rgba(255,255,255,0.15);line-height:1;">
+          <div style="font-family:'Outfit',sans-serif;font-size:42px;color:rgba(255,255,255,0.15);line-height:1;">
             TURNING<br>DATA INTO<br>IMPACT</div>
         </div>
       </div>
@@ -1955,7 +2240,7 @@
       <div class="card card-blue social-card" style="grid-column:span 4;grid-row:span 4;">
         <div>
           <div class="section-tag" style="color:rgba(255,255,255,0.9);">Find Me</div>
-          <div style="font-family:'Bebas Neue',sans-serif;font-size:42px;color:#fff;margin-bottom:6px;">
+          <div style="font-family:'Outfit',sans-serif;font-size:42px;color:#fff;margin-bottom:6px;">
             Gopikrishna<br>Chegoni</div>
           <div style="font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:28px;">Open to Opportunities</div>
         </div>
@@ -1986,7 +2271,7 @@
   </main>
 
   <footer>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;opacity:.6;margin-bottom:12px;">
+    <div style="font-family:'Outfit',sans-serif;font-size:28px;letter-spacing:4px;opacity:.6;margin-bottom:12px;">
       GOPIKRISHNA CHEGONI</div>
     <div>© 2025 · Aspiring AI/ML Engineer · Built with intention.</div>
   </footer>
@@ -2045,24 +2330,12 @@
     cursor.classList.add('custom-cursor');
     document.body.appendChild(cursor);
 
-    let mouseX = 0, mouseY = 0;
-    let cursorX = 0, cursorY = 0;
     let isMouseOnPage = true;
 
-    // Smooth cursor follow
-    function animateCursor() {
-      cursorX += (mouseX - cursorX) * 0.7;
-      cursorY += (mouseY - cursorY) * 0.7;
-      cursor.style.left = cursorX + 'px';
-      cursor.style.top = cursorY + 'px';
-      requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    // Track mouse position
+    // Track mouse position and update cursor instantly
     document.addEventListener('mousemove', (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
     });
 
     // Hide cursor when leaving page
@@ -2219,6 +2492,91 @@
         });
       }
     }
+    // Mouse Position Tracking for Mesh Gradient
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.body.style.setProperty('--mouse-x', `${x}%`);
+      document.body.style.setProperty('--mouse-y', `${y}%`);
+    });
+
+    // ── GSAP ANIMATIONS (Physics-Based Motion) ──
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Staggered reveals for cards
+    gsap.utils.toArray('.card, .bento-grid section, .section-header').forEach((element) => {
+      gsap.from(element, {
+        scrollTrigger: {
+          trigger: element,
+          start: "top 90%",
+          toggleActions: "play none none none"
+        },
+        opacity: 0,
+        y: 60,
+        scale: 0.98,
+        duration: 1.2,
+        ease: "power4.out" // Elite physics-based feel
+      });
+    });
+
+    // Magnetic Button Effect (50px proximity pull) - ONLY HIRE ME
+    const magneticButtons = document.querySelectorAll('.nav-cta');
+
+    document.addEventListener('mousemove', (e) => {
+      magneticButtons.forEach(btn => {
+        const rect = btn.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const distanceX = e.clientX - centerX;
+        const distanceY = e.clientY - centerY;
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        const threshold = 80;
+
+        if (distance < threshold) {
+          gsap.to(btn, {
+            x: distanceX * 0.3,
+            y: distanceY * 0.3,
+            duration: 0.4,
+            ease: "power2.out"
+          });
+        } else {
+          gsap.to(btn, {
+            x: 0,
+            y: 0,
+            duration: 0.6,
+            ease: "elastic.out(1, 0.3)"
+          });
+        }
+      });
+    });
+
+    // Command Palette Logic
+    const cmdBtn = document.getElementById('navCommand');
+    const cmdPalette = document.getElementById('cmdPalette');
+
+    if (cmdBtn) {
+      cmdBtn.addEventListener('click', () => {
+        cmdPalette.classList.add('active');
+        setTimeout(() => document.getElementById('cmdSearch').focus(), 100);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        cmdPalette.classList.toggle('active');
+        if (cmdPalette.classList.contains('active')) {
+          setTimeout(() => document.getElementById('cmdSearch').focus(), 100);
+        }
+      }
+      if (e.key === 'Escape') cmdPalette.classList.remove('active');
+    });
+
+    cmdPalette.addEventListener('click', (e) => {
+      if (e.target === cmdPalette) cmdPalette.classList.remove('active');
+    });
   </script>
 
 </body>
