@@ -13,17 +13,19 @@
   <meta property="og:url" content="https://gopikrishna818.github.io/projects.html">
   <meta name="twitter:card" content="summary_large_image">
   <title>Projects — Gopikrishna Chegoni</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="css/shared.css">
-<link rel="stylesheet" href="css/projects.css">
-  </head>
+  <link rel="stylesheet" href="css/projects.css">
+</head>
 
 <body>
   <div id="scrollProgress"></div>
@@ -53,7 +55,7 @@
 
   <!-- NAV -->
   <nav>
-    
+
     <a class="nav-logo" href="index.html">GK</a>
 
     <div class="nav-links">
@@ -61,6 +63,13 @@
       <a href="projects.html">Projects</a>
       <a href="experience_new.html">Experience</a>
       <a href="contact.html">Contact</a>
+    </div>
+    <div class="audience-toggle-container">
+      <div class="audience-toggle" id="audienceToggle">
+        <div class="audience-slider"></div>
+        <button class="audience-btn active" data-view="dev" title="Developer Mode: Technical Depth">Dev</button>
+        <button class="audience-btn" data-view="rec" title="Recruiter Mode: Business Impact">Rec</button>
+      </div>
     </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
       <i class="fas fa-moon"></i>
@@ -121,83 +130,152 @@
   </div>
 
 
-  <main>
+  <main style="background: #fff;">
     <!-- PAGE TITLE -->
-    <div class="page-title">
+    <div class="page-title" style="text-align: center; border-bottom: 1px solid #eee;">
       <div class="page-grid-bg" aria-hidden="true"></div>
-      <h1
-        style="position:relative;z-index:1;font-family: var(--font-heading);font-size:clamp(40px,5vw,72px);font-weight: 900;letter-spacing: -0.06em;line-height:1.05;margin-bottom:12px;">
-        Building the Future</h1>
-      <p style="position:relative;z-index:1;font-size:18px;max-width:600px;opacity:0.8;">A showcase of production-ready
-        AI systems, document intelligence pipelines, and automated outreach engines.</p>
+      <h1 class="projects-h1" style="margin: 0 auto 24px; max-width: 900px;">I build AI systems that replace hours of
+        manual work</h1>
+      <p class="projects-sub" style="margin: 0 auto 48px; font-weight: 800; color: #000; font-size: 20px;">6 systems
+        shipped. 70% less manual work. Zero fluff.</p>
+    </div>
 
-      <div class="filter-tabs-wrapper" style="margin-top: 32px;">
-        <div class="filter-indicator"></div>
-        <div class="filter-tabs">
-          <button class="filter-tab active" data-filter="all">All Projects <span class="count">4</span></button>
-          <button class="filter-tab" data-filter="AI/ML">AI & ML <span class="count">3</span></button>
-          <button class="filter-tab" data-filter="Automation">Automation <span class="count">1</span></button>
+    <!-- CURRENTLY BUILDING (LIVE TRACKER) -->
+    <div class="live-build-section" style="padding: 100px 24px; background: #fff;">
+      <div class="live-build-card">
+        <div class="live-build-info">
+          <div class="live-tag">
+            <span class="pulse-dot"></span> LIVE BUILD — PRODUCTION SPRINT
+          </div>
+          <h2
+            style="font-family: var(--font-heading); font-size: clamp(32px, 5vw, 48px); font-weight: 900; letter-spacing: -0.06em; margin-bottom: 12px; color: #fff;">
+            Multi-Agent RAG System</h2>
+          <p style="font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 40px; max-width: 500px;">Building the
+            next-gen hallucination guard layer for enterprise knowledge bases.</p>
+
+          <div class="live-progress-wrap" style="margin-bottom: 40px;">
+            <div
+              style="display: flex; justify-content: space-between; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; font-weight: 900; color: rgba(255,255,255,0.4);">
+              <span>CORE ARCHITECTURE</span>
+              <span>95% DONE</span>
+            </div>
+            <div class="progress-bar-bg"
+              style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 100px; overflow: hidden;">
+              <div class="progress-bar-fill" style="width: 95%;"></div>
+            </div>
+          </div>
+
+          <div class="live-check-list" style="display: grid; gap: 12px;">
+            <div style="display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 700;">
+              <i class="fas fa-check-circle" style="color: var(--accent);"></i> Query Router Engine
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 700;">
+              <i class="fas fa-check-circle" style="color: var(--accent);"></i> Hybrid Vector Search
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.5); font-weight: 700;">
+              <i class="fas fa-arrow-right" style="color: var(--accent); font-size: 12px;"></i> Up Next → Hallucination
+              Guard Layer
+            </div>
+          </div>
+        </div>
+
+        <div class="live-meta">
+          <div class="live-meta-item">
+            <span>STARTED</span>
+            <strong>3 Weeks Ago</strong>
+          </div>
+          <div class="live-meta-item">
+            <span>NEXT SPRINT</span>
+            <strong style="color: var(--accent);">Evaluation Framework</strong>
+          </div>
+          <div class="live-meta-item">
+            <span>TARGET ETA</span>
+            <strong>2 Weeks</strong>
+          </div>
         </div>
       </div>
     </div>
 
+    <!-- PROOF WALL SECTION -->
+    <section class="proof-wall-section"
+      style="padding: 100px 0; background: #fafafa; border-top: 1px solid #eee; border-bottom: 1px solid #eee; overflow: hidden;">
+      <div style="padding: 0 24px; margin-bottom: 60px; text-align: center;">
+        <div
+          style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: .4; margin-bottom: 12px;">
+          Visual Evidence</div>
+        <h2
+          style="font-family: var(--font-heading); font-size: clamp(32px, 5vw, 56px); letter-spacing: -0.06em; font-weight: 900;">
+          The Proof Wall</h2>
+        <p style="color: var(--text-muted); font-size: 18px; max-width: 600px; margin: 0 auto;">Metrics tell the story,
+          but outputs prove the capability. Here is what my systems actually deliver.</p>
+      </div>
 
-    <div class="projects-container">
+      <div class="proof-scroll-container">
+        <div class="proof-track">
+          <!-- Proof Item 1 -->
+          <div class="proof-item">
+            <div class="proof-label">↳ OCR Extraction Proof (98.2% Confidence)</div>
+            <img src="images/invoice_proof.png" alt="Invoice Parsing Proof" loading="lazy">
+          </div>
+          <!-- Proof Item 2 -->
+          <div class="proof-item">
+            <div class="proof-label">↳ Demand Forecasting Accuracy (94% MAPE)</div>
+            <img src="images/forecast_proof.png" alt="Demand Forecasting Proof" loading="lazy">
+          </div>
+          <!-- Proof Item 3 -->
+          <div class="proof-item">
+            <div class="proof-label">↳ RAG Groundedness & Citations (99% Score)</div>
+            <img src="images/rag_proof.png" alt="RAG Guardrail Proof" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS -->
+    <div class="projects-container" style="background: #fff; position: relative; z-index: 2; padding-top: 40px;">
       <div class="projects-list-header">
         <h2>Featured Projects</h2>
-        <a href="javascript:void(0)" class="view-all-link" onclick="resetFilters()">Reset Filters</a>
+        <div id="resetFilters" style="display: none;">
+          <a href="javascript:void(0)" class="view-all-link" onclick="resetFilters()">Reset Filters</a>
+        </div>
+        <div class="filter-tabs-wrapper">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">All Projects <span class="count">4</span></button>
+            <button class="filter-tab" data-filter="AI/ML">AI & ML <span class="count">3</span></button>
+            <button class="filter-tab" data-filter="Automation">Automation <span class="count">1</span></button>
+          </div>
+        </div>
       </div>
+
       <div id="projectsGrid">
         <!-- Projects will be rendered here as rows -->
       </div>
     </div>
 
+    <!-- FINAL CTA SECTION -->
+    <section class="final-cta"
+      style="padding: 140px 24px; text-align: center; background: #fff; border-top: 1px solid #eee;">
+      <h2
+        style="font-family: var(--font-heading); font-size: clamp(32px, 5vw, 64px); font-weight: 900; letter-spacing: -0.06em; margin-bottom: 24px;">
+        Ready to scale your AI operations?</h2>
+      <p style="font-size: 20px; color: var(--text-muted); max-width: 600px; margin: 0 auto 48px; font-weight: 600;">I’m
+        currently open to new collaborations and engineering roles. Let’s build the next system together.</p>
+
+      <div style="display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap;">
+        <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
+          rel="noopener noreferrer" class="nav-cta"
+          style="display: inline-flex; align-items: center; gap: 12px; padding: 20px 48px; font-size: 16px; text-decoration: none; background: #000; color: #fff; font-weight: 800; border-radius: 100px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+          <i class="fas fa-download" style="font-size: 18px; color: var(--accent);"></i>
+          Download Full Resume
+        </a>
+        <a href="contact.html"
+          style="font-size: 18px; font-weight: 800; color: #000; text-decoration: none; border-bottom: 2px solid #000; padding-bottom: 4px;">
+          Describe your problem →
+        </a>
+      </div>
+    </section>
 
   </main>
-
-  <!-- Ticker (Audit Step 10) -->
-  <div class="tech-ticker">
-    <div class="ticker-track">
-      <div class="ticker-item">PYTHON <span>•</span></div>
-      <div class="ticker-item">N8N <span>•</span></div>
-      <div class="ticker-item">RETELL AI <span>•</span></div>
-      <div class="ticker-item">DOCKER <span>•</span></div>
-      <div class="ticker-item">FASTAPI <span>•</span></div>
-      <div class="ticker-item">GEMINI <span>•</span></div>
-      <div class="ticker-item">SUPABASE <span>•</span></div>
-      <div class="ticker-item">PYDANTIC <span>•</span></div>
-      <div class="ticker-item">PYTHON <span>•</span></div>
-      <div class="ticker-item">N8N <span>•</span></div>
-      <div class="ticker-item">RETELL AI <span>•</span></div>
-      <div class="ticker-item">DOCKER <span>•</span></div>
-      <div class="ticker-item">FASTAPI <span>•</span></div>
-      <div class="ticker-item">GEMINI <span>•</span></div>
-      <div class="ticker-item">SUPABASE <span>•</span></div>
-      <div class="ticker-item">PYDANTIC <span>•</span></div>
-    </div>
-  </div>
-
-
-  <!-- CTA Section (Audit Step 11) -->
-  <div class="cta-card-wrapper">
-    <div class="cta-card">
-      <div class="cta-sub">Let's build together</div>
-      <h2 class="cta-title">Join our community<br>and help define it.</h2>
-      <p class="cta-desc">Interested in AI automation, machine learning collaborations, or have an open role? Let’s
-        connect and create something impactful.</p>
-      <a href="contact.html" class="cta-btn">Connect with me</a>
-    </div>
-
-    <!-- RESUME DOWNLOAD SECTION (Moved per user request) -->
-    <div style="text-align: center; padding: 40px 24px 0;">
-      <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
-        rel="noopener noreferrer" class="nav-cta"
-        style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; text-decoration: none; background: #0a0a0a; color: #fff; border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-        <i class="fas fa-download" style="font-size: 16px; color: var(--accent);"></i>
-        Download Resume
-      </a>
-    </div>
-  </div>
 
   <footer>
     <div class="footer-container">
@@ -296,9 +374,9 @@
   <div class="custom-cursor" id="customCursor"></div>
   <div class="page-transition-overlay" id="pageTransition"></div>
 
-  
 
-  
+
+
   <script src="js/chatbot.js"></script>
   <script src="js/shared.js"></script>
 </body>

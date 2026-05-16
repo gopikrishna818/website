@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <!-- Structured Data -->
-  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
     content="Gopikrishna Chegoni — Aspiring AI/ML Engineer. Building intelligent systems, document automation, and AI-driven workflows.">
@@ -15,17 +15,19 @@
   <meta property="og:url" content="https://gopikrishna818.github.io/">
   <meta name="twitter:card" content="summary_large_image">
   <title>Gopikrishna Chegoni — Aspiring AI/ML Engineer</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- GSAP for Physics-Based Motion -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  
+
   <link rel="stylesheet" href="css/shared.css">
-<link rel="stylesheet" href="css/index.css">
-  </head>
+  <link rel="stylesheet" href="css/index.css">
+</head>
 
 <body>
   <div id="scrollProgress"></div>
@@ -34,7 +36,7 @@
 
   <!-- NAV -->
   <nav>
-    
+
     <a class="nav-logo" href="index.html">GK</a>
 
     <div class="nav-links">
@@ -42,6 +44,13 @@
       <a href="projects.html">Projects</a>
       <a href="experience_new.html">Experience</a>
       <a href="contact.html">Contact</a>
+    </div>
+    <div class="audience-toggle-container">
+      <div class="audience-toggle" id="audienceToggle">
+        <div class="audience-slider"></div>
+        <button class="audience-btn active" data-view="dev" title="Developer Mode: Technical Depth">Dev</button>
+        <button class="audience-btn" data-view="rec" title="Recruiter Mode: Business Impact">Rec</button>
+      </div>
     </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
       <i class="fas fa-moon"></i>
@@ -114,15 +123,22 @@
     <div class="bento-grid">
 
       <!-- HERO CARD -->
-      <div class="card card-dark hero-card" style="grid-column:span 8;grid-row:span 4;">
+      <div class="card card-dark hero-card">
         <div class="hero-noise"></div>
         <div style="position:relative;z-index:1;">
           <div class="hero-available"><span></span>Available for AIML Roles</div>
-          <div class="hero-role">Data Science Graduate</div>
+          <div class="hero-role">Production AI Engineer</div>
           <div class="hero-name">GOPIKRISHNA <span class="blue">CHEGONI</span></div>
-          <div class="hero-desc" style="max-width:540px;">Building intelligent systems at the intersection of Machine
-            Learning, document
-            automation, and AI-driven workflows. Turning data into impact.</div>
+
+          <!-- DEV BIO -->
+          <div class="hero-desc dev-only" style="max-width:540px;">I build production AI systems that <strong>cut manual
+              work by 70%+</strong> using state-of-the-art OCR and agentic RAG architectures.</div>
+
+          <!-- REC BIO -->
+          <div class="hero-desc rec-only" style="max-width:540px;">I help businesses scale by <strong>automating complex
+              data workflows</strong>. I transform manual document processing into high-efficiency, AI-driven digital
+            assets.</div>
+
           <div class="hero-btns">
             <a class="btn btn-primary" href="#projects">See My Work →</a>
           </div>
@@ -130,9 +146,7 @@
         </div>
       </div>
 
-
-      <!-- PHOTO CARD -->
-      <div class="card photo-card" style="grid-column:span 4;grid-row:span 4;">
+      <div class="card photo-card">
         <div class="photo-inner">
           <img src="images/pp-1.png" alt="Gopikrishna Chegoni" fetchpriority="high" />
           <div class="photo-overlay">
@@ -141,63 +155,49 @@
           </div>
         </div>
       </div>
-
-      <!-- BOLD CLAIM CARD — full-width, stops the scroll -->
-      <div class="card card-dark"
-        style="grid-column:span 12;grid-row:span 2;display:flex;align-items:center;justify-content:space-between;gap:40px;position:relative;overflow:hidden;padding:48px;">
-        <!-- subtle geometric grid overlay -->
-        <div
-          style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;">
-        </div>
-        <!-- radial accent glow -->
-        <div
-          style="position:absolute;top:-40px;left:-40px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,68,238,0.2) 0%,transparent 70%);pointer-events:none;">
-        </div>
-        <div style="position:relative;z-index:1;">
-          <div
-            style="font-family: var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">
-            Codekaze · National Engineering Ranking</div>
-          <div
-            style="font-family: var(--font-heading);font-weight: 900;font-size:clamp(56px,8vw,96px);line-height:0.9;letter-spacing: -0.06em;color:#fff;">
-            #<span style="color:var(--accent);" class="count-up" data-target="992">0</span></div>
-          <div style="font-size:15px;color:rgba(255,255,255,0.5);margin-top:12px;">Top <strong
-              style="color:#fff;">0.1%</strong> out of 1 million+ applicants · National rank among India's best
-            engineers.</div>
-        </div>
-        <div style="position:relative;z-index:1;display:flex;gap:48px;flex-shrink:0;">
-          <div style="text-align:center;">
-            <div
-              style="font-family: var(--font-heading);font-weight: 900;font-size:48px;color:#fff;line-height:1;"
-              class="count-up" data-target="8.42" data-decimals="2">0</div>
-            <div
-              style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:6px;">
-              CGPA · B.Tech</div>
-          </div>
-          <div style="width:1px;background:rgba(255,255,255,0.1);"></div>
-          <div style="text-align:center;">
-            <div
-              style="font-family: var(--font-heading);font-weight: 900;font-size:48px;color:#fff;line-height:1;">
-              <span class="count-up" data-target="6">0</span>+
-            </div>
-            <div
-              style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:6px;">
-              Projects Shipped</div>
-          </div>
-          <div style="width:1px;background:rgba(255,255,255,0.1);"></div>
-          <div style="text-align:center;">
-            <div
-              style="font-family: var(--font-heading);font-weight: 900;font-size:48px;color:#fff;line-height:1;">
-              <span class="count-up" data-target="73">0</span>%
-            </div>
-            <div
-              style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:6px;">
-              NPTEL Score</div>
-          </div>
-        </div>
       </div>
+    </div>
 
-      <!-- ABOUT CARD -->
-      <div class="card card-white about-card" style="grid-column:span 5;grid-row:span 3;">
+    <!-- ══ MOMENTS STACK ══ -->
+    <div class="moments-stack">
+      <!-- ══ MOMENT 1: GLOBAL AUTHORITY (#992) ══ -->
+      <section class="moment-section scrolly-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; padding: 100px 0;">
+        <div class="moment-content" style="text-align: center; max-width: 900px; padding: 0 40px;">
+          <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; font-weight: 800;">Global Authority</div>
+          <h2 style="font-family: var(--font-heading); font-size: clamp(48px, 8vw, 120px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 40px;">
+            Ranked <span class="blue">#992</span> <br> <span style="font-size: 0.4em; opacity: 0.5; letter-spacing: -0.01em;">Globally out of 1M+ Engineers</span>
+          </h2>
+          <p style="font-size: clamp(18px, 2vw, 24px); color: var(--text-muted); line-height: 1.5; font-weight: 600;">Technical authority isn't claimed; it's proven through consistent, high-performance execution on a global scale.</p>
+        </div>
+      </section>
+
+      <!-- ══ MOMENT 2: TECHNICAL PRECISION (98% OCR) ══ -->
+      <section class="moment-section scrolly-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #0a0a0a; color: #fff; position: relative; overflow: hidden; padding: 100px 0;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(0,68,238,0.15) 0%, transparent 70%); pointer-events: none;"></div>
+        <div class="moment-content" style="text-align: center; max-width: 1000px; padding: 0 40px; position: relative; z-index: 2;">
+          <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; font-weight: 800;">Precision Engineering</div>
+          <h2 style="font-family: var(--font-heading); font-size: clamp(48px, 8vw, 120px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 40px; color: #fff;">
+            98<span style="color: var(--accent);">.</span>2% <br> <span style="font-size: 0.45em; opacity: 0.6; letter-spacing: -0.01em;">OCR Extraction Accuracy</span>
+          </h2>
+          <p style="font-size: clamp(18px, 2vw, 24px); color: rgba(255,255,255,0.5); line-height: 1.5; font-weight: 600;">Building production-grade AI means eliminating the gap between "working" and "reliable."</p>
+        </div>
+      </section>
+
+      <!-- ══ MOMENT 3: BUSINESS IMPACT (70% AUTOMATION) ══ -->
+      <section class="moment-section scrolly-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; padding: 100px 0;">
+        <div class="moment-content" style="text-align: center; max-width: 900px; padding: 0 40px;">
+          <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; font-weight: 800;">Measurable Impact</div>
+          <h2 style="font-family: var(--font-heading); font-size: clamp(48px, 8vw, 120px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 40px;">
+            70% <span style="color: var(--accent);">+</span> <br> <span style="font-size: 0.4em; opacity: 0.5; letter-spacing: -0.01em;">Reduction in Manual Work</span>
+          </h2>
+          <p style="font-size: clamp(18px, 2vw, 24px); color: var(--text-muted); line-height: 1.5; font-weight: 600;">I don't just write code; I reclaim time by automating the complex workflows that stall growth.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ══ DETAILS SECTION (Bento Grid 2) ══ -->
+    <div class="bento-grid scrolly-section" style="padding-top: 100px;">
+      <div class="card card-white about-card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <div class="section-tag">About Me</div>
           <div
@@ -210,15 +210,19 @@
               Multi-Agent RAG</span>
           </div>
         </div>
-        <h2>Computer Science<br>× AI/ML</h2>
-        <p>B.Tech graduate in CSE (Data Science) from Guru Nanak Institutions Technical Campus with expertise in machine
-          learning pipelines, intelligent document processing, and automation workflows. I build production-grade AI
-          systems that solve real business problems — from 88% accurate OCR engines to lead-gen automation that cuts
-          manual effort by 70%.</p>
+        <h2 class="dev-only">Computer Science<br>× AI/ML</h2>
+        <h2 class="rec-only">Production AI<br>Solutions</h2>
+        <p class="dev-only">B.Tech graduate in CSE (Data Science) from Guru Nanak Institutions Technical Campus with
+          expertise in machine learning pipelines, intelligent document processing, and automation workflows. I build
+          production-grade AI systems that solve real business problems — from 88% accurate OCR engines to lead-gen
+          automation that cuts manual effort by 70%.</p>
+        <p class="rec-only">Specialized in developing automated AI solutions that deliver measurable business value. I
+          transform manual document workflows into high-efficiency digital assets, helping organizations scale through
+          intelligent automation and operational excellence.</p>
       </div>
 
       <!-- TECH STACK CARD -->
-      <div class="card card-dark skills-card" style="grid-column:span 4;grid-row:span 3;">
+      <div class="card card-dark skills-card">
         <div class="section-tag" style="color:rgba(255,255,255,0.4);">Capabilities</div>
         <h2 style="color:#fff;">Tech Stack</h2>
         <div class="skill-tags">
@@ -246,8 +250,7 @@
       </div>
 
       <!-- INTRO BIG TEXT CARD -->
-      <div class="card card-cream"
-        style="grid-column:span 3;grid-row:span 3;display:flex;flex-direction:column;justify-content:center;">
+      <div class="card card-cream intro-card" style="display:flex;flex-direction:column;justify-content:center;">
         <div
           style="font-family: var(--font-heading);font-weight: 900;font-size:48px;line-height:1;color:var(--text);opacity:0.15;position:absolute;bottom:30px;right:30px;">
           ML</div>
@@ -262,8 +265,8 @@
       </div>
 
       <!-- TESTIMONIAL CARD -->
-      <div class="card card-dark"
-        style="grid-column:span 6;grid-row:span 2;display:flex;flex-direction:column;justify-content:center;position:relative;padding:32px;">
+      <div class="card card-dark testimonial-card"
+        style="display:flex;flex-direction:column;justify-content:center;position:relative;padding:32px;">
         <i class="fas fa-quote-left"
           style="position:absolute; top: 24px; left: 24px; font-size: 40px; color: rgba(255,255,255,0.05);"></i>
         <div style="position:relative; z-index:1;">
@@ -283,8 +286,8 @@
       </div>
 
       <!-- GITHUB GRAPH CARD -->
-      <div class="card card-white"
-        style="grid-column:span 6;grid-row:span 2;display:flex;flex-direction:column;justify-content:center; align-items:center; padding:32px;">
+      <div class="card card-white graph-card"
+        style="display:flex;flex-direction:column;justify-content:center; align-items:center; padding:32px;">
         <div
           style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
           <div class="section-tag" style="margin-bottom:0;">Open Source Activity</div>
@@ -297,7 +300,6 @@
 
     </div><!-- end hero bento-grid -->
 
-    <!-- ══ MY PROCESS ══ -->
     <div style="margin-top: 80px; margin-bottom: 40px;">
       <div class="section-header" style="text-align: center; margin-bottom: 40px;">
         <div
@@ -309,7 +311,6 @@
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-
         <div class="card card-white" style="padding: 32px; position: relative;">
           <div
             style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(0,0,0,0.03); font-weight: 900; font-family: var(--font-heading);">
@@ -366,12 +367,12 @@
           <h3
             style="font-size: 20px; font-weight: 900; margin-bottom: 12px; color: #fff; font-family: var(--font-heading); letter-spacing: -0.06em;">
             Ship</h3>
-          <p style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6;">Deploy to production environments
-            (Railway/AWS), set up CI/CD, and optimize for latency and scale.</p>
+          <p style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6;">Deploy to production environments,
+            set up CI/CD, and optimize for latency and scale.</p>
         </div>
-
       </div>
     </div>
+
 
     <!-- ══ PROJECTS ══ -->
     <div class="bento-grid" id="projects" style="margin-top:60px;">
@@ -384,8 +385,9 @@
           Projects</h2>
       </div>
 
+
       <!-- SmartDoc Parser -->
-      <div class="card card-blue project-card" style="grid-column:span 4;grid-row:span 3;">
+      <div class="card card-blue project-card">
         <div>
           <div class="proj-year">2025</div>
           <div class="proj-accuracy">98%</div>
@@ -409,7 +411,7 @@
 
 
       <!-- AI Lead-Gen -->
-      <div class="card card-dark project-card" style="grid-column:span 4;grid-row:span 3;">
+      <div class="card card-dark project-card">
         <div>
           <div class="proj-year">2025</div>
           <div class="proj-accuracy" style="color:var(--accent);">70%</div>
@@ -435,7 +437,7 @@
       </div>
 
       <!-- Enterprise Multi-Agent RAG — uniform 4-col span -->
-      <div class="card card-white project-card" style="grid-column:span 4;grid-row:span 3;">
+      <div class="card card-white project-card">
         <div>
           <div class="proj-year" style="color:var(--text-muted);">2026</div>
           <div class="proj-accuracy">95%</div>
@@ -451,7 +453,8 @@
             <span class="proj-tag">FastAPI</span>
           </div>
           <div style="display: flex; gap: 12px; margin-top: 12px;">
-            <a class="proj-link" href="https://github.com/gopikrishna818/enterprise-multi-agent-rag.git" target="_blank" rel="noopener noreferrer">
+            <a class="proj-link" href="https://github.com/gopikrishna818/enterprise-multi-agent-rag.git" target="_blank"
+              rel="noopener noreferrer">
               <i class="fab fa-github"></i> GitHub
             </a>
             <a class="proj-link" href="projects.html">Details →</a>
@@ -534,8 +537,36 @@
     <div id="github-activity" style="margin-top:60px;">
       <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;">
         <div>
-          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:10px;">Live Activity</div>
-          <h2 style="font-family:var(--font-heading);font-size:clamp(32px,4vw,48px);letter-spacing: -0.06em;font-weight: 900;">GitHub Commits</h2>
+          <div
+            style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:10px;">
+            Live Activity</div>
+          <h2
+            style="font-family:var(--font-heading);font-size:clamp(32px,4vw,48px);letter-spacing: -0.06em;font-weight: 900;">
+            GitHub Momentum</h2>
+        </div>
+        <div id="velocity-indicator"
+          style="display: flex; gap: 32px; align-items: center; background: #fafafa; padding: 12px 32px; border-radius: 100px; border: 1px solid #eee;">
+          <div class="velocity-item">
+            <span
+              style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Last
+              Commit</span>
+            <strong id="last-commit-time"
+              style="font-size: 16px; font-weight: 900; color: var(--accent);">Loading...</strong>
+          </div>
+          <div style="width: 1px; height: 24px; background: #eee;"></div>
+          <div class="velocity-item">
+            <span
+              style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Current
+              Streak</span>
+            <strong style="font-size: 16px; font-weight: 900; color: #000;">47 Days</strong>
+          </div>
+          <div style="width: 1px; height: 24px; background: #eee;"></div>
+          <div class="velocity-item">
+            <span
+              style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">This
+              Month</span>
+            <strong id="features-shipped" style="font-size: 16px; font-weight: 900; color: #00b96b;">3 Features</strong>
+          </div>
         </div>
         <a href="https://github.com/gopikrishna818" target="_blank" rel="noopener noreferrer"
           style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:100px;transition:all 0.2s;"
@@ -545,7 +576,8 @@
         </a>
       </div>
       <div id="gh-feed" style="display:flex;flex-direction:column;gap:10px;">
-        <div style="display:flex;align-items:center;justify-content:center;height:120px;color:var(--text-muted);font-size:14px;">
+        <div
+          style="display:flex;align-items:center;justify-content:center;height:120px;color:var(--text-muted);font-size:14px;">
           <i class="fas fa-spinner fa-spin" style="margin-right:10px;"></i> Loading recent activity...
         </div>
       </div>
@@ -776,7 +808,7 @@
     <div class="bento-grid" id="experience" style="margin-top:60px;">
 
       <!-- Experience -->
-      <div class="card card-dark exp-card" style="grid-column:span 6;grid-row:span 4;">
+      <div class="card card-dark exp-card">
         <div class="section-tag" style="color:rgba(255,255,255,0.9);">Career</div>
         <h2 style="color:#fff;">Experience</h2>
         <div class="exp-item">
@@ -791,7 +823,7 @@
       </div>
 
       <!-- Education -->
-      <div class="card card-white edu-card" style="grid-column:span 6;grid-row:span 4;">
+      <div class="card card-white edu-card">
         <div class="section-tag">Academics</div>
         <h2>Education</h2>
         <div class="exp-item exp-item-light" style="border-color:rgba(0,0,0,0.1);margin-bottom:28px;">
@@ -811,7 +843,7 @@
       </div>
 
       <!-- Achievements -->
-      <div class="card card-orange ach-card" style="grid-column:span 4;grid-row:span 2; background-color: var(--card-orange) !important; color: #fff;">
+      <div class="card card-orange ach-card" style="background-color: var(--card-orange) !important; color: #fff;">
         <div class="section-tag" style="color:rgba(255,255,255,0.8); opacity: 1;">Wins</div>
         <div
           style="font-family: var(--font-heading);font-weight: 900;font-size:38px;color:#fff;margin-bottom:16px;letter-spacing: -0.06em;">
@@ -828,7 +860,7 @@
       </div>
 
       <!-- Certifications -->
-      <div class="card card-white cert-card" style="grid-column:span 4;grid-row:span 2;">
+      <div class="card card-white cert-card">
         <div class="section-tag">Credentials</div>
         <h3>Certifications</h3>
         <ul class="cert-list">
@@ -840,21 +872,20 @@
       </div>
 
       <!-- Quote card -->
-      <div class="card card-dark"
-        style="grid-column:span 4;grid-row:span 2;display:flex;align-items:center;justify-content:center;">
-        <div style="text-align:center;">
-          <div
-            style="font-family: var(--font-heading);font-weight: 900;font-size:42px;color:rgba(255,255,255,0.15);line-height:1;letter-spacing: -0.06em;">
-            TURNING<br>DATA INTO<br>IMPACT</div>
+      <div class="card card-dark quote-card">
+        <div
+          style="font-family: var(--font-heading); font-weight: 900; font-size: 42px; color: rgba(255,255,255,0.15); line-height: 1; letter-spacing: -0.06em; text-align: center; width: 100%;">
+          TURNING<br>DATA INTO<br>IMPACT
         </div>
       </div>
+
 
     </div><!-- end exp grid -->
 
     <!-- ══ CONTACT ══ -->
     <div class="bento-grid" id="contact" style="margin-top:60px;">
 
-      <div class="card card-dark contact-card" style="grid-column:span 8;grid-row:span 4;">
+      <div class="card card-dark contact-card">
         <div class="section-tag" style="color:rgba(255,255,255,0.9);">Let's Talk</div>
         <h2 style="color:#fff;">Get In<br><span style="color:var(--accent);">Touch</span></h2>
         <div class="contact-sub">Whether you have a role, a project, or just want to talk AI — I'm always open.</div>
@@ -868,17 +899,20 @@
           <div></div>
           <button type="submit" class="btn-submit">Send Message ↗</button>
         </form>
-        <div class="form-success-state" style="display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; height: 100%; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; padding: 40px 0;">
-          <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(0, 232, 122, 0.15); color: #00e87a; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px;">
+        <div class="form-success-state"
+          style="display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; height: 100%; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; padding: 40px 0;">
+          <div
+            style="width: 60px; height: 60px; border-radius: 50%; background: rgba(0, 232, 122, 0.15); color: #00e87a; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px;">
             <i class="fas fa-check"></i>
           </div>
           <h3 style="margin-bottom: 8px; color: #fff;">Message Sent!</h3>
-          <p style="color: var(--text-muted); font-size: 14px;">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+          <p style="color: var(--text-muted); font-size: 14px;">Thank you for reaching out. I'll get back to you within
+            24 hours.</p>
         </div>
       </div>
 
       <!-- Contact info + social -->
-      <div class="card card-blue social-card" style="grid-column:span 4;grid-row:span 4;">
+      <div class="card card-blue social-card">
         <div>
           <div class="section-tag" style="color:rgba(255,255,255,0.9);">Find Me</div>
           <div
@@ -962,8 +996,8 @@
       <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
     </div>
     <div class="chatbot-messages" id="chatbotMessages">
-      <div class="chat-msg ai-msg">Hi! I'm Gopikrishna's AI assistant. Ask me anything about his experience, skills, or
-        projects.</div>
+      <div class="chat-msg ai-msg">I've read 200+ ML papers and shipped 6 production systems. What do you want to know?
+      </div>
     </div>
     <div class="chatbot-input">
       <input type="text" id="chatInput" placeholder="Ask about OCR, Python, etc..." />
@@ -1005,7 +1039,7 @@
   <div class="custom-cursor" id="customCursor"></div>
   <div class="page-transition-overlay" id="pageTransition"></div>
 
-  
+
   <script src="js/chatbot.js"></script>
   <script src="js/shared.js"></script>
   <script src="js/index.js"></script>

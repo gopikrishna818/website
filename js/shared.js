@@ -47,6 +47,40 @@
       });
     }
 
+    // ── 2. AUDIENCE MODE (Developer vs Recruiter) ──
+    const audienceToggle = document.getElementById('audienceToggle');
+    const audienceSlider = document.querySelector('.audience-slider');
+    const audienceBtns = document.querySelectorAll('.audience-btn');
+
+    const applyAudience = (view) => {
+      if (view === 'rec') {
+        document.body.classList.add('view-recruiter');
+        document.body.classList.remove('view-developer');
+        if (audienceSlider) audienceSlider.style.transform = 'translateX(100%)';
+      } else {
+        document.body.classList.add('view-developer');
+        document.body.classList.remove('view-recruiter');
+        if (audienceSlider) audienceSlider.style.transform = 'translateX(0)';
+      }
+
+      audienceBtns.forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-view') === view);
+      });
+      localStorage.setItem('audience-view', view);
+    };
+
+    // Load initial view
+    const savedAudience = localStorage.getItem('audience-view') || 'dev';
+    applyAudience(savedAudience);
+
+    if (audienceToggle) {
+      audienceBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          applyAudience(btn.getAttribute('data-view'));
+        });
+      });
+    }
+
     // ── 2. CUSTOM CURSOR ──
     const cursor = document.querySelector('.custom-cursor');
     if (cursor && window.matchMedia('(pointer: fine)').matches) {
@@ -73,8 +107,8 @@
 
     // ── 4. SMART NAVBAR (hide on scroll-down, show on scroll-up) ──
     const navbar = document.querySelector('nav');
-    let lastScroll = window.pageYOffset; 
-    
+    let lastScroll = window.pageYOffset;
+
     const handleNavbarScroll = () => {
       const current = window.pageYOffset;
       if (!navbar) return;
@@ -219,12 +253,12 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
-            
+
             // Special handling for count-up elements
             if (entry.target.classList.contains('count-up') && !entry.target.dataset.counted) {
-               _animateCounter(entry.target);
+              _animateCounter(entry.target);
             }
-            
+
             animObserver.unobserve(entry.target);
           }
         });
@@ -244,7 +278,7 @@
       const suffix = el.dataset.suffix || '';
       const duration = 1800;
       const startTime = performance.now();
-      
+
       const update = (now) => {
         const elapsed = now - startTime;
         const progress = Math.min(elapsed / duration, 1);
@@ -267,17 +301,106 @@
     // ── 14. PROJECT MODAL & FILTER LOGIC ──
     // Shared projects data for detail modal
     window.portfolioProjects = [
-      { id: 1, title: "AI Lead-Gen & Outreach Automation Engine", impact: "95% Automation", image: "images/lead_gen_rel.png", brief: "End-to-end lead generation pipeline with AI voice calls and automated follow-ups.", category: "Automation", caseStudy: { problem: "Manual lead outreach is slow and expensive.", approach: "Built n8n pipeline with Retell AI and Gemini.", results: "Reduced outreach time by 95%.", learnings: "Mastered workflow orchestration." }, year: "2025", techStack: ["n8n", "Retell AI", "Gemini"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }] },
-      { id: 2, title: "SmartDoc Parser", impact: "98% OCR Accuracy", image: "images/smartdoc_rel.png", brief: "Production-grade OCR pipeline for financial documents.", category: "AI/ML", caseStudy: { problem: "Financial data entry is error-prone.", approach: "DocTR and PaddleOCR hybrid strategy.", results: "98% extraction accuracy.", learnings: "Deep CV expertise." }, year: "2024", techStack: ["Python", "DocTR", "PaddleOCR"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }] },
-      { id: 3, title: "AI Content Strategy Engine", impact: "10x Faster", image: "images/content_strategy_rel.png", brief: "AI application automating digital marketing strategy.", category: "AI/ML", caseStudy: { problem: "Content planning is research-intensive.", approach: "FastAPI architecture with LLM integration.", results: "Planning time cut by 90%.", learnings: "System architecture focus." }, year: "2025", techStack: ["FastAPI", "Nginx", "Docker"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }] },
-      { id: 4, title: "Enterprise Multi-Agent RAG", impact: "98% Accuracy", image: "images/rag_agents_rel.png", brief: "Multi-agent system for support with strict guardrails.", category: "AI/ML", caseStudy: { problem: "Chatbots hallucinate on complex support queries.", approach: "Hybrid vector search with multi-agent orchestration.", results: "98% hallucination-free groundedness.", learnings: "Agentic design patterns." }, year: "2026", techStack: ["Python", "Groq", "ChromaDB"], buttons: [{ label: "Live Demo", url: "#", icon: "fas fa-external-link-alt" }] }
+      {
+        id: 1, title: "AI Lead-Gen & Outreach Automation Engine", impact: "95% Automation",
+        image: "images/lead_gen_rel.png",
+        brief: "Cut lead response time from 48 hours to 4 minutes for a B2B sales team using automated AI voice and outreach.",
+        category: "Automation",
+        beforeAfter: {
+          before: "Sales team spent 8+ hours/day manually finding leads, writing emails, and making follow-up calls.",
+          after: "Fully automated pipeline handles prospecting, outreach & voice calls in the background.",
+          stat: "95% of outreach",
+          statLabel: "now runs without human input"
+        },
+        caseStudy: { problem: "Manual lead outreach is slow and expensive.", approach: "Built n8n pipeline with Retell AI and Gemini.", results: "Reduced outreach time by 95%.", learnings: "Mastered workflow orchestration." },
+        year: "2025", techStack: ["n8n", "Retell AI", "Gemini"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }],
+        diagram: [
+          { name: "LinkedIn Scraper", x: 50, y: 40, tooltip: "Automated agent that extracts target profiles based on ICP." },
+          { name: "Gemini Processor", x: 200, y: 40, tooltip: "LMM analyzing profiles to generate hyper-personalized scripts." },
+          { name: "Retell AI Voice", x: 350, y: 40, tooltip: "Handles outbound voice calls. Reduced response time from 48hrs to 4min." },
+          { name: "Supabase CRM", x: 500, y: 40, tooltip: "Centralized database for lead status and call transcripts." },
+          { name: "n8n Orchestrator", x: 200, y: 100, tooltip: "The brain connecting all services and handling retries/errors." }
+        ],
+        connections: [
+          { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 }, { from: 1, to: 4 }
+        ]
+      },
+      {
+        id: 2, title: "SmartDoc Parser", impact: "98% OCR Accuracy",
+        image: "images/smartdoc_rel.png",
+        brief: "Eliminated 5+ hours of manual data entry daily by extracting structured data from financial docs with 98% accuracy.",
+        category: "AI/ML",
+        beforeAfter: {
+          before: "Team spent 6hrs/day manually re-typing data from invoices & bank statements. Error rate: ~12%.",
+          after: "SmartDoc extracts everything in under 45 seconds. Error rate: ~2%.",
+          stat: "87% of their day",
+          statLabel: "back in their hands"
+        },
+        caseStudy: { problem: "Financial data entry is error-prone.", approach: "DocTR and PaddleOCR hybrid strategy.", results: "98% extraction accuracy.", learnings: "Deep CV expertise." },
+        year: "2024", techStack: ["Python", "DocTR", "PaddleOCR"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }],
+        diagram: [
+          { name: "Document Upload", x: 50, y: 60, tooltip: "Secure S3 bucket ingestion with virus scanning." },
+          { name: "PaddleOCR / DocTR", x: 220, y: 60, tooltip: "Hybrid ensemble achieving 98%+ accuracy on noisy docs." },
+          { name: "Post-Processing", x: 390, y: 60, tooltip: "Regex and LLM-based verification for structural integrity." },
+          { name: "JSON Export", x: 560, y: 60, tooltip: "Structured API output for ERP integration." }
+        ],
+        connections: [
+          { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 }
+        ]
+      },
+      {
+        id: 3, title: "AI Content Strategy Engine", impact: "10x Faster",
+        image: "images/content_strategy_rel.png",
+        brief: "Accelerated content strategy delivery by 10x, reducing research and planning from 3 days to 18 minutes.",
+        category: "AI/ML",
+        beforeAfter: {
+          before: "Marketing team needed 2–3 days to research, plan, and draft a content strategy per campaign.",
+          after: "Full content strategy — with audience targeting, topic clusters & copy — generated in 18 minutes.",
+          stat: "10x faster",
+          statLabel: "strategy delivery, zero quality loss"
+        },
+        caseStudy: { problem: "Content planning is research-intensive.", approach: "FastAPI architecture with LLM integration.", results: "Planning time cut by 90%.", learnings: "System architecture focus." },
+        year: "2025", techStack: ["FastAPI", "Nginx", "Docker"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }],
+        diagram: [
+          { name: "SEO Research", x: 60, y: 60, tooltip: "Real-time SERP analysis and keyword intent mapping." },
+          { name: "LLM Orchestrator", x: 250, y: 60, tooltip: "Multi-prompt chain generating content pillars and briefs." },
+          { name: "Content Dashboard", x: 440, y: 60, tooltip: "Interactive UI for editing and scheduling generated content." }
+        ],
+        connections: [
+          { from: 0, to: 1 }, { from: 1, to: 2 }
+        ]
+      },
+      {
+        id: 4, title: "Enterprise Multi-Agent RAG", impact: "98% Accuracy",
+        image: "images/rag_agents_rel.png",
+        brief: "Reduced enterprise support hallucinations by 98% using a multi-agent validation layer and hybrid search.",
+        category: "AI/ML",
+        beforeAfter: {
+          before: "Support chatbots hallucinated answers on 30%+ of complex queries, eroding user trust completely.",
+          after: "Multi-agent orchestration with strict guardrails delivers verifiably grounded answers every time.",
+          stat: "98% hallucination-free",
+          statLabel: "responses across all queries"
+        },
+        caseStudy: { problem: "Chatbots hallucinate on complex support queries.", approach: "Hybrid vector search with multi-agent orchestration.", results: "98% hallucination-free groundedness.", learnings: "Agentic design patterns." },
+        year: "2026", techStack: ["Python", "Groq", "ChromaDB"], buttons: [{ label: "Live Demo", url: "#", icon: "fas fa-external-link-alt" }],
+        diagram: [
+          { name: "User Query", x: 50, y: 60, tooltip: "Complex enterprise question input." },
+          { name: "Router Agent", x: 200, y: 60, tooltip: "Analyzes intent and routes to specialized domain agents." },
+          { name: "Vector DB", x: 350, y: 30, tooltip: "ChromaDB holding high-dimensional document embeddings." },
+          { name: "Critic Agent", x: 350, y: 90, tooltip: "Strict guardrail agent verifying groundedness of responses." },
+          { name: "Final Answer", x: 500, y: 60, tooltip: "Hallucination-free response delivered with citations." }
+        ],
+        connections: [
+          { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 2, to: 4 }, { from: 3, to: 4 }
+        ]
+      }
     ];
 
     window.openProjectModal = (idx) => {
       const p = window.portfolioProjects[idx];
       const m = document.getElementById('projectModal');
       if (!m || !p) return;
-      
+
       const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
       setEl('modalImpact', p.impact);
       setEl('modalTitle', p.title);
@@ -287,13 +410,13 @@
       setEl('modalLearnings', p.caseStudy.learnings);
       setEl('modalYear', p.year);
       setEl('modalCategory', p.category);
-      
+
       const ts = document.getElementById('modalTechStack');
       if (ts) ts.innerHTML = p.techStack.map(t => `<span class="cs-tech-item">${t}</span>`).join('');
-      
+
       const ma = document.getElementById('modalActions');
       if (ma) ma.innerHTML = p.buttons.map(b => `<a href="${b.url}" target="_blank" rel="noopener noreferrer" class="modal-btn"><i class="${b.icon}"></i> ${b.label}</a>`).join('');
-      
+
       m.classList.add('active');
       document.body.style.overflow = 'hidden';
     };
@@ -316,7 +439,7 @@
     if (filterTabs.length > 0) {
       const grid = document.getElementById('projectsGrid');
       const indicator = document.querySelector('.filter-indicator');
-      
+
       const updateIndicator = (tab) => {
         if (!indicator || !tab) return;
         indicator.style.width = `${tab.offsetWidth}px`;
@@ -326,22 +449,78 @@
       const renderList = (filter = 'all') => {
         if (!grid) return;
         const filtered = filter === 'all' ? window.portfolioProjects : window.portfolioProjects.filter(p => p.category.toLowerCase() === filter.toLowerCase());
-        
-        grid.innerHTML = filtered.map(p => `
-          <div class="project-item-row anim-item" onclick="window.openProjectModal(${window.portfolioProjects.indexOf(p)})">
+
+        const resetBtn = document.getElementById('resetFilters');
+        if (resetBtn) resetBtn.style.display = filter === 'all' ? 'none' : 'block';
+        grid.innerHTML = filtered.map((p, i) => `
+          <div class="project-item-row anim-item ${i === 0 ? 'lead-project' : ''}" onclick="window.openProjectModal(${window.portfolioProjects.indexOf(p)})">
             <div class="project-content-left">
               <h3 class="project-title-new">${p.title}</h3>
               <p class="project-desc-new">${p.brief}</p>
+              
+              <!-- INTERACTIVE ARCHITECTURE DIAGRAM -->
+              <div class="arch-diagram-wrap" onclick="event.stopPropagation()">
+                <div class="arch-label">↳ System Flow</div>
+                <svg viewBox="0 0 600 160" class="arch-svg">
+                  <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                      <polygon points="0 0, 10 3.5, 0 7" fill="rgba(0,0,0,0.2)" />
+                    </marker>
+                  </defs>
+                  <!-- Connections -->
+                  ${p.connections.map(c => {
+          const from = p.diagram[c.from];
+          const to = p.diagram[c.to];
+          return `<line x1="${from.x + 50}" y1="${from.y + 15}" x2="${to.x - 10}" y2="${to.y + 15}" class="arch-line" marker-end="url(#arrowhead)" />`;
+        }).join('')}
+                  <!-- Nodes -->
+                  ${p.diagram.map(n => `
+                    <g class="arch-node-group">
+                      <rect x="${n.x}" y="${n.y}" width="110" height="30" rx="8" class="arch-node" />
+                      <text x="${n.x + 55}" y="${n.y + 19}" class="arch-node-text">${n.name}</text>
+                      <foreignObject x="${n.x - 45}" y="${n.y - 70}" width="200" height="70" class="arch-tooltip-wrap">
+                        <div class="arch-tooltip">${n.tooltip}</div>
+                      </foreignObject>
+                    </g>
+                  `).join('')}
+                </svg>
+              </div>
+
               <div class="project-pills">
                 ${p.techStack.map(t => `<span class="project-pill">${t}</span>`).join('')}
               </div>
+              <button class="project-cta-new" onclick="event.stopPropagation(); window.openProjectModal(${window.portfolioProjects.indexOf(p)})">
+                View Case Study →
+              </button>
             </div>
-            <div class="project-image-right">
-              <img src="${p.image}" alt="${p.title}" loading="lazy">
+            <div class="flip-card" title="Hover to see business impact">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img src="${p.image}" alt="${p.title}" loading="lazy">
+                  <div class="flip-card-badge">${p.impact}</div>
+                  <div class="flip-card-hint">Hover to see impact →</div>
+                </div>
+                <div class="flip-card-back">
+                  <div class="flip-back-label">REAL IMPACT</div>
+                  <div class="flip-section">
+                    <div class="flip-tag before-tag">BEFORE</div>
+                    <p>${p.beforeAfter.before}</p>
+                  </div>
+                  <div class="flip-divider"></div>
+                  <div class="flip-section">
+                    <div class="flip-tag after-tag">AFTER</div>
+                    <p>${p.beforeAfter.after}</p>
+                  </div>
+                  <div class="flip-stat">
+                    <span class="flip-stat-num">${p.beforeAfter.stat}</span>
+                    <span class="flip-stat-label">${p.beforeAfter.statLabel}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         `).join('');
-        
+
         // Re-observe new items
         if (animObserver) {
           grid.querySelectorAll('.anim-item').forEach(el => animObserver.observe(el));
@@ -366,6 +545,68 @@
         setTimeout(() => updateIndicator(document.querySelector('.filter-tab.active')), 100);
       }
     }
+
+    // ── 13. TECH STACK EASTER EGG (THE FLEX) ──
+    const initStackFlex = () => {
+      const overlayHTML = `
+        <div class="stack-overlay" id="stackOverlay">
+          <div class="stack-content">
+            <div class="stack-flex-title">Architecture: Zero Bloat</div>
+            <p class="stack-flex-text">This site was built with <strong>Vanilla HTML, CSS, and JS</strong>. Powered by GSAP for motion. Zero frameworks. Zero build tools. 100% hand-crafted engineering.</p>
+            <div class="stack-badge-row">
+              <span class="stack-badge">Vanilla JS</span>
+              <span class="stack-badge">CSS Grid</span>
+              <span class="stack-badge">GSAP ScrollTrigger</span>
+              <span class="stack-badge">Zero Frameworks</span>
+              <span class="stack-badge">Zero Dependencies</span>
+            </div>
+            <button style="margin-top:40px; background:transparent; border:1px solid rgba(255,255,255,0.2); color:#fff; padding:12px 24px; border-radius:100px; cursor:pointer; font-size:12px; font-weight:800;" onclick="document.getElementById('stackOverlay').classList.remove('active')">CLOSE ESC</button>
+          </div>
+        </div>
+      `;
+      document.body.insertAdjacentHTML('beforeend', overlayHTML);
+
+      const overlay = document.getElementById('stackOverlay');
+      
+      // Keyboard Shortcut: Cmd/Ctrl + /
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === '/') {
+          e.preventDefault();
+          overlay.classList.toggle('active');
+          if (overlay.classList.contains('active')) {
+            gsap.from('.stack-content > *', { y: 20, opacity: 0, stagger: 0.1, duration: 0.6, ease: "power3.out" });
+          }
+        }
+        if (e.key === 'Escape') overlay.classList.remove('active');
+      });
+
+      // Hidden Footer Trigger
+      const footers = document.querySelectorAll('footer .footer-bottom');
+      footers.forEach(f => {
+        const trigger = document.createElement('div');
+        trigger.className = 'hidden-stack-trigger';
+        trigger.textContent = 'Inspect System Architecture';
+        trigger.onclick = () => {
+          overlay.classList.add('active');
+          gsap.from('.stack-content > *', { y: 20, opacity: 0, stagger: 0.1, duration: 0.6, ease: "power3.out" });
+        };
+        f.appendChild(trigger);
+      });
+    };
+
+    initStackFlex();
+
+    // ── 14. CHALLENGE ME HANDLER ──
+    window.handleChallenge = () => {
+      const text = document.getElementById('challengeText').value;
+      if (!text) {
+        alert('Please describe your problem first.');
+        return;
+      }
+      const subject = encodeURIComponent("Challenge from [Company] for Gopikrishna");
+      const body = encodeURIComponent(text);
+      window.location.href = `mailto:chegoni.gk@gmail.com?subject=${subject}&body=${body}`;
+    };
 
   }); // end DOMContentLoaded
 

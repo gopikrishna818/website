@@ -213,14 +213,18 @@
         </div>
       </div>
 
-      <!-- CTA CARD -->
-      <div class="card cta-card">
-        <div class="cta-content">
-          <h2>Ready to collaborate?</h2>
-          <p>Whether you have a project in mind or just want to discuss ideas, I'm always excited to connect with
-            like-minded professionals and innovators.</p>
+      <!-- CHALLENGE ME CARD -->
+      <div class="card card-dark challenge-card" style="grid-column: span 12; padding: 60px; background: radial-gradient(circle at top right, rgba(0,68,238,0.2) 0%, transparent 60%), #0a0a0a; position:relative; overflow:hidden;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+          <div class="section-tag" style="color: var(--accent); opacity: 1;">The High-Conviction CTA</div>
+          <h2 style="color: #fff; font-size: clamp(32px, 5vw, 48px); margin-bottom: 24px;">How I Would Solve Your Problem</h2>
+          <p style="color: rgba(255,255,255,0.6); font-size: 18px; margin-bottom: 48px;">Have a production system that’s failing? A data pipeline that’s slow? A manual process eating your margins? <strong>Challenge me.</strong> Describe the problem below, and I’ll send you a high-level architecture proposal within 24 hours.</p>
+          
+          <div class="challenge-form-wrap" style="max-width: 600px; margin: 0 auto;">
+            <textarea id="challengeText" placeholder="Describe your technical bottleneck or manual process..." style="width: 100%; height: 180px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 24px; color: #fff; font-family: var(--font-body); font-size: 16px; margin-bottom: 24px; resize: none;"></textarea>
+            <button class="btn btn-primary" style="width: 100%; padding: 20px; font-size: 18px;" onclick="handleChallenge()">Describe your problem →</button>
+          </div>
         </div>
-        <button class="cta-btn" onclick="document.getElementById('name').focus();">Start Now</button>
       </div>
     </div>
 

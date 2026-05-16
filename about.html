@@ -13,18 +13,20 @@
   <meta property="og:url" content="https://gopikrishna818.github.io/about.html">
   <meta name="twitter:card" content="summary_large_image">
   <title>About — Gopikrishna Chegoni</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- GSAP for Physics-Based Motion -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-  
+
   <link rel="stylesheet" href="css/shared.css">
-<link rel="stylesheet" href="css/about.css">
-  </head>
+  <link rel="stylesheet" href="css/about.css">
+</head>
 
 <body>
   <div id="scrollProgress"></div>
@@ -32,7 +34,7 @@
 
   <!-- NAV -->
   <nav>
-    
+
     <a class="nav-logo" href="index.html">GK</a>
 
     <div class="nav-links">
@@ -40,6 +42,13 @@
       <a href="projects.html">Projects</a>
       <a href="experience_new.html">Experience</a>
       <a href="contact.html">Contact</a>
+    </div>
+    <div class="audience-toggle-container">
+      <div class="audience-toggle" id="audienceToggle">
+        <div class="audience-slider"></div>
+        <button class="audience-btn active" data-view="dev" title="Developer Mode: Technical Depth">Dev</button>
+        <button class="audience-btn" data-view="rec" title="Recruiter Mode: Business Impact">Rec</button>
+      </div>
     </div>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
       <i class="fas fa-moon"></i>
@@ -108,94 +117,165 @@
         About Me</h1>
       <p>CS (Data Science) graduate and fresher, eager to apply ML and automation skills to real-world problems in a
         production environment.</p>
-    </div>
+      <div class="bento-grid">
+        <!-- PROFILE CARD -->
+        <div class="card card-white profile-section">
+          <div class="profile-image-container">
+            <img src="images/profile-pic.png" alt="Gopikrishna Chegoni" loading="lazy" />
+          </div>
+          <div class="profile-name">Gopikrishna<br>Chegoni</div>
+          <div class="profile-title">CS (Data Science) Graduate</div>
+          <div class="availability-widget" style="margin-top: 20px;">
+            <div class="availability-item">
+              <div class="availability-dot"></div>
+              <span>Available — Can join in 2 weeks</span>
+            </div>
+            <div class="availability-item">
+              <i class="fas fa-map-marker-alt" style="color: var(--accent); font-size: 10px;"></i>
+              <span>Hyderabad (Open to Remote & Relocation)</span>
+            </div>
+            <div class="availability-item">
+              <i class="fas fa-bolt" style="color: #ffcc00; font-size: 10px;"></i>
+              <span>Response time: &lt; 4 hours</span>
+            </div>
+          </div>
+        </div>
 
-    <!-- PROFILE CARD -->
-    <div class="card card-white profile-section">
-      <div class="profile-image-container">
-        <img src="images/profile-pic.png" alt="Gopikrishna Chegoni" loading="lazy" />
+        <!-- ABOUT SECTION -->
+        <div class="card card-white content-card">
+          <div class="section-tag">Who I Am</div>
+          <h2>Background</h2>
+          <p>I'm a Computer Science (Data Science) graduate from Guru Nanak Institutions Technical Campus, Hyderabad,
+            with a fresher background in machine learning, OCR-based document processing, and data pipelines — built
+            through an internship at Kreativetimebox and self-driven projects.</p>
+          <p>My journey in tech is driven by a genuine interest in automation, data analysis, and building systems that
+            learn and adapt.</p>
+        </div>
+
+        <!-- HIGHLIGHTS SECTION -->
+        <div class="card card-blue highlight-card">
+          <div class="section-tag" style="color:rgba(255,255,255,0.9);">Key Strengths</div>
+          <h3 style="color:#fff;">What I Bring</h3>
+          <ul class="highlight-list">
+            <li>Machine Learning fundamentals — classification, regression, preprocessing</li>
+            <li>OCR & document processing with PaddleOCR and DocTR</li>
+            <li>Python, SQL, and data handling with Pandas & NumPy</li>
+            <li>REST API integration and workflow automation (n8n)</li>
+          </ul>
+        </div>
+
+        <!-- STATS -->
+        <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2;">
+          <div class="stat-number">8.42</div>
+          <div class="stat-label">College CGPA</div>
+        </div>
+
+        <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2;">
+          <div class="stat-number">992</div>
+          <div class="stat-label">Codekaze AIR Rank</div>
+        </div>
+
+        <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2;">
+          <div class="stat-number">4+</div>
+          <div class="stat-label">ML Projects</div>
+        </div>
+
+        <!-- INTERESTS SECTION -->
+        <div class="card card-white content-card" style="grid-column: span 6; grid-row: span 3;">
+          <div class="section-tag">Passions</div>
+          <h2>Interests & Focus</h2>
+          <p>I'm genuinely curious about Computer Vision, NLP, and automation. I enjoy exploring end-to-end ML workflows
+            — from understanding the data to seeing a working pipeline in action — and I like documenting what I learn
+            along the way.</p>
+          <p>Outside of projects, I keep up with AI research and try to build things that go beyond tutorials. I'm
+            always open to collaborating and learning from others who are working on interesting problems.</p>
+        </div>
+
+        <!-- APPROACH SECTION -->
+        <div class="card card-orange highlight-card"
+          style="grid-column: span 6; grid-row: span 3; background: var(--accent2); color: #fff;">
+          <div class="section-tag" style="color:rgba(255,255,255,0.9);">My Philosophy</div>
+          <h3 style="color:#fff;">Work Approach</h3>
+          <ul class="highlight-list" style="opacity: .9;">
+            <li>Data-driven decision making</li>
+            <li>Clean, maintainable code</li>
+            <li>Continuous optimization</li>
+            <li>Collaborative problem-solving</li>
+            <li>User-centric design</li>
+            <li>Transparent communication</li>
+          </ul>
+        </div>
+
+        <!-- REVERSE JOB DESCRIPTION SECTION -->
+        <div class="card card-dark content-card"
+          style="grid-column: span 12; background: #000; border: 1px solid rgba(255,255,255,0.1); margin-top: 20px;">
+          <div class="section-tag" style="color:rgba(255,255,255,0.6);">The Partnership</div>
+          <h2 style="color:#fff; font-size: clamp(32px, 4vw, 48px); margin-bottom: 24px;">Here's what I need from you
+          </h2>
+          <div
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 20px;">
+            <div class="need-item">
+              <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">01</div>
+              <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">A team that ships, not just plans</h4>
+              <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I thrive in high-velocity
+                environments where the goal is production, not just documentation. I value a "bias for action" over
+                endless meeting cycles.</p>
+            </div>
+            <div class="need-item">
+              <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">02</div>
+              <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">Access to real data</h4>
+              <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I'm useless with toy datasets.
+                I need the messy, unstructured, real-world data where AI can actually solve bottlenecks and create a
+                competitive edge.</p>
+            </div>
+            <div class="need-item">
+              <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">03</div>
+              <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">Freedom to suggest architecture</h4>
+              <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I don't just implement
+                tickets. I need the agency to suggest architectural improvements when I see a path to 10x efficiency or
+                98%+ reliability.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- TERMINAL THINKING SECTION - FULL WIDTH BOTTOM -->
+        <div class="dev-only" id="methodology" style="grid-column: span 12; margin-top: 40px; margin-bottom: 40px;">
+          <div style="text-align: center; margin-bottom: 40px;">
+            <div
+              style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: .4; margin-bottom: 12px;">
+              System Reasoning</div>
+            <h2
+              style="font-family: var(--font-heading); font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.06em; font-weight: 900;">
+              How I Think & Build</h2>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-header">
+              <div class="dot red"></div>
+              <div class="dot yellow"></div>
+              <div class="dot green"></div>
+              <div class="terminal-title">reasoning_process.sh</div>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+              <div class="terminal-line">
+                <span class="terminal-prompt">bash$</span><span class="terminal-command" id="termCmd"></span><span
+                  class="terminal-cursor"></span>
+              </div>
+              <div id="termOutput" style="margin-top: 16px; color: rgba(255,255,255,0.7);"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RESUME DOWNLOAD SECTION -->
+        <div style="grid-column: span 12; text-align: center; padding: 40px 24px;">
+          <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
+            rel="noopener noreferrer" class="nav-cta"
+            style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; text-decoration: none;">
+            <i class="fas fa-download" style="font-size: 16px;"></i>
+            Download Resume
+          </a>
+        </div>
       </div>
-      <div class="profile-name">Gopikrishna<br>Chegoni</div>
-      <div class="profile-title">CS (Data Science) Graduate</div>
-      <div class="profile-status">Available for AIML Roles</div>
-    </div>
-
-    <!-- ABOUT SECTION -->
-    <div class="card card-white content-card">
-      <div class="section-tag">Who I Am</div>
-      <h2>Background</h2>
-      <p>I'm a Computer Science (Data Science) graduate from Guru Nanak Institutions Technical Campus, Hyderabad, with a
-        fresher background in machine learning, OCR-based document processing, and data pipelines — built through an
-        internship at Kreativetimebox and self-driven projects.</p>
-      <p>My journey in tech is driven by a genuine interest in automation, data analysis, and building systems that
-        learn and adapt. I enjoy turning ML concepts into practical tools and I'm actively looking for opportunities
-        where I can grow, contribute, and learn on the job.</p>
-    </div>
-
-    <!-- HIGHLIGHTS SECTION -->
-    <div class="card card-blue highlight-card">
-      <div class="section-tag" style="color:rgba(255,255,255,0.9);">Key Strengths</div>
-      <h3 style="color:#fff;">What I Bring</h3>
-      <ul class="highlight-list">
-        <li>Machine Learning fundamentals — classification, regression, preprocessing</li>
-        <li>OCR & document processing with PaddleOCR and DocTR</li>
-        <li>Python, SQL, and data handling with Pandas & NumPy</li>
-        <li>REST API integration and workflow automation (n8n)</li>
-        <li>Basic cloud exposure (AWS) and Git version control</li>
-        <li>Strong problem-solving and eagerness to learn</li>
-      </ul>
-    </div>
-
-    <!-- STATS -->
-    <div class="card card-dark stat-grid">
-      <div class="stat-number">8.42</div>
-      <div class="stat-label">College CGPA</div>
-    </div>
-
-    <div class="card card-dark stat-grid">
-      <div class="stat-number">992</div>
-      <div class="stat-label">Codekaze AIR Rank</div>
-    </div>
-
-    <div class="card card-dark stat-grid">
-      <div class="stat-number">4+</div>
-      <div class="stat-label">ML Projects</div>
-    </div>
-
-    <!-- INTERESTS SECTION -->
-    <div class="card card-white content-card">
-      <div class="section-tag">Passions</div>
-      <h2>Interests & Focus</h2>
-      <p>I'm genuinely curious about Computer Vision, NLP, and automation. I enjoy exploring end-to-end ML workflows —
-        from understanding the data to seeing a working pipeline in action — and I like documenting what I learn along
-        the way.</p>
-      <p>Outside of projects, I keep up with AI research and try to build things that go beyond tutorials. I'm always
-        open to collaborating and learning from others who are working on interesting problems.</p>
-    </div>
-
-    <!-- APPROACH SECTION -->
-    <div class="card card-orange highlight-card" style="background: var(--accent2); color: #fff;">
-      <div class="section-tag" style="color:rgba(255,255,255,0.9);">My Philosophy</div>
-      <h3 style="color:#fff;">Work Approach</h3>
-      <ul class="highlight-list" style="opacity: .9;">
-        <li>Data-driven decision making</li>
-        <li>Clean, maintainable code</li>
-        <li>Continuous optimization</li>
-        <li>Collaborative problem-solving</li>
-        <li>User-centric design</li>
-        <li>Transparent communication</li>
-      </ul>
-    </div>
-
-    <!-- RESUME DOWNLOAD SECTION -->
-    <div style="grid-column: span 12; text-align: center; padding: 60px 24px; margin-top: 40px;">
-      <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
-        rel="noopener noreferrer" class="nav-cta"
-        style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; text-decoration: none;">
-        <i class="fas fa-download" style="font-size: 16px;"></i>
-        Download Resume
-      </a>
-    </div>
 
   </main>
 
@@ -262,13 +342,13 @@
     <i class="fas fa-comment-dots"></i>
   </button>
 
-  
 
 
 
 
 
-  
+
+
 
   <div class="side-socials">
     <a href="https://www.linkedin.com/in/gopikrishnachegoni/" title="LinkedIn" target="_blank"
@@ -298,12 +378,13 @@
   <div class="custom-cursor" id="customCursor"></div>
   <div class="page-transition-overlay" id="pageTransition"></div>
 
-  
 
-  
+
+
   <script src="js/chatbot.js"></script>
   <script src="js/shared.js"></script>
   <script src="js/about.js"></script>
+  <script src="js/index.js"></script> <!-- Included for Terminal Animation -->
 </body>
 
 </html>
