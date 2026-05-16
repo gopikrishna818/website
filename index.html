@@ -3,1582 +3,40 @@
 
 <head>
   <meta charset="UTF-8" />
+  <!-- Structured Data -->
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Gopikrishna Chegoni — Aspiring AI/ML Engineer. Building intelligent systems, document automation, and AI-driven workflows.">
+  <meta property="og:title" content="Gopikrishna Chegoni — AI/ML Engineer">
+  <meta property="og:description"
+    content="Building intelligent systems at the intersection of Machine Learning, document automation, and AI-driven workflows.">
+  <meta property="og:image" content="https://gopikrishna818.github.io/images/pp-1.png">
+  <meta property="og:url" content="https://gopikrishna818.github.io/">
+  <meta name="twitter:card" content="summary_large_image">
   <title>Gopikrishna Chegoni — Aspiring AI/ML Engineer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <!-- GSAP for Physics-Based Motion -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <style>
-    :root {
-      --bg: #f8f7f4;
-      --card: #ffffff;
-      --card-dark: #0a0a0a;
-      --card-blue: #0044ee;
-      --text: #050505;
-      --text-muted: #666666;
-      --text-light: #f8f7f4;
-      --accent: #0044ee;
-      --accent2: #ff3300;
-      --border: rgba(0, 0, 0, 0.04);
-      --radius: 24px;
-      --radius-sm: 12px;
-
-      /* Premium Motion System */
-      --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-linear: cubic-bezier(0, 0, 1, 1);
-      --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
-      --transition-slow: 0.8s var(--ease-premium);
-      --transition-medium: 0.5s var(--ease-premium);
-      --transition-fast: 0.3s var(--ease-premium);
-
-      /* Elevation System */
-      --surface-1: #f8f7f4;
-      --surface-2: #ffffff;
-      --surface-3: #fcfbf9;
-      --shadow-premium: 0 10px 40px -10px rgba(0, 0, 0, 0.05), 0 20px 50px -20px rgba(0, 0, 0, 0.1);
-    }
-
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* ── GLOBAL NOISE ── */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0.4;
-      mix-blend-mode: soft-light;
-    }
-
-    /* ── REACTIVE MESH GRADIENT (STRIPE-STYLE) ── */
-    .mesh-gradient {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-          rgba(0, 68, 238, 0.2) 0%,
-          transparent 45%),
-        radial-gradient(circle at 80% 20%,
-          rgba(255, 51, 0, 0.1) 0%,
-          transparent 35%),
-        radial-gradient(circle at 10% 80%,
-          rgba(0, 255, 128, 0.05) 0%,
-          transparent 30%);
-      pointer-events: none;
-      filter: blur(80px);
-    }
-
-    .dark-mode .mesh-gradient {
-      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-          rgba(0, 68, 238, 0.3) 0%,
-          transparent 60%),
-        radial-gradient(circle at 20% 80%,
-          rgba(255, 51, 0, 0.2) 0%,
-          transparent 50%),
-        radial-gradient(circle at 80% 80%,
-          rgba(0, 255, 128, 0.1) 0%,
-          transparent 40%);
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      overflow-x: hidden;
-      cursor: none;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* ── PERFORMANCE OPTIMIZATION ── */
-    * {
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* ── CUSTOM CURSOR ── */
-    .custom-cursor {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      background-color: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%, -50%);
-      will-change: left, top;
-      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease, border 0.2s ease;
-      left: -50px;
-      top: -50px;
-      border: 1px solid transparent;
-    }
-
-    .custom-cursor.hover {
-      width: 45px;
-      height: 45px;
-      background-color: transparent;
-      border: 2px solid var(--accent);
-    }
-
-    .custom-cursor.hidden {
-      opacity: 0;
-    }
-
-    :root.dark-mode .custom-cursor {
-      border-color: var(--accent);
-    }
-
-    /* ── SMOOTH TRANSITIONS ── */
-    a,
-    button,
-    input,
-    textarea,
-    select {
-      transition: all var(--transition-medium);
-    }
-
-    button:active,
-    a:active {
-      transform: scale(0.98);
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 10px 24px;
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    .nav-logo {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: -0.5px;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 24px;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
-    }
-
-    .nav-cta {
-      background: var(--card-dark);
-      color: #fff;
-      padding: 8px 20px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background .2s;
-    }
-
-    .nav-cta:hover {
-      background: var(--accent);
-    }
-
-    /* ── NAV COMMAND ── */
-    .nav-cmd {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s var(--ease-premium);
-      color: var(--text-muted);
-      margin-right: 8px;
-    }
-
-    .dark-mode .nav-cmd {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .nav-cmd:hover {
-      border-color: var(--accent);
-      background: rgba(0, 68, 238, 0.05);
-      color: var(--accent);
-      transform: scale(1.1);
-    }
-
-    .nav-cmd i,
-    .nav-cmd svg {
-      font-size: 16px;
-      width: 16px;
-      height: 16px;
-    }
-
-    /* ── COMMAND PALETTE ── */
-    .cmd-palette-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(12px);
-      z-index: 10000;
-      display: flex;
-      justify-content: center;
-      padding-top: 15vh;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.4s var(--ease-premium);
-    }
-
-    .cmd-palette-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .cmd-palette {
-      width: 90%;
-      max-width: 500px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 18px;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-      transform: translateY(-20px) scale(0.98);
-      transition: all 0.4s var(--ease-premium);
-      height: fit-content;
-    }
-
-    .dark-mode .cmd-palette {
-      background: rgba(15, 15, 15, 0.85);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .cmd-palette-overlay.active .cmd-palette {
-      transform: translateY(0) scale(1);
-    }
-
-    .cmd-search-bar {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(0, 0, 0, 0.02);
-    }
-
-    .dark-mode .cmd-search-bar {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .cmd-search-bar i {
-      font-size: 14px;
-      opacity: 0.5;
-    }
-
-    .cmd-search-bar input {
-      flex: 1;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 15px;
-      outline: none;
-    }
-
-    .cmd-list {
-      padding: 10px;
-    }
-
-    .cmd-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      text-decoration: none;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    .cmd-item:hover {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .cmd-item:hover i,
-    .cmd-item:hover .cmd-shortcut {
-      color: #fff;
-      opacity: 1;
-    }
-
-    .cmd-item i {
-      width: 20px;
-      text-align: center;
-      opacity: 0.6;
-      font-size: 14px;
-    }
-
-    .cmd-item span {
-      flex: 1;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .cmd-shortcut {
-      font-size: 10px;
-      opacity: 0.3;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-    }
-
-    /* ── THEME TOGGLE ── */
-    .theme-toggle {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      color: var(--text-muted);
-      transition: color 0.2s, transform 0.2s;
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .theme-toggle:hover {
-      color: var(--text);
-      transform: rotate(20deg);
-    }
-
-    .theme-toggle i {
-      transition: transform 0.3s;
-    }
-
-    /* ── DARK MODE ── */
-    :root.dark-mode {
-      --bg: #030303;
-      --card: #0a0a0a;
-      --card-dark: #111111;
-      --text: #f0f0f0;
-      --text-muted: #999999;
-      --text-light: #f0f0f0;
-      --border: rgba(255, 255, 255, 0.04);
-
-      --surface-1: #030303;
-      --surface-2: #0a0a0a;
-      --surface-3: #111111;
-      --shadow-premium: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
-    }
-
-    .dark-mode body {
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    .dark-mode nav {
-      background: rgba(26, 26, 26, 0.85);
-      border-color: var(--border);
-    }
-
-    .dark-mode .card-white {
-      background: #1a1a1a;
-      color: var(--text);
-    }
-
-    .dark-mode .card-cream {
-      background: #2a2a2a;
-      color: var(--text);
-    }
-
-    .dark-mode .card-blue {
-      background: #1a4a9f;
-    }
-
-    .dark-mode .card-orange {
-      background: #a63600;
-    }
-
-    .dark-mode .btn-ghost {
-      border-color: rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .dark-mode .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-
-    /* ── MAIN GRID ── */
-    main {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 120px 24px 60px;
-      display: grid;
-      gap: 16px;
-    }
-
-    /* ── BENTO GRID ── */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-auto-rows: minmax(80px, auto);
-      gap: 16px;
-    }
-
-    /* ── BASE CARD ── */
-    .card {
-      border-radius: var(--radius);
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-      will-change: transform, box-shadow;
-      border: 1px solid var(--border);
-    }
-
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-    }
-
-    .card-white {
-      background: var(--card);
-    }
-
-    .card-dark {
-      background: var(--card-dark);
-      color: var(--text-light);
-    }
-
-    .card-blue {
-      background: var(--card-blue);
-      color: #fff;
-    }
-
-    .card-cream {
-      background: #f0ece6;
-    }
-
-    .card-orange {
-      background: var(--accent2);
-      color: #fff;
-    }
-
-    /* ── HERO CARD ── */
-    .hero-card {
-      grid-column: span 8;
-      grid-row: span 4;
-      min-height: 480px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      background: var(--card-dark);
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 70% 30%, rgba(26, 107, 255, 0.25) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .hero-noise {
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
-      opacity: 0.15;
-      pointer-events: none;
-    }
-
-    .hero-available {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 7px 16px;
-      border-radius: 100px;
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 24px;
-      width: fit-content;
-    }
-
-    .hero-available span {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #00d26a;
-      display: block;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1)
-      }
-
-      50% {
-        opacity: .6;
-        transform: scale(1.3)
-      }
-    }
-
-    .hero-name {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800;
-      font-size: clamp(60px, 8vw, 100px);
-      line-height: 0.95;
-      letter-spacing: -3px;
-      color: #fff;
-      margin-bottom: 12px;
-    }
-
-    .hero-name .blue {
-      color: var(--accent);
-    }
-
-    .hero-role {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.5);
-      margin-bottom: 24px;
-    }
-
-    .hero-desc {
-      font-size: 18px;
-      color: rgba(255, 255, 255, 0.5);
-      max-width: 480px;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      font-weight: 400;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      border: none;
-      transition: all .3s cubic-bezier(.34, 1.56, .64, 1);
-      will-change: transform, background;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: #0f55e0;
-      transform: translateY(-2px);
-    }
-
-    .btn-ghost {
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .btn-ghost:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-2px);
-    }
-
-    /* ── PHOTO CARD ── */
-    .photo-card {
-      grid-column: span 4;
-      grid-row: span 4;
-      min-height: 480px;
-      background: linear-gradient(145deg, #1a2340 0%, #0d1625 100%);
-      display: flex;
-      align-items: stretch;
-      overflow: hidden;
-      padding: 0 !important;
-    }
-
-    .photo-inner {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-    }
-
-    .photo-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 15%;
-      display: block;
-    }
-
-    .photo-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.6) 40%, transparent 75%);
-      padding: 28px 24px 24px;
-    }
-
-    .photo-name {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 24px;
-      color: #fff;
-      letter-spacing: -0.5px;
-      margin-bottom: 6px;
-      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    .photo-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #fff;
-      background: var(--accent);
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 6px;
-      text-shadow: none;
-    }
-
-    /* ── FIXED RIGHT SOCIAL BAR ── */
-    .side-socials {
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 200;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 20px;
-      padding: 16px 10px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    }
-
-    .side-socials a {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: #f0ede8;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: #1a1a1a;
-      font-size: 13px;
-      font-weight: 700;
-      transition: all .25s cubic-bezier(.34, 1.56, .64, 1);
-      will-change: transform, background, border-color;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-
-    .side-socials a:hover {
-      background: var(--accent);
-      color: #fff;
-      transform: scale(1.15);
-      border-color: var(--accent);
-    }
-
-    .side-socials .soc-line {
-      width: 22px;
-      height: 1px;
-      background: rgba(0, 0, 0, 0.1);
-      margin: 2px 0;
-    }
-
-    /* ── STACK / SKILLS SECTION ── */
-    .stack-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    /* base card — dark like hero */
-    .stack-card {
-      background: var(--card-dark);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 20px;
-      padding: 22px 20px;
-      min-width: 140px;
-      flex: 1 1 140px;
-      max-width: 195px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      cursor: default;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1), box-shadow 0.3s ease, border-color 0.25s;
-      will-change: transform, box-shadow;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-
-    .stack-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 0% 0%, rgba(26, 107, 255, 0.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .stack-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      border-color: rgba(26, 107, 255, 0.35);
-    }
-
-    .stack-card-blue {
-      background: var(--card-blue);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .stack-card-blue::before {
-      background: radial-gradient(ellipse at 100% 0%, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
-    }
-
-    .stack-card-blue .stack-name {
-      color: #fff;
-    }
-
-    .stack-card-blue .stack-sub {
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    .stack-card-orange {
-      background: var(--accent2);
-      border-color: rgba(255, 255, 255, 0.1);
-    }
-
-    .stack-card-orange::before {
-      background: radial-gradient(ellipse at 100% 0%, rgba(255, 255, 255, 0.15) 0%, transparent 60%);
-    }
-
-    .stack-card-orange .stack-name {
-      color: #fff;
-    }
-
-    .stack-card-orange .stack-sub {
-      color: rgba(255, 255, 255, 0.65);
-    }
-
-    .stack-card-cream {
-      background: #e8e4dd;
-      border-color: rgba(0, 0, 0, 0.06);
-    }
-
-    .stack-card-cream::before {
-      display: none;
-    }
-
-    .stack-card-cream .stack-name {
-      color: var(--text);
-    }
-
-    .stack-card-cream .stack-sub {
-      color: var(--text-muted);
-    }
-
-    .stack-card-cream:hover {
-      border-color: rgba(26, 107, 255, 0.3);
-    }
-
-    .stack-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .stack-name {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.2;
-    }
-
-    .stack-sub {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.5px;
-      color: rgba(255, 255, 255, 0.4);
-      text-transform: uppercase;
-    }
-
-    .stack-cat-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .stack-cat-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ── STAT CARD ── */
-    .stat-card {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .stat-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: .55;
-      margin-bottom: 8px;
-    }
-
-    .stat-number {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800;
-      font-size: clamp(48px, 5vw, 72px);
-      line-height: 1;
-      letter-spacing: -2px;
-    }
-
-    .stat-desc {
-      font-size: 13px;
-      opacity: .6;
-      margin-top: 8px;
-    }
-
-    /* ── ABOUT CARD ── */
-    .about-card {
-      grid-column: span 5;
-      grid-row: span 3;
-    }
-
-    .section-tag {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      opacity: .45;
-      margin-bottom: 20px;
-    }
-
-    .about-card h2 {
-      font-weight: 800;
-      font-size: 64px;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      letter-spacing: -1px;
-    }
-
-    .about-card p {
-      font-size: 15px;
-      line-height: 1.7;
-      opacity: .75;
-      max-width: 420px;
-    }
-
-    /* ── SKILLS CARD ── */
-    .skills-card {
-      grid-column: span 4;
-      grid-row: span 3;
-    }
-
-    .skills-card h2 {
-      font-weight: 700;
-      font-size: 32px;
-      margin-bottom: 24px;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .skill-tag {
-      padding: 7px 14px;
-      border-radius: 100px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .skill-tag.py {
-      background: rgba(26, 107, 255, 0.15);
-      border-color: rgba(26, 107, 255, 0.3);
-      color: #1a6bff;
-    }
-
-    .skill-tag.ml {
-      background: rgba(255, 77, 0, 0.12);
-      border-color: rgba(255, 77, 0, 0.25);
-      color: #ff4d00;
-    }
-
-    .skill-tag.data {
-      background: rgba(0, 210, 106, 0.12);
-      border-color: rgba(0, 210, 106, 0.25);
-      color: #00a855;
-    }
-
-    /* ── STAT ROW ── */
-    .stat-row {
-      grid-column: span 3;
-      grid-row: span 3;
-    }
-
-    .stat-row.cgpa {}
-
-    .stat-row.air {}
-
-    .stat-row.proj {}
-
-    /* ── PROJECTS SECTION ── */
-    .section-header {
-      grid-column: span 12;
-      padding: 20px 0 8px;
-    }
-
-    .section-header h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 64px;
-      letter-spacing: 2px;
-    }
-
-    .project-card {
-      grid-column: span 4;
-      grid-row: span 3;
-      min-height: 280px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .project-card.wide {
-      grid-column: span 6;
-    }
-
-    .project-card.tall {
-      grid-row: span 4;
-    }
-
-    .proj-year {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      opacity: .45;
-      margin-bottom: 12px;
-    }
-
-    .proj-accuracy {
-      font-family: 'Outfit', sans-serif;
-      font-size: 64px;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-
-    .proj-accuracy-label {
-      font-size: 11px;
-      opacity: .55;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-    }
-
-    .proj-title {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-
-    .proj-desc {
-      font-size: 14px;
-      line-height: 1.6;
-      opacity: .65;
-      flex: 1;
-    }
-
-    .proj-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 20px;
-    }
-
-    .proj-tag {
-      padding: 4px 10px;
-      border-radius: 100px;
-      font-size: 11px;
-      font-weight: 600;
-      background: rgba(0, 0, 0, 0.06);
-    }
-
-    .proj-tag-light {
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    .proj-link {
-      margin-top: 16px;
-      font-size: 13px;
-      font-weight: 600;
-      opacity: .55;
-      text-decoration: none;
-      color: inherit;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: opacity .2s;
-    }
-
-    .proj-link:hover {
-      opacity: 1;
-    }
-
-    /* ── EXPERIENCE ── */
-    .exp-card {
-      grid-column: span 6;
-      grid-row: span 3;
-    }
-
-    .exp-card h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 52px;
-      margin-bottom: 28px;
-    }
-
-    .exp-item {
-      border-left: 2px solid rgba(255, 255, 255, 0.15);
-      padding-left: 20px;
-      margin-bottom: 24px;
-    }
-
-    .exp-item .company {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .exp-item .role {
-      font-size: 13px;
-      opacity: .5;
-      margin-bottom: 10px;
-      font-family: 'JetBrains Mono', monospace;
-      letter-spacing: 1px;
-    }
-
-    .exp-item .desc {
-      font-size: 14px;
-      opacity: .65;
-      line-height: 1.6;
-    }
-
-    .exp-item-light {
-      border-left-color: rgba(0, 0, 0, 0.1);
-    }
-
-    .exp-item-light .role {
-      color: var(--text-muted);
-    }
-
-    /* ── EDUCATION ── */
-    .edu-card {
-      grid-column: span 6;
-      grid-row: span 3;
-    }
-
-    /* ── CONTACT ── */
-    .contact-card {
-      grid-column: span 8;
-      grid-row: span 3;
-      min-height: 280px;
-    }
-
-    .contact-card h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 72px;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .contact-sub {
-      font-size: 16px;
-      opacity: .6;
-      margin-bottom: 32px;
-    }
-
-    .contact-form {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .form-full {
-      grid-column: span 2;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 14px 18px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: var(--radius-sm);
-      color: #fff;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color .2s;
-    }
-
-    .form-input::placeholder {
-      opacity: .35;
-    }
-
-    .form-input:focus {
-      border-color: var(--accent);
-    }
-
-    textarea.form-input {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .btn-submit {
-      background: #fff;
-      color: var(--card-dark);
-      font-weight: 700;
-      padding: 14px 36px;
-      border-radius: 100px;
-      cursor: pointer;
-      font-size: 14px;
-      border: none;
-      transition: all .2s;
-    }
-
-    .btn-submit:hover {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .social-card {
-      grid-column: span 4;
-      grid-row: span 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .social-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex: 1;
-      justify-content: center;
-    }
-
-    .social-link {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px 20px;
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      text-decoration: none;
-      color: #fff;
-      font-weight: 600;
-      transition: all .2s;
-    }
-
-    .social-link:hover {
-      background: rgba(255, 255, 255, 0.12);
-      transform: translateX(4px);
-    }
-
-    .social-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-    }
-
-    /* ── CERT CARD ── */
-    .cert-card {
-      grid-column: span 3;
-      grid-row: span 2;
-    }
-
-    .cert-card h3 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 28px;
-      margin-bottom: 16px;
-    }
-
-    .cert-list {
-      list-style: none;
-    }
-
-    .cert-list li {
-      font-size: 13px;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: .7;
-    }
-
-    .cert-list li::before {
-      content: '✓';
-      color: var(--accent);
-      font-weight: 700;
-      opacity: 1;
-    }
-
-    /* ── ACHIEVEMENT CARD ── */
-    .ach-card {
-      grid-column: span 3;
-      grid-row: span 2;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 40px;
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* ── SCROLL ANIMATION ── */
-    .card {
-      opacity: 0;
-      animation: fadeUp 0.6s cubic-bezier(.22, 1, .36, 1) forwards;
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .card:nth-child(1) {
-      animation-delay: 0.05s;
-    }
-
-    .card:nth-child(2) {
-      animation-delay: 0.1s;
-    }
-
-    .card:nth-child(3) {
-      animation-delay: 0.15s;
-    }
-
-    .card:nth-child(4) {
-      animation-delay: 0.2s;
-    }
-
-    .card:nth-child(5) {
-      animation-delay: 0.25s;
-    }
-
-    .card:nth-child(6) {
-      animation-delay: 0.3s;
-    }
-
-    .card:nth-child(7) {
-      animation-delay: 0.35s;
-    }
-
-    .card:nth-child(8) {
-      animation-delay: 0.4s;
-    }
-
-    .card:nth-child(9) {
-      animation-delay: 0.45s;
-    }
-
-    .card:nth-child(10) {
-      animation-delay: 0.5s;
-    }
-
-    /* ── RAG CHATBOT ── */
-    .chatbot-toggle {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      font-size: 24px;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(26, 107, 255, 0.4);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1);
-    }
-
-    .chatbot-toggle:hover {
-      transform: scale(1.1) translateY(-5px);
-    }
-
-    .chatbot-container {
-      position: fixed;
-      bottom: 100px;
-      right: 30px;
-      width: 350px;
-      height: 500px;
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      transform: translateY(20px);
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.4s cubic-bezier(.34, 1.56, .64, 1);
-    }
-
-    .chatbot-container.active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .dark-mode .chatbot-container {
-      background: rgba(26, 26, 26, 0.85);
-    }
-
-    .chatbot-header {
-      padding: 16px 20px;
-      background: var(--accent);
-      color: #fff;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .chatbot-title {
-      font-weight: 600;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .chatbot-close {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      opacity: 0.8;
-    }
-
-    .chatbot-close:hover {
-      opacity: 1;
-    }
-
-    .chatbot-messages {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .chat-msg {
-      max-width: 80%;
-      padding: 10px 14px;
-      border-radius: 14px;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .ai-msg {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--text);
-      align-self: flex-start;
-      border-bottom-left-radius: 4px;
-    }
-
-    .dark-mode .ai-msg {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .user-msg {
-      background: var(--accent);
-      color: #fff;
-      align-self: flex-end;
-      border-bottom-right-radius: 4px;
-    }
-
-    .chatbot-input {
-      padding: 16px;
-      border-top: 1px solid var(--border);
-      display: flex;
-      gap: 10px;
-    }
-
-    .chatbot-input input {
-      flex: 1;
-      padding: 10px 16px;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      background: transparent;
-      color: var(--text);
-      font-size: 13px;
-      outline: none;
-    }
-
-    .chatbot-input button {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    @media (max-width: 600px) {
-      .chatbot-container {
-        width: 90%;
-        right: 5%;
-        bottom: 90px;
-      }
-
-      .chatbot-toggle {
-        bottom: 20px;
-        right: 20px;
-      }
-    }
-  </style>
-</head>
+  
+  <link rel="stylesheet" href="css/shared.css">
+<link rel="stylesheet" href="css/index.css">
+  </head>
 
 <body>
+  <div id="scrollProgress"></div>
 
   <div class="mesh-gradient"></div>
 
   <!-- NAV -->
   <nav>
+    
     <a class="nav-logo" href="index.html">GK</a>
+
     <div class="nav-links">
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
@@ -1600,11 +58,12 @@
   </nav>
 
   <!-- COMMAND PALETTE MODAL -->
-  <div class="cmd-palette-overlay" id="cmdPalette">
+  <div class="cmd-palette-overlay" id="cmdPalette" role="dialog" aria-modal="true" aria-label="Command palette">
     <div class="cmd-palette">
       <div class="cmd-search-bar">
         <i class="fas fa-search"></i>
-        <input type="text" placeholder="Type a command or search..." id="cmdSearch">
+        <input type="text" placeholder="Type a command or search..." id="cmdSearch" aria-label="Search commands"
+          autocomplete="off">
       </div>
       <div class="cmd-list">
         <a href="projects.html" class="cmd-item">
@@ -1628,7 +87,7 @@
           <span class="cmd-shortcut">G C</span>
         </a>
         <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
-          class="cmd-item">
+          rel="noopener noreferrer" class="cmd-item">
           <i class="fas fa-file-pdf"></i>
           <span>Download Resume</span>
           <span class="cmd-shortcut">⌘ D</span>
@@ -1638,6 +97,12 @@
           <i class="fas fa-robot"></i>
           <span>Ask AI Assistant</span>
           <span class="cmd-shortcut">⌘ J</span>
+        </div>
+        <div class="cmd-item"
+          onclick="navigator.clipboard.writeText('chegoni.gk@gmail.com'); alert('Email copied!'); document.getElementById('cmdPalette').classList.remove('active');">
+          <i class="fas fa-envelope"></i>
+          <span>Copy Email Address</span>
+          <span class="cmd-shortcut">⌘ E</span>
         </div>
       </div>
     </div>
@@ -1649,25 +114,27 @@
     <div class="bento-grid">
 
       <!-- HERO CARD -->
-      <div class="card card-dark hero-card">
+      <div class="card card-dark hero-card" style="grid-column:span 8;grid-row:span 4;">
         <div class="hero-noise"></div>
         <div style="position:relative;z-index:1;">
           <div class="hero-available"><span></span>Available for AIML Roles</div>
           <div class="hero-role">Data Science Graduate</div>
-          <div class="hero-name">GOPI<span class="blue">KRISHNA</span><br>CHEGONI</div>
-          <div class="hero-desc">Building intelligent systems at the intersection of Machine Learning, document
+          <div class="hero-name">GOPIKRISHNA <span class="blue">CHEGONI</span></div>
+          <div class="hero-desc" style="max-width:540px;">Building intelligent systems at the intersection of Machine
+            Learning, document
             automation, and AI-driven workflows. Turning data into impact.</div>
           <div class="hero-btns">
-            <a class="btn btn-primary" href="#projects">View Projects →</a>
-            <a class="btn btn-ghost" href="#contact">Contact Me</a>
+            <a class="btn btn-primary" href="#projects">See My Work →</a>
           </div>
+
         </div>
       </div>
+
 
       <!-- PHOTO CARD -->
       <div class="card photo-card" style="grid-column:span 4;grid-row:span 4;">
         <div class="photo-inner">
-          <img src="pp-1.png" alt="Gopikrishna Chegoni" />
+          <img src="images/pp-1.png" alt="Gopikrishna Chegoni" fetchpriority="high" />
           <div class="photo-overlay">
             <div class="photo-name">Gopikrishna Chegoni</div>
             <div class="photo-label">DS Graduate · B.Tech CSE</div>
@@ -1675,37 +142,74 @@
         </div>
       </div>
 
-      <!-- STAT: CGPA -->
-      <div class="card card-blue stat-card" style="grid-column:span 2;grid-row:span 2;">
-        <div class="stat-label">B.Tech CGPA</div>
-        <div class="stat-number">8.42</div>
-        <div class="stat-desc">GNITC</div>
-      </div>
-
-      <!-- STAT: AIR -->
-      <div class="card card-dark stat-card" style="grid-column:span 3;grid-row:span 2;">
-        <div class="stat-label">Codekaze AIR</div>
-        <div class="stat-number" style="color:var(--accent);">992</div>
-        <div class="stat-desc">Top 0.1% of 1M+ applicants</div>
-      </div>
-
-      <!-- STAT: Projects -->
-      <div class="card card-white stat-card" style="grid-column:span 2;grid-row:span 2;">
-        <div class="stat-label">Projects</div>
-        <div class="stat-number">6+</div>
-        <div class="stat-desc">Shipped</div>
-      </div>
-
-      <!-- STAT: NPTEL -->
-      <div class="card card-orange stat-card" style="grid-column:span 3;grid-row:span 2;">
-        <div class="stat-label">NPTEL Score</div>
-        <div class="stat-number">73%</div>
-        <div class="stat-desc">Python for Data Science</div>
+      <!-- BOLD CLAIM CARD — full-width, stops the scroll -->
+      <div class="card card-dark"
+        style="grid-column:span 12;grid-row:span 2;display:flex;align-items:center;justify-content:space-between;gap:40px;position:relative;overflow:hidden;padding:48px;">
+        <!-- subtle geometric grid overlay -->
+        <div
+          style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;">
+        </div>
+        <!-- radial accent glow -->
+        <div
+          style="position:absolute;top:-40px;left:-40px;width:400px;height:400px;background:radial-gradient(circle,rgba(0,68,238,0.2) 0%,transparent 70%);pointer-events:none;">
+        </div>
+        <div style="position:relative;z-index:1;">
+          <div
+            style="font-family: var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:12px;">
+            Codekaze · National Engineering Ranking</div>
+          <div
+            style="font-family: var(--font-heading);font-weight: 900;font-size:clamp(56px,8vw,96px);line-height:0.9;letter-spacing: -0.06em;color:#fff;">
+            #<span style="color:var(--accent);" class="count-up" data-target="992">0</span></div>
+          <div style="font-size:15px;color:rgba(255,255,255,0.5);margin-top:12px;">Top <strong
+              style="color:#fff;">0.1%</strong> out of 1 million+ applicants · National rank among India's best
+            engineers.</div>
+        </div>
+        <div style="position:relative;z-index:1;display:flex;gap:48px;flex-shrink:0;">
+          <div style="text-align:center;">
+            <div
+              style="font-family: var(--font-heading);font-weight: 900;font-size:48px;color:#fff;line-height:1;"
+              class="count-up" data-target="8.42" data-decimals="2">0</div>
+            <div
+              style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:6px;">
+              CGPA · B.Tech</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.1);"></div>
+          <div style="text-align:center;">
+            <div
+              style="font-family: var(--font-heading);font-weight: 900;font-size:48px;color:#fff;line-height:1;">
+              <span class="count-up" data-target="6">0</span>+
+            </div>
+            <div
+              style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:6px;">
+              Projects Shipped</div>
+          </div>
+          <div style="width:1px;background:rgba(255,255,255,0.1);"></div>
+          <div style="text-align:center;">
+            <div
+              style="font-family: var(--font-heading);font-weight: 900;font-size:48px;color:#fff;line-height:1;">
+              <span class="count-up" data-target="73">0</span>%
+            </div>
+            <div
+              style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:1px;text-transform:uppercase;margin-top:6px;">
+              NPTEL Score</div>
+          </div>
+        </div>
       </div>
 
       <!-- ABOUT CARD -->
       <div class="card card-white about-card" style="grid-column:span 5;grid-row:span 3;">
-        <div class="section-tag">About Me</div>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div class="section-tag">About Me</div>
+          <div
+            style="display:flex; align-items:center; gap: 8px; background: rgba(0,68,238,0.1); padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(0,68,238,0.2);">
+            <div
+              style="width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 8px var(--accent); animation: pulse 2s infinite;">
+            </div>
+            <span
+              style="font-size: 11px; font-weight: 900; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase;">Building:
+              Multi-Agent RAG</span>
+          </div>
+        </div>
         <h2>Computer Science<br>× AI/ML</h2>
         <p>B.Tech graduate in CSE (Data Science) from Guru Nanak Institutions Technical Campus with expertise in machine
           learning pipelines, intelligent document processing, and automation workflows. I build production-grade AI
@@ -1745,7 +249,7 @@
       <div class="card card-cream"
         style="grid-column:span 3;grid-row:span 3;display:flex;flex-direction:column;justify-content:center;">
         <div
-          style="font-family:'Outfit',sans-serif;font-size:48px;line-height:1;color:var(--text);opacity:0.15;position:absolute;bottom:30px;right:30px;">
+          style="font-family: var(--font-heading);font-weight: 900;font-size:48px;line-height:1;color:var(--text);opacity:0.15;position:absolute;bottom:30px;right:30px;">
           ML</div>
         <div class="section-tag">Previously</div>
         <div style="font-size:15px;line-height:1.6;color:var(--text-muted);">Worked as Machine Learning Intern at
@@ -1753,27 +257,135 @@
           REST APIs, and automated data annotation tasks.
         </div>
         <div style="margin-top:20px;">
-          <span
-            style="display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--accent);">
-            <span style="width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;"></span>
-            Sept 2024 – Sept 2025
-          </span>
+          <span style="font-size:12px;font-weight:600;color:var(--accent);">Sept 2024 – Sept 2025</span>
         </div>
       </div>
 
+      <!-- TESTIMONIAL CARD -->
+      <div class="card card-dark"
+        style="grid-column:span 6;grid-row:span 2;display:flex;flex-direction:column;justify-content:center;position:relative;padding:32px;">
+        <i class="fas fa-quote-left"
+          style="position:absolute; top: 24px; left: 24px; font-size: 40px; color: rgba(255,255,255,0.05);"></i>
+        <div style="position:relative; z-index:1;">
+          <p style="font-size: 15px; font-style: italic; color: rgba(255,255,255,0.8); line-height: 1.6;">"Gopikrishna
+            consistently delivered production-ready ML pipelines. His OCR work directly reduced our manual data entry
+            time by over 80%. A rare mix of strong research skills and engineering pragmatism."</p>
+          <div style="margin-top: 20px; display: flex; align-items: center; gap: 12px;">
+            <div
+              style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 14px;">
+              KT</div>
+            <div>
+              <div style="font-size: 14px; font-weight: 900; color: #fff;">[Manager's Name]</div>
+              <div style="font-size: 12px; color: rgba(255,255,255,0.5);">Engineering Manager · KreativeTimebox</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GITHUB GRAPH CARD -->
+      <div class="card card-white"
+        style="grid-column:span 6;grid-row:span 2;display:flex;flex-direction:column;justify-content:center; align-items:center; padding:32px;">
+        <div
+          style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+          <div class="section-tag" style="margin-bottom:0;">Open Source Activity</div>
+          <a href="https://github.com/gopikrishna818" target="_blank" rel="noopener noreferrer"
+            style="color: var(--text);"><i class="fab fa-github" style="font-size: 20px;"></i></a>
+        </div>
+        <img src="https://ghchart.rshah.org/0044ee/gopikrishna818" alt="GitHub Contributions"
+          style="width: 100%; max-width: 100%; opacity: 0.9;" loading="lazy" />
+      </div>
+
     </div><!-- end hero bento-grid -->
+
+    <!-- ══ MY PROCESS ══ -->
+    <div style="margin-top: 80px; margin-bottom: 40px;">
+      <div class="section-header" style="text-align: center; margin-bottom: 40px;">
+        <div
+          style="font-family: var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:12px;">
+          Methodology</div>
+        <h2
+          style="font-family: var(--font-heading);font-size:clamp(32px,4vw,48px);letter-spacing: -0.06em;font-weight: 900;">
+          How I Think & Build</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+
+        <div class="card card-white" style="padding: 32px; position: relative;">
+          <div
+            style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(0,0,0,0.03); font-weight: 900; font-family: var(--font-heading);">
+            01</div>
+          <div
+            style="width: 48px; height: 48px; border-radius: 12px; background: rgba(0,68,238,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <i class="fas fa-search" style="color: var(--accent); font-size: 20px;"></i>
+          </div>
+          <h3
+            style="font-size: 20px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
+            Research</h3>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Dive deep into the problem domain,
+            review state-of-the-art papers, and evaluate open-source models.</p>
+        </div>
+
+        <div class="card card-white" style="padding: 32px; position: relative;">
+          <div
+            style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(0,0,0,0.03); font-weight: 900; font-family: var(--font-heading);">
+            02</div>
+          <div
+            style="width: 48px; height: 48px; border-radius: 12px; background: rgba(0,68,238,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <i class="fas fa-project-diagram" style="color: var(--accent); font-size: 20px;"></i>
+          </div>
+          <h3
+            style="font-size: 20px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
+            Design</h3>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Architect scalable data pipelines and
+            API structures using FastAPI, Docker, and vector databases.</p>
+        </div>
+
+        <div class="card card-white" style="padding: 32px; position: relative;">
+          <div
+            style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(0,0,0,0.03); font-weight: 900; font-family: var(--font-heading);">
+            03</div>
+          <div
+            style="width: 48px; height: 48px; border-radius: 12px; background: rgba(0,68,238,0.1); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <i class="fas fa-code" style="color: var(--accent); font-size: 20px;"></i>
+          </div>
+          <h3
+            style="font-size: 20px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
+            Build</h3>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Develop the core models and backend
+            logic, focusing on modularity, clean code, and type safety.</p>
+        </div>
+
+        <div class="card card-dark" style="padding: 32px; position: relative; border: 1px solid rgba(0,68,238,0.3);">
+          <div
+            style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(255,255,255,0.05); font-weight: 900; font-family: var(--font-heading);">
+            04</div>
+          <div
+            style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <i class="fas fa-rocket" style="color: #fff; font-size: 20px;"></i>
+          </div>
+          <h3
+            style="font-size: 20px; font-weight: 900; margin-bottom: 12px; color: #fff; font-family: var(--font-heading); letter-spacing: -0.06em;">
+            Ship</h3>
+          <p style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6;">Deploy to production environments
+            (Railway/AWS), set up CI/CD, and optimize for latency and scale.</p>
+        </div>
+
+      </div>
+    </div>
 
     <!-- ══ PROJECTS ══ -->
     <div class="bento-grid" id="projects" style="margin-top:60px;">
       <div class="section-header">
         <div
-          style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:12px;">
+          style="font-family: var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:12px;">
           Featured Work</div>
-        <h2>PROJECTS</h2>
+        <h2
+          style="font-family: var(--font-heading);font-size:clamp(40px,5vw,64px);letter-spacing: -0.06em;font-weight: 900;">
+          Projects</h2>
       </div>
 
       <!-- SmartDoc Parser -->
-      <div class="card card-blue project-card" style="grid-column:span 5;grid-row:span 3;">
+      <div class="card card-blue project-card" style="grid-column:span 4;grid-row:span 3;">
         <div>
           <div class="proj-year">2025</div>
           <div class="proj-accuracy">98%</div>
@@ -1786,15 +398,15 @@
           <div class="proj-tags">
             <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">DocTR</span>
             <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">PaddleOCR</span>
-            <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">Python</span>
-            <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">FastAPI</span>
           </div>
           <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
               href="https://github.com/gopikrishna818/SmartDoc-Parser-Invoice-Bank-Statement-Extraction" target="_blank"
-              style="color:#fff;"><i class="fab fa-github"></i> GitHub</a><a class="proj-link" href="projects.html"
-              style="color:#fff;">Details →</a></div>
+              rel="noopener noreferrer" style="color:#fff;"><i class="fab fa-github"></i> GitHub</a><a class="proj-link"
+              href="projects.html" style="color:#fff;">Details →</a></div>
         </div>
       </div>
+
+
 
       <!-- AI Lead-Gen -->
       <div class="card card-dark project-card" style="grid-column:span 4;grid-row:span 3;">
@@ -1817,13 +429,13 @@
           </div>
           <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
               href="https://github.com/gopikrishna818/AI-Lead-Gen-Outreach-Automation-Engine" target="_blank"
-              style="color:rgba(255,255,255,0.5);"><i class="fab fa-github"></i> GitHub</a><a class="proj-link"
-              href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a></div>
+              rel="noopener noreferrer" style="color:rgba(255,255,255,0.5);"><i class="fab fa-github"></i> GitHub</a><a
+              class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a></div>
         </div>
       </div>
 
-      <!-- Enterprise Multi-Agent RAG -->
-      <div class="card card-white project-card" style="grid-column:span 3;grid-row:span 3;">
+      <!-- Enterprise Multi-Agent RAG — uniform 4-col span -->
+      <div class="card card-white project-card" style="grid-column:span 4;grid-row:span 3;">
         <div>
           <div class="proj-year" style="color:var(--text-muted);">2026</div>
           <div class="proj-accuracy">95%</div>
@@ -1838,20 +450,17 @@
             <span class="proj-tag">RAG</span>
             <span class="proj-tag">FastAPI</span>
           </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
-              href="https://enterprise-multi-agent-rag-production.up.railway.app/" target="_blank"><i
-                class="fas fa-external-link-alt"></i> Live Demo</a><a class="proj-link"
-              href="https://github.com/gopikrishna818/enterprise-multi-agent-rag.git" target="_blank"><i
-                class="fab fa-github"></i> GitHub</a>
-            <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
-                href="https://github.com/gopikrishna818/ai_content_strategy_engine" target="_blank"><i
-                  class="fab fa-github"></i> GitHub</a><a class="proj-link" href="projects.html">Details →</a></div>
+          <div style="display: flex; gap: 12px; margin-top: 12px;">
+            <a class="proj-link" href="https://github.com/gopikrishna818/enterprise-multi-agent-rag.git" target="_blank" rel="noopener noreferrer">
+              <i class="fab fa-github"></i> GitHub
+            </a>
+            <a class="proj-link" href="projects.html">Details →</a>
           </div>
         </div>
       </div>
 
-      <!-- AI Content Strategy Engine -->
-      <div class="card card-cream project-card" style="grid-column:span 4;grid-row:span 3;">
+      <!-- AI Content Strategy Engine — uniform 4-col span -->
+      <div class="card card-white project-card" style="grid-column:span 4;grid-row:span 3;">
         <div>
           <div class="proj-year">2025</div>
           <div class="proj-accuracy" style="color:var(--accent2);">93%</div>
@@ -1871,11 +480,11 @@
         </div>
       </div>
 
-      <!-- Team Task Manager -->
+      <!-- Team Task Manager — uniform 4-col span -->
       <div class="card card-dark project-card" style="grid-column:span 4;grid-row:span 3;">
         <div>
           <div class="proj-year">2026</div>
-          <div class="proj-accuracy" style="color:#00d26a;">94%</div>
+          <div class="proj-accuracy" style="color:var(--accent);">94%</div>
           <div class="proj-accuracy-label" style="color:rgba(255,255,255,0.4);">Task Completion</div>
           <div class="proj-title" style="color:#fff;">Team Task Manager</div>
           <div class="proj-desc">Collaborative task management application for teams — assign tasks, track progress, and
@@ -1891,40 +500,63 @@
           </div>
           <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
               href="https://worthy-encouragement-production-6af3.up.railway.app/" target="_blank"
-              style="color:rgba(255,255,255,0.4);"><i class="fas fa-external-link-alt"></i> Live Demo</a><a
-              class="proj-link" href="https://github.com/gopikrishna818" target="_blank"
-              style="color:rgba(255,255,255,0.4);"><i class="fab fa-github"></i> GitHub</a><a class="proj-link"
-              href="projects.html" style="color:rgba(255,255,255,0.4);">Details →</a></div>
+              rel="noopener noreferrer" style="color:rgba(255,255,255,0.4);"><i class="fas fa-external-link-alt"></i>
+              Live Demo</a><a class="proj-link" href="https://github.com/gopikrishna818" target="_blank"
+              rel="noopener noreferrer" style="color:rgba(255,255,255,0.4);"><i class="fab fa-github"></i> GitHub</a><a
+              class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.4);">Details →</a></div>
         </div>
       </div>
 
-      <!-- Inventory -->
-      <div class="card card-blue project-card" style="grid-column:span 4;grid-row:span 3;">
+      <!-- Inventory — uniform 4-col span -->
+      <div class="card card-dark project-card" style="grid-column:span 4;grid-row:span 3;">
         <div>
           <div class="proj-year">2024</div>
-          <div class="proj-accuracy">88%</div>
-          <div class="proj-accuracy-label">Forecast MAPE</div>
-          <div class="proj-title">Inventory Demand Forecaster</div>
+          <div class="proj-accuracy" style="color:var(--accent);">88%</div>
+          <div class="proj-accuracy-label" style="color:rgba(255,255,255,0.4);">Forecast MAPE</div>
+          <div class="proj-title" style="color:#fff;">Inventory Demand Forecaster</div>
           <div class="proj-desc">Time-series demand forecasting for retail inventory using Prophet and LSTM, reducing
             overstock by 30%.</div>
         </div>
         <div>
           <div class="proj-tags">
-            <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">Prophet</span>
-            <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">LSTM</span>
-            <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">PyTorch</span>
-            <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">Plotly</span>
+            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Prophet</span>
+            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">LSTM</span>
+            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">PyTorch</span>
+            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Plotly</span>
           </div>
-          <a class="proj-link" href="projects.html" style="color:#fff;">Details →</a>
+          <a class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a>
         </div>
       </div>
 
     </div><!-- end projects grid -->
 
+    <!-- ══ GITHUB LIVE ACTIVITY ══ -->
+    <div id="github-activity" style="margin-top:60px;">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;">
+        <div>
+          <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:10px;">Live Activity</div>
+          <h2 style="font-family:var(--font-heading);font-size:clamp(32px,4vw,48px);letter-spacing: -0.06em;font-weight: 900;">GitHub Commits</h2>
+        </div>
+        <a href="https://github.com/gopikrishna818" target="_blank" rel="noopener noreferrer"
+          style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:100px;transition:all 0.2s;"
+          onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--text)';"
+          onmouseleave="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)';">
+          <i class="fab fa-github"></i> gopikrishna818
+        </a>
+      </div>
+      <div id="gh-feed" style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:center;justify-content:center;height:120px;color:var(--text-muted);font-size:14px;">
+          <i class="fas fa-spinner fa-spin" style="margin-right:10px;"></i> Loading recent activity...
+        </div>
+      </div>
+    </div>
+
     <!-- ══ SKILLS / STACK ══ -->
     <div id="skills" style="margin-top:60px;">
       <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;">
-        <h2 style="font-family:'Outfit',sans-serif;font-size:64px;letter-spacing:2px;line-height:1;">TECH STACK</h2>
+        <h2
+          style="font-family: var(--font-heading);font-size:clamp(40px,5vw,64px);letter-spacing: -0.06em;font-weight: 900;line-height:0.95;">
+          Tech Stack</h2>
         <p style="font-size:14px;color:var(--text-muted);max-width:320px;text-align:right;">The tools & technologies I
           use to build intelligent systems</p>
       </div>
@@ -1955,9 +587,9 @@
             <div class="stack-name">SQL</div>
             <div class="stack-sub">Databases</div>
           </div>
-          <div class="stack-card stack-card-orange">
+          <div class="stack-card stack-card-dark">
             <div class="stack-icon"
-              style="background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;">
+              style="background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;">
               <i class="fab fa-html5" style="font-size:24px;color:#fff;"></i>
             </div>
             <div class="stack-name">HTML/CSS</div>
@@ -1977,10 +609,9 @@
       <div style="margin-bottom:32px;">
         <div class="stack-cat-label">AI / ML Frameworks</div>
         <div class="stack-row">
-          <div class="stack-card stack-card-orange">
-            <div class="stack-icon"
-              style="background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-js" style="font-size:24px;color:#fff;"></i>
+          <div class="stack-card stack-card-dark">
+            <div class="stack-icon" style="background:#ff6f00;display:flex;align-items:center;justify-content:center;">
+              <i class="fas fa-brain" style="font-size:24px;color:#fff;"></i>
             </div>
             <div class="stack-name">TensorFlow</div>
             <div class="stack-sub">Deep Learning</div>
@@ -2027,7 +658,7 @@
       <!-- Category: Tools & Platforms -->
       <div style="margin-bottom:12px;">
         <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
+          style="font-family: var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
           Tools & Platforms</div>
         <div class="stack-row">
           <div class="stack-card">
@@ -2078,7 +709,7 @@
       <!-- Category: Specialisations -->
       <div>
         <div
-          style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
+          style="font-family: var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
           Specialisations</div>
         <div class="stack-row">
           <div class="stack-card stack-card-accent">
@@ -2167,29 +798,31 @@
           <div class="company">Guru Nanak Institutions Technical Campus</div>
           <div class="role">B.Tech – CSE (Data Science) · 2020 – 2024</div>
           <div
-            style="display:inline-flex;align-items:center;gap:8px;background:rgba(26,107,255,0.08);border:1px solid rgba(26,107,255,0.2);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;color:var(--accent);margin-top:12px;">
+            style="display:inline-flex;align-items:center;gap:8px;background:rgba(26,107,255,0.08);border:1px solid rgba(26,107,255,0.2);padding:6px 14px;border-radius:100px;font-size:12px;font-weight: 900;color:var(--accent);margin-top:12px;">
             CGPA: 8.42</div>
         </div>
         <div class="exp-item exp-item-light" style="border-color:rgba(0,0,0,0.1);">
           <div class="company">Narayana Junior College</div>
           <div class="role">Intermediate (MPC) · 2018 – 2020</div>
           <div
-            style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);padding:6px 14px;border-radius:100px;font-size:12px;font-weight:700;margin-top:12px;">
+            style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);padding:6px 14px;border-radius:100px;font-size:12px;font-weight: 900;margin-top:12px;">
             CGPA: 9.78</div>
         </div>
       </div>
 
       <!-- Achievements -->
-      <div class="card card-orange ach-card" style="grid-column:span 4;grid-row:span 2;">
-        <div class="section-tag" style="color:rgba(255,255,255,0.9);">Wins</div>
-        <div style="font-family:'Outfit',sans-serif;font-size:38px;color:#fff;margin-bottom:16px;">Achievements
+      <div class="card card-orange ach-card" style="grid-column:span 4;grid-row:span 2; background-color: var(--card-orange) !important; color: #fff;">
+        <div class="section-tag" style="color:rgba(255,255,255,0.8); opacity: 1;">Wins</div>
+        <div
+          style="font-family: var(--font-heading);font-weight: 900;font-size:38px;color:#fff;margin-bottom:16px;letter-spacing: -0.06em;">
+          Achievements
         </div>
         <div style="display:flex;flex-direction:column;gap:10px;">
           <div
-            style="background:rgba(255,255,255,0.15);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;font-weight:600;">
+            style="background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;font-weight:600;backdrop-filter:blur(4px);">
             🏆 Codekaze AIR 992 — Top 0.1% of 1M+ applicants</div>
           <div
-            style="background:rgba(255,255,255,0.15);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;font-weight:600;">
+            style="background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;font-weight:600;backdrop-filter:blur(4px);">
             🎖️ NPTEL Python for Data Science — 73%</div>
         </div>
       </div>
@@ -2210,7 +843,8 @@
       <div class="card card-dark"
         style="grid-column:span 4;grid-row:span 2;display:flex;align-items:center;justify-content:center;">
         <div style="text-align:center;">
-          <div style="font-family:'Outfit',sans-serif;font-size:42px;color:rgba(255,255,255,0.15);line-height:1;">
+          <div
+            style="font-family: var(--font-heading);font-weight: 900;font-size:42px;color:rgba(255,255,255,0.15);line-height:1;letter-spacing: -0.06em;">
             TURNING<br>DATA INTO<br>IMPACT</div>
         </div>
       </div>
@@ -2234,13 +868,21 @@
           <div></div>
           <button type="submit" class="btn-submit">Send Message ↗</button>
         </form>
+        <div class="form-success-state" style="display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; height: 100%; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; padding: 40px 0;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: rgba(0, 232, 122, 0.15); color: #00e87a; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px;">
+            <i class="fas fa-check"></i>
+          </div>
+          <h3 style="margin-bottom: 8px; color: #fff;">Message Sent!</h3>
+          <p style="color: var(--text-muted); font-size: 14px;">Thank you for reaching out. I'll get back to you within 24 hours.</p>
+        </div>
       </div>
 
       <!-- Contact info + social -->
       <div class="card card-blue social-card" style="grid-column:span 4;grid-row:span 4;">
         <div>
           <div class="section-tag" style="color:rgba(255,255,255,0.9);">Find Me</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:42px;color:#fff;margin-bottom:6px;">
+          <div
+            style="font-family: var(--font-heading);font-weight: 900;font-size:42px;color:#fff;margin-bottom:6px;letter-spacing: -0.06em;">
             Gopikrishna<br>Chegoni</div>
           <div style="font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:28px;">Open to Opportunities</div>
         </div>
@@ -2271,13 +913,48 @@
   </main>
 
   <footer>
-    <div style="font-family:'Outfit',sans-serif;font-size:28px;letter-spacing:4px;opacity:.6;margin-bottom:12px;">
-      GOPIKRISHNA CHEGONI</div>
-    <div>© 2025 · Aspiring AI/ML Engineer · Built with intention.</div>
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <h2>Gopikrishna<br>Chegoni</h2>
+          <div class="footer-status">
+            <span class="status-dot"></span>
+            Available for new opportunities
+          </div>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="experience_new.html">Experience</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-col">
+          <h4>Social</h4>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/gopikrishnachegoni/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/gopikrishna818" target="_blank">GitHub</a></li>
+            <li><a href="mailto:chegoni.gk@gmail.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-credit">
+          © <span id="footerYear">2025</span> · Built by <strong>Gopikrishna</strong>
+        </div>
+        <div class="footer-legal">
+          <a href="contact.html">Connect</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <!-- RAG Resume Chatbot -->
-  <div class="chatbot-container" id="chatbotContainer">
+  <div class="chatbot-container" id="chatbotContainer" role="dialog" aria-label="Resume AI assistant"
+    aria-live="polite">
     <div class="chatbot-header">
       <div class="chatbot-title">
         <i class="fas fa-robot"></i> Resume AI
@@ -2300,15 +977,16 @@
 
   <!-- ── FIXED RIGHT SOCIAL BAR ── -->
   <div class="side-socials">
-    <a href="https://www.linkedin.com/in/gopikrishnachegoni/" title="LinkedIn" target="_blank">in</a>
-    <a href="https://github.com/gopikrishna818" title="GitHub" target="_blank">
+    <a href="https://www.linkedin.com/in/gopikrishnachegoni/" title="LinkedIn" target="_blank"
+      rel="noopener noreferrer">in</a>
+    <a href="https://github.com/gopikrishna818" title="GitHub" target="_blank" rel="noopener noreferrer">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <path
           d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
       </svg>
     </a>
     <div class="soc-line"></div>
-    <a href="mailto:chegoni.gk@gmail.com" title="Email" target="_blank">
+    <a href="mailto:chegoni.gk@gmail.com" title="Email" target="_blank" rel="noopener noreferrer">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
         stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -2324,261 +1002,13 @@
     </a>
   </div>
 
-  <script>
-    // Custom Cursor Setup
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="page-transition-overlay" id="pageTransition"></div>
 
-    let isMouseOnPage = true;
-
-    // Track mouse position and update cursor instantly
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-
-    // Hide cursor when leaving page
-    document.addEventListener('mouseleave', () => {
-      cursor.classList.add('hidden');
-      isMouseOnPage = false;
-    });
-
-    document.addEventListener('mouseenter', () => {
-      cursor.classList.remove('hidden');
-      isMouseOnPage = true;
-    });
-
-    // Hover effects on interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .btn, input, textarea, select, .clickable, .stack-card, .side-socials a');
-    interactiveElements.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.classList.add('hover');
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.classList.remove('hover');
-      });
-    });
-
-    // Theme Toggle Functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const htmlElement = document.documentElement;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    // Initialize theme from localStorage or system preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-      htmlElement.classList.add('dark-mode');
-      updateThemeIcon(true);
-    }
-
-    // Theme toggle event listener
-    themeToggle.addEventListener('click', () => {
-      htmlElement.classList.toggle('dark-mode');
-      const isDarkMode = htmlElement.classList.contains('dark-mode');
-      localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-      updateThemeIcon(isDarkMode);
-    });
-
-    function updateThemeIcon(isDarkMode) {
-      const icon = themeToggle.querySelector('i');
-      if (isDarkMode) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-      } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-      }
-    }
-
-    // Form Submission for Formsubmit.co
-    function handleSubmit(event) {
-      event.preventDefault();
-      const form = event.target;
-      const submitBtn = form.querySelector('.btn-submit');
-      const originalText = submitBtn.textContent;
-
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
-
-      fetch("https://formsubmit.co/ajax/chegoni.gk@gmail.com", {
-        method: "POST",
-        headers: {
-          'Accept': 'application/json'
-        },
-        body: new FormData(form)
-      })
-        .then(response => response.json())
-        .then(data => {
-          alert('Thank you for your message! I will get back to you soon.');
-          form.reset();
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-        })
-        .catch(error => {
-          alert('Oops! Something went wrong. Please try again later.');
-          submitBtn.textContent = originalText;
-          submitBtn.disabled = false;
-        });
-    }
-
-    // Chatbot Logic
-    const chatbotToggle = document.getElementById('chatbotToggle');
-    const chatbotContainer = document.getElementById('chatbotContainer');
-    const chatbotClose = document.getElementById('chatbotClose');
-    const chatInput = document.getElementById('chatInput');
-    const chatSend = document.getElementById('chatSend');
-    const chatbotMessages = document.getElementById('chatbotMessages');
-
-    if (chatbotToggle) {
-      chatbotToggle.addEventListener('click', () => {
-        chatbotContainer.classList.add('active');
-      });
-      chatbotClose.addEventListener('click', () => {
-        chatbotContainer.classList.remove('active');
-      });
-
-      function appendMessage(text, sender) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `chat-msg ${sender}-msg`;
-        msgDiv.textContent = text;
-        chatbotMessages.appendChild(msgDiv);
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-      }
-
-      function handleSend() {
-        const text = chatInput.value.trim();
-        if (!text) return;
-        appendMessage(text, 'user');
-        chatInput.value = '';
-
-        // Smart RAG response
-        setTimeout(() => {
-          const query = text.toLowerCase();
-          let response = "";
-
-          if (query.includes("experience") || query.includes("work") || query.includes("intern")) {
-            response = "Gopikrishna worked as a Machine Learning Intern at Kreativetimebox (Sept 2024 - Sept 2025). He built a duplicate detection pipeline reducing redundancy by 30%, designed REST APIs, and implemented PaddleOCR for automating data extraction.";
-          } else if (query.includes("project") || query.includes("portfolio") || query.includes("smartdoc") || query.includes("lead")) {
-            response = "He has five main projects: 1) 'AI Lead-Gen & Outreach Automation Engine' — n8n workflow with Retell AI voice calls and Gemini-generated outreach. 2) 'SmartDoc Parser' — DocTR & PaddleOCR for invoice/bank statement extraction with 98% accuracy. 3) 'AI Content Strategy Engine' — full-stack FastAPI + TypeScript app for AI-driven content planning. 4) 'Team Task Manager' — collaborative task management system with FastAPI and PostgreSQL. 5) 'Enterprise Multi-Agent RAG' — production-grade support system with hybrid RAG and guardrails.";
-          } else if (query.includes("skill") || query.includes("technology") || query.includes("stack") || query.includes("python") || query.includes("java")) {
-            response = "His technical skills include Python, Java, SQL, Machine Learning (Scikit-learn, PyTorch, TensorFlow), OCR (PaddleOCR, DocTR), and tools like n8n, REST APIs, Git, and AWS.";
-          } else if (query.includes("education") || query.includes("degree") || query.includes("college") || query.includes("university") || query.includes("btech") || query.includes("cgpa")) {
-            response = "He holds a B.Tech in Computer Science (Data Science) from Guru Nanak Institutions Technical Campus (2020-2024) with an 8.42 CGPA, and completed his Intermediate at Narayana Junior College with a 9.78 CGPA.";
-          } else if (query.includes("ocr") || query.includes("document") || query.includes("parser") || query.includes("paddleocr") || query.includes("doctr")) {
-            response = "He has strong expertise in OCR! He built 'SmartDoc Parser' using DocTR and PaddleOCR to extract structured data from invoices and bank statements with 98% accuracy, completely eliminating third-party API dependencies.";
-          } else if (query.includes("contact") || query.includes("email") || query.includes("phone") || query.includes("reach") || query.includes("hire") || query.includes("number")) {
-            response = "You can reach Gopikrishna at chegoni.gk@gmail.com or call him at +91-8184835291. He's based in Hyderabad and his GitHub is github.com/gopikrishna818.";
-          } else if (query.includes("achieve") || query.includes("rank") || query.includes("certif") || query.includes("nptel")) {
-            response = "He secured All India Rank 992 in the Codekaze Naukri Engineers Week Test (out of 1.05M applicants) and holds a Python for Data Science Certification from NPTEL IIT Madras.";
-          } else if (query.includes("hi") || query.includes("hello") || query.includes("hey") || query.includes("greetings")) {
-            response = "Hello! I'm Gopikrishna's AI assistant. You can ask me about his experience, skills, projects, education, or contact info based on his resume.";
-          } else if (query.includes("who are you") || query.includes("what are you") || query.includes("your name")) {
-            response = "I am an AI assistant built to answer questions about Gopikrishna Chegoni's portfolio and resume. Feel free to ask about his skills, education, or projects!";
-          } else {
-            response = "Based on his resume, I don't have the exact answer to that, but Gopikrishna is a passionate aspiring AI/ML Engineer with strong skills in Python, OCR, and data pipelines. Would you like to know about his projects or experience?";
-          }
-
-          appendMessage(response, 'ai');
-        }, 600);
-      }
-
-      if (chatSend) {
-        chatSend.addEventListener('click', handleSend);
-      }
-      if (chatInput) {
-        chatInput.addEventListener('keypress', (e) => {
-          if (e.key === 'Enter') handleSend();
-        });
-      }
-    }
-    // Mouse Position Tracking for Mesh Gradient
-    document.addEventListener('mousemove', (e) => {
-      const x = (e.clientX / window.innerWidth) * 100;
-      const y = (e.clientY / window.innerHeight) * 100;
-      document.body.style.setProperty('--mouse-x', `${x}%`);
-      document.body.style.setProperty('--mouse-y', `${y}%`);
-    });
-
-    // ── GSAP ANIMATIONS (Physics-Based Motion) ──
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Staggered reveals for cards
-    gsap.utils.toArray('.card, .bento-grid section, .section-header').forEach((element) => {
-      gsap.from(element, {
-        scrollTrigger: {
-          trigger: element,
-          start: "top 90%",
-          toggleActions: "play none none none"
-        },
-        opacity: 0,
-        y: 60,
-        scale: 0.98,
-        duration: 1.2,
-        ease: "power4.out" // Elite physics-based feel
-      });
-    });
-
-    // Magnetic Button Effect (50px proximity pull) - ONLY HIRE ME
-    const magneticButtons = document.querySelectorAll('.nav-cta');
-
-    document.addEventListener('mousemove', (e) => {
-      magneticButtons.forEach(btn => {
-        const rect = btn.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        const distanceX = e.clientX - centerX;
-        const distanceY = e.clientY - centerY;
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-        const threshold = 80;
-
-        if (distance < threshold) {
-          gsap.to(btn, {
-            x: distanceX * 0.3,
-            y: distanceY * 0.3,
-            duration: 0.4,
-            ease: "power2.out"
-          });
-        } else {
-          gsap.to(btn, {
-            x: 0,
-            y: 0,
-            duration: 0.6,
-            ease: "elastic.out(1, 0.3)"
-          });
-        }
-      });
-    });
-
-    // Command Palette Logic
-    const cmdBtn = document.getElementById('navCommand');
-    const cmdPalette = document.getElementById('cmdPalette');
-
-    if (cmdBtn) {
-      cmdBtn.addEventListener('click', () => {
-        cmdPalette.classList.add('active');
-        setTimeout(() => document.getElementById('cmdSearch').focus(), 100);
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        cmdPalette.classList.toggle('active');
-        if (cmdPalette.classList.contains('active')) {
-          setTimeout(() => document.getElementById('cmdSearch').focus(), 100);
-        }
-      }
-      if (e.key === 'Escape') cmdPalette.classList.remove('active');
-    });
-
-    cmdPalette.addEventListener('click', (e) => {
-      if (e.target === cmdPalette) cmdPalette.classList.remove('active');
-    });
-  </script>
-
+  
+  <script src="js/chatbot.js"></script>
+  <script src="js/shared.js"></script>
+  <script src="js/index.js"></script>
 </body>
 
 </html>

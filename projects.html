@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Projects — Gopikrishna Chegoni</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Projects by Gopikrishna Chegoni — SmartDoc Parser (98% OCR accuracy), AI Lead-Gen Engine, Enterprise Multi-Agent RAG, and more.">
+  <meta property="og:title" content="Projects — Gopikrishna Chegoni">
+  <meta property="og:description"
+    content="Production-ready AI systems: SmartDoc Parser (98% OCR accuracy), AI Lead-Gen Engine, Multi-Agent RAG.">
+  <meta property="og:image" content="https://gopikrishna818.github.io/images/pp-1.png">
+  <meta property="og:url" content="https://gopikrishna818.github.io/projects.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Projects — Gopikrishna Chegoni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="css/shared.css">
+<link rel="stylesheet" href="css/projects.css">
+  </head>
+
+<body>
+  <div id="scrollProgress"></div>
+  <div class="mesh-gradient"></div>
 
   <!-- RAG Resume Chatbot -->
   <div class="chatbot-container" id="chatbotContainer">
@@ -18,7 +38,8 @@
       <button class="chatbot-close" id="chatbotClose"><i class="fas fa-times"></i></button>
     </div>
     <div class="chatbot-messages" id="chatbotMessages">
-      <div class="chat-msg ai-msg">Hi! I'm Gopikrishna's AI assistant. Ask me anything about his experience, skills, or projects.</div>
+      <div class="chat-msg ai-msg">Hi! I'm Gopikrishna's AI assistant. Ask me anything about his experience, skills, or
+        projects.</div>
     </div>
     <div class="chatbot-input">
       <input type="text" id="chatInput" placeholder="Ask about OCR, Python, etc..." />
@@ -30,1238 +51,20 @@
     <i class="fas fa-comment-dots"></i>
   </button>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-  :root {
-    --bg: #f0ede8;
-    --card: #ffffff;
-    --card-dark: #1a1a1a;
-    --card-blue: #1a6bff;
-    --text: #1a1a1a;
-    --text-muted: #6b6b6b;
-    --text-light: #f0ede8;
-    --accent: #1a6bff;
-    --accent2: #ff4d00;
-    --border: rgba(0,0,0,0.08);
-    --radius: 24px;
-    --radius-sm: 14px;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-    cursor: none;
-  }
-
-  /* ── PERFORMANCE OPTIMIZATION ── */
-  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-
-  /* ── CUSTOM CURSOR ── */
-    .custom-cursor {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      background-color: var(--accent);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 99999;
-      transform: translate(-50%, -50%);
-      will-change: left, top;
-      transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, opacity 0.2s ease, border 0.2s ease;
-      left: -50px;
-      top: -50px;
-      border: 1px solid transparent;
-    }
-    .custom-cursor.hover {
-      width: 45px;
-      height: 45px;
-      background-color: transparent;
-      border: 2px solid var(--accent);
-    }
-    .custom-cursor.hidden {
-      opacity: 0;
-    }
-    :root.dark-mode .custom-cursor {
-      border-color: var(--accent);
-    }
-
-  @media (hover: none) and (pointer: coarse) {
-    body { cursor: auto; }
-    .custom-cursor { display: none !important; }
-  }
-
-  /* ── SMOOTH TRANSITIONS ── */
-  a, button, input, textarea, select {
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-
-  button:active, a:active { transform: scale(0.98); }
-
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-    z-index: 100;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 10px 24px;
-    display: flex; align-items: center; gap: 32px;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.08);
-  }
-  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); text-decoration: none; }
-  .nav-links { display: flex; gap: 24px; }
-  .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; transition: color .2s; }
-  .nav-links a:hover { color: var(--text); }
-  .nav-cta {
-    background: var(--card-dark); color: #fff;
-    padding: 8px 20px; border-radius: 100px;
-    font-size: 13px; font-weight: 600; text-decoration: none;
-    transition: background .2s;
-  }
-  .nav-cta:hover { background: var(--accent); }
-
-  /* ── THEME TOGGLE ── */
-  .theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: var(--text-muted);
-    transition: color 0.2s, transform 0.2s;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .theme-toggle:hover {
-    color: var(--text);
-    transform: rotate(20deg);
-  }
-  .theme-toggle i { transition: transform 0.3s; }
-
-  /* ── DARK MODE ── */
-  :root.dark-mode {
-    --bg: #0a0a0a;
-    --card: #1a1a1a;
-    --card-dark: #2a2a2a;
-    --text: #f0ede8;
-    --text-muted: #a0a0a0;
-    --text-light: #f0ede8;
-    --border: rgba(255,255,255,0.08);
-  }
-  .dark-mode body { background: var(--bg); color: var(--text); }
-  .dark-mode nav { background: rgba(26,26,26,0.85); border-color: var(--border); }
-  .dark-mode .card-white { background: #1a1a1a; color: var(--text); }
-  .dark-mode .btn-ghost { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); }
-  .dark-mode .btn-ghost:hover { background: rgba(255,255,255,0.1); }
-
-  /* ── MAIN ── */
-  main {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 120px 24px 60px;
-    display: grid;
-    gap: 16px;
-  }
-
-  /* ── BENTO GRID ── */
-  .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: minmax(80px, auto);
-    gap: 16px;
-  }
-
-  /* ── PAGE TITLE ── */
-  .page-title {
-    grid-column: span 12;
-    padding: 60px 0;
-    position: relative;
-  }
-
-  .hero-bg-text {
-    position: absolute;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(100px, 18vw, 280px);
-    letter-spacing: -4px;
-    color: rgba(0,0,0,0.04);
-    white-space: nowrap;
-    pointer-events: none;
-    z-index: 0;
-    user-select: none;
-  }
-
-  .dark-mode .hero-bg-text {
-    color: rgba(255,255,255,0.04);
-  }
-
-  .page-title h1 {
-    position: relative;
-    z-index: 1;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 72px;
-    letter-spacing: 2px;
-    margin-bottom: 12px;
-  }
-  .page-title p {
-    position: relative;
-    z-index: 1;
-    font-size: 16px;
-    color: var(--text-muted);
-    max-width: 600px;
-  }
-
-  .section-tag { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; opacity: .45; margin-bottom: 20px; }
-
-  /* ── FILTER & SEARCH CARD ── */
-  .filter-card {
-    grid-column: span 12;
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 28px;
-    border: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.05s forwards;
-    opacity: 0;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-
-  .filter-tabs {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .filter-tab {
-    padding: 8px 16px;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    color: var(--text-muted);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
-    will-change: transform, background, color;
-    backface-visibility: hidden;
-  }
-  .filter-tab:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .filter-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-  .search-container {
-    position: relative;
-    min-width: 200px;
-  }
-  .search-container input {
-    width: 100%;
-    padding: 10px 16px 10px 40px;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    background: transparent;
-    color: var(--text);
-    font-size: 14px;
-  }
-  .search-container input::placeholder { color: var(--text-muted); }
-  .search-container i {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-muted);
-    font-size: 14px;
-  }
-
-  /* ── PROJECT CARD ── */
-  .project-card {
-    grid-column: span 4;
-    grid-row: span 4;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), box-shadow 0.3s ease, border-color 0.25s;
-    animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) forwards;
-    opacity: 0;
-    will-change: transform, box-shadow;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Individual card sizing for balanced layout */
-  .project-card:nth-child(2) { grid-column: span 4; grid-row: span 4; animation-delay: 0.05s; }
-  .project-card:nth-child(3) { grid-column: span 4; grid-row: span 4; animation-delay: 0.1s; }
-  .project-card:nth-child(4) { grid-column: span 4; grid-row: span 4; animation-delay: 0.15s; }
-  .project-card:nth-child(5) { grid-column: span 4; grid-row: span 4; animation-delay: 0.2s; }
-  .project-card:nth-child(6) { grid-column: span 4; grid-row: span 4; animation-delay: 0.25s; }
-  .project-card:nth-child(7) { grid-column: span 4; grid-row: span 4; animation-delay: 0.3s; }
-
-  .project-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-    border-color: rgba(26,107,255,0.35);
-  }
-
-  .project-card-dark {
-    background: var(--card-dark);
-    color: var(--text-light);
-    border-color: rgba(255,255,255,0.06);
-  }
-  .project-card-dark::before {
-    background: radial-gradient(ellipse at 100% 0%, rgba(255,255,255,0.08) 0%, transparent 70%);
-  }
-  .project-card-dark:hover {
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    border-color: rgba(26,107,255,0.35);
-  }
-
-  .project-card-blue {
-    background: var(--card-blue);
-    color: #fff;
-    border-color: rgba(255,255,255,0.1);
-  }
-  .project-card-blue::before {
-    background: radial-gradient(ellipse at 100% 0%, rgba(255,255,255,0.12) 0%, transparent 60%);
-  }
-  .project-card-blue .proj-year { color: rgba(255,255,255,0.5); }
-  .project-card-blue .proj-title { color: #fff; }
-  .project-card-blue .proj-desc { color: rgba(255,255,255,0.75); }
-  .project-card-blue:hover { border-color: rgba(255,255,255,0.2); }
-
-  .project-card-orange {
-    background: var(--accent2);
-    color: #fff;
-    border-color: rgba(255,255,255,0.1);
-  }
-  .project-card-orange::before {
-    background: radial-gradient(ellipse at 100% 0%, rgba(255,255,255,0.15) 0%, transparent 60%);
-  }
-  .project-card-orange .proj-year { color: rgba(255,255,255,0.5); }
-  .project-card-orange .proj-title { color: #fff; }
-  .project-card-orange .proj-desc { color: rgba(255,255,255,0.75); }
-  .project-card-orange:hover { border-color: rgba(255,255,255,0.2); }
-
-  .project-card-cream {
-    background: #e8e4dd;
-    border-color: rgba(0,0,0,0.06);
-  }
-  .project-card-cream::before { display: none; }
-  .project-card-cream .proj-year { opacity: .45; }
-  .project-card-cream .proj-title { color: var(--text); }
-  .project-card-cream .proj-desc { color: var(--text-muted); }
-  .project-card-cream:hover { border-color: rgba(26,107,255,0.3); }
-
-  .proj-year { font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; opacity: .45; margin-bottom: 12px; }
-  .proj-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; }
-  .proj-desc { font-size: 14px; line-height: 1.6; opacity: .65; flex: 1; margin-bottom: 16px; }
-  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
-  .proj-tag { padding: 4px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; background: rgba(0,0,0,0.06); }
-  .proj-tag-light { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); }
-  .proj-link { font-size: 13px; font-weight: 600; opacity: .55; text-decoration: none; color: inherit; display: inline-flex; align-items: center; gap: 6px; transition: opacity .2s; }
-  .proj-link:hover { opacity: 1; }
-
-  .project-tech-stack {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .tech-mini-badge {
-    padding: 4px 8px;
-    background: rgba(0,0,0,0.04);
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--text-muted);
-  }
-
-  /* ── FEATURED PROJECT CARD (LARGE) ── */
-  .project-card.featured {
-    grid-column: span 4;
-    grid-row: span 4;
-  }
-  .featured .proj-title {
-    font-size: 22px;
-  }
-
-  .projects-grid {
-    display: contents;
-  }
-
-  /* ── MODAL ── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(4px);
-    z-index: 1000;
-    animation: fadeInOverlay 0.3s ease;
-    will-change: opacity;
-    backface-visibility: hidden;
-  }
-
-  .modal-overlay.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @keyframes fadeInOverlay {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  .modal-content {
-    background: var(--card);
-    border-radius: var(--radius);
-    max-width: 900px;
-    width: 90%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-    animation: slideUp 0.4s cubic-bezier(.34,1.56,.64,1);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--border);
-  }
-
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(40px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .modal-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 32px;
-    letter-spacing: 2px;
-    margin: 0;
-  }
-
-  .modal-close {
-    background: none;
-    border: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: var(--text-muted);
-    transition: color 0.2s, transform 0.2s;
-    padding: 8px;
-  }
-
-  .modal-close:hover {
-    color: var(--text);
-    transform: scale(1.2);
-  }
-
-  /* ── MODAL TABS ── */
-  .modal-tabs-container {
-    display: flex;
-    gap: 0;
-    border-bottom: 1px solid var(--border);
-    padding: 0 40px;
-    flex-wrap: wrap;
-  }
-
-  .modal-tab-button {
-    padding: 16px 24px;
-    background: transparent;
-    border: none;
-    color: var(--text-muted);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    transition: color 0.3s;
-    white-space: nowrap;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .modal-tab-button::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .modal-tab-button:hover {
-    color: var(--text);
-  }
-
-  .modal-tab-button.active {
-    color: var(--accent);
-  }
-
-  .modal-tab-button.active::after {
-    opacity: 1;
-  }
-
-  .modal-body {
-    flex: 1;
-    padding: 40px;
-    overflow-y: auto;
-  }
-
-  .tab-content {
-    display: none;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .tab-content.active {
-    display: block;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  /* ── GALLERY TAB ── */
-  .gallery-container {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    background: linear-gradient(135deg, var(--accent) 0%, #0f55e0 100%);
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 32px;
-    overflow: hidden;
-  }
-
-  .gallery-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .gallery-arrow {
-    background: rgba(0,0,0,0.3);
-    border: none;
-    color: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-  }
-
-  .gallery-arrow:hover {
-    background: rgba(0,0,0,0.6);
-    transform: scale(1.1);
-  }
-
-  .gallery-dots {
-    display: flex;
-    gap: 8px;
-    position: absolute;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .gallery-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.4);
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-
-  .gallery-dot.active {
-    background: #fff;
-    width: 24px;
-    border-radius: 4px;
-  }
-
-  /* ── CHARTS ── */
-  .chart-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    margin-bottom: 32px;
-  }
-
-  .chart-container {
-    position: relative;
-    height: 300px;
-    background: rgba(0,0,0,0.02);
-    border-radius: var(--radius-sm);
-    padding: 16px;
-    border: 1px solid var(--border);
-  }
-
-  .metrics-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-
-  .metrics-table th,
-  .metrics-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-    font-size: 14px;
-  }
-
-  .metrics-table th {
-    font-weight: 700;
-    color: var(--accent);
-    background: rgba(26,107,255,0.05);
-  }
-
-  /* ── FEATURES TAB ── */
-  .features-list {
-    list-style: none;
-  }
-
-  .features-list li {
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .features-list li::before {
-    content: '✓';
-    flex-shrink: 0;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--accent);
-  }
-
-  .features-list li:last-child {
-    border-bottom: none;
-  }
-
-  /* ── TECH STACK TAB ── */
-  .tech-stack-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 12px;
-  }
-
-  .tech-item {
-    padding: 16px;
-    background: rgba(0,0,0,0.02);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    text-align: center;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    transition: all 0.3s;
-  }
-
-  .tech-item:hover {
-    background: rgba(26,107,255,0.05);
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  /* ── MODAL DESCRIPTION ── */
-  #modalDescription p {
-    line-height: 1.8;
-    margin-bottom: 16px;
-    color: var(--text-muted);
-    font-size: 15px;
-  }
-
-  #modalTags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 32px;
-  }
-
-  .modal-tag {
-    padding: 6px 14px;
-    border-radius: 100px;
-    font-size: 12px;
-    font-weight: 600;
-    background: rgba(26, 107, 255, 0.1);
-    color: var(--accent);
-  }
-
-  /* ── MODAL ACTIONS ── */
-  .modal-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin-top: 32px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-  }
-
-  .modal-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 24px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text);
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
-    will-change: transform, background, color, border-color;
-    backface-visibility: hidden;
-  }
-
-  .modal-btn:hover {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-
-  .dark-mode .modal-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: var(--text);
-  }
-
-  .dark-mode .modal-btn:hover {
-    background: var(--accent);
-    color: #fff;
-    border-color: var(--accent);
-  }
-
-  /* ── CTA FOOTER ── */
-  .cta-section {
-    background: var(--card-dark);
-    border-radius: 0;
-    padding: 60px 24px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 40px;
-    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
-    animation: fadeUp 0.6s cubic-bezier(.22,1,.36,1) 0.35s forwards;
-    opacity: 0;
-    will-change: transform;
-    backface-visibility: hidden;
-  }
-  .cta-section::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, rgba(26,107,255,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .cta-section:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
-    border-color: rgba(26,107,255,0.35);
-  }
-  .cta-icon {
-    font-size: 48px;
-    margin-bottom: 16px;
-    display: block;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 44px;
-    letter-spacing: 1px;
-    color: #fff;
-    margin-bottom: 12px;
-    position: relative;
-    z-index: 1;
-    line-height: 1.2;
-  }
-  .cta-desc {
-    font-size: 14px;
-    color: rgba(255,255,255,0.7);
-    max-width: 600px;
-    margin: 0 auto 28px;
-    line-height: 1.6;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-buttons {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-btn {
-    padding: 12px 28px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-  .cta-btn-primary {
-    background: var(--accent);
-    color: #fff;
-  }
-  .cta-btn-primary:hover {
-    background: #0f55e0;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(26,107,255,0.3);
-  }
-  .cta-btn-secondary {
-    background: rgba(255,255,255,0.08);
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.15);
-  }
-  .cta-btn-secondary:hover {
-    background: rgba(255,255,255,0.15);
-    transform: translateY(-2px);
-  }
-  .side-socials {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 200;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(0,0,0,0.08);
-    border-radius: 20px;
-    padding: 16px 10px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-  }
-  .side-socials a {
-    width: 38px; height: 38px; border-radius: 12px;
-    background: #f0ede8; border: 1px solid rgba(0,0,0,0.08);
-    display: flex; align-items: center; justify-content: center;
-    text-decoration: none; color: #1a1a1a; font-size: 13px; font-weight: 700;
-    transition: all .25s cubic-bezier(.34,1.56,.64,1);
-    will-change: transform, background, border-color;
-    backface-visibility: hidden;
-  }
-  .side-socials a:hover { background: var(--accent); color: #fff; transform: scale(1.15); border-color: var(--accent); }
-
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .projects-grid {
-      grid-template-columns: 1fr;
-    }
-    .chart-grid {
-      grid-template-columns: 1fr;
-    }
-    .filter-section {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .search-container {
-      min-width: auto;
-    }
-    .hero-section h1 {
-      font-size: 48px;
-    }
-  }
-
-  .project-card.hidden {
-    display: none;
-  }
-
-  footer {
-    text-align: center;
-    padding: 40px;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  /* ── MOBILE RESPONSIVENESS ── */
-  @media (max-width: 860px) {
-    nav { gap: 12px; padding: 8px 16px; width: 90%; max-width: 400px; justify-content: space-between; }
-    .nav-links { display: none; }
-  }
-
-  /* ── RAG CHATBOT ── */
-  .chatbot-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(26,107,255,0.4);
-    z-index: 9999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1);
-  }
-  .chatbot-toggle:hover {
-    transform: scale(1.1) translateY(-5px);
-  }
-
-  .chatbot-container {
-    position: fixed;
-    bottom: 100px;
-    right: 30px;
-    width: 350px;
-    height: 500px;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transform: translateY(20px);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
-  }
-  .chatbot-container.active {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .dark-mode .chatbot-container {
-    background: rgba(26,26,26,0.85);
-  }
-
-  .chatbot-header {
-    padding: 16px 20px;
-    background: var(--accent);
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .chatbot-title {
-    font-weight: 600;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .chatbot-close {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    opacity: 0.8;
-  }
-  .chatbot-close:hover { opacity: 1; }
-
-  .chatbot-messages {
-    flex: 1;
-    padding: 20px;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .chat-msg {
-    max-width: 80%;
-    padding: 10px 14px;
-    border-radius: 14px;
-    font-size: 13px;
-    line-height: 1.5;
-  }
-  .ai-msg {
-    background: rgba(0,0,0,0.05);
-    color: var(--text);
-    align-self: flex-start;
-    border-bottom-left-radius: 4px;
-  }
-  .dark-mode .ai-msg {
-    background: rgba(255,255,255,0.08);
-  }
-  .user-msg {
-    background: var(--accent);
-    color: #fff;
-    align-self: flex-end;
-    border-bottom-right-radius: 4px;
-  }
-
-  .chatbot-input {
-    padding: 16px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    gap: 10px;
-  }
-  .chatbot-input input {
-    flex: 1;
-    padding: 10px 16px;
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    background: transparent;
-    color: var(--text);
-    font-size: 13px;
-    outline: none;
-  }
-  .chatbot-input button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  @media (max-width: 600px) {
-    .chatbot-container {
-      width: 90%;
-      right: 5%;
-      bottom: 90px;
-    }
-    .chatbot-toggle {
-      bottom: 20px;
-      right: 20px;
-    }
-  }
-
-    /* ── NAV COMMAND ── */
-    .nav-cmd {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s var(--ease-premium);
-      color: var(--text-muted);
-      margin-right: 8px;
-    }
-
-    .dark-mode .nav-cmd {
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .nav-cmd:hover {
-      border-color: var(--accent);
-      background: rgba(0, 68, 238, 0.05);
-      color: var(--accent);
-      transform: scale(1.1);
-    }
-
-    .nav-cmd i,
-    .nav-cmd svg {
-      font-size: 16px;
-      width: 16px;
-      height: 16px;
-    }
-
-    /* ── COMMAND PALETTE ── */
-    .cmd-palette-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(12px);
-      z-index: 10000;
-      display: flex;
-      justify-content: center;
-      padding-top: 15vh;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.4s var(--ease-premium);
-    }
-
-    .cmd-palette-overlay.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .cmd-palette {
-      width: 90%;
-      max-width: 500px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 18px;
-      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-      transform: translateY(-20px) scale(0.98);
-      transition: all 0.4s var(--ease-premium);
-      height: fit-content;
-    }
-
-    .dark-mode .cmd-palette {
-      background: rgba(15, 15, 15, 0.85);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    .cmd-palette-overlay.active .cmd-palette {
-      transform: translateY(0) scale(1);
-    }
-
-    .cmd-search-bar {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(0, 0, 0, 0.02);
-    }
-
-    .dark-mode .cmd-search-bar {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .cmd-search-bar i {
-      font-size: 14px;
-      opacity: 0.5;
-    }
-
-    .cmd-search-bar input {
-      flex: 1;
-      background: none;
-      border: none;
-      color: var(--text);
-      font-size: 15px;
-      outline: none;
-    }
-
-    .cmd-list {
-      padding: 10px;
-    }
-
-    .cmd-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-      text-decoration: none;
-      color: var(--text);
-      margin-bottom: 2px;
-    }
-
-    .cmd-item:hover {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .cmd-item:hover i,
-    .cmd-item:hover .cmd-shortcut {
-      color: #fff;
-      opacity: 1;
-    }
-
-    .cmd-item i {
-      width: 20px;
-      text-align: center;
-      opacity: 0.6;
-      font-size: 14px;
-    }
-
-    .cmd-item span {
-      flex: 1;
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .cmd-shortcut {
-      font-size: 10px;
-      opacity: 0.3;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 600;
-    }
-
-
-</style>
-  <!-- GSAP for Physics-Based Motion -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <a class="nav-logo" href="index.html">GK</a>
-  <div class="nav-links">
-    <a href="about.html">About</a>
-    <a href="projects.html">Projects</a>
-    <a href="experience_new.html">Experience</a>
-    <a href="contact.html">Contact</a>
-  </div>
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
-    <i class="fas fa-moon"></i>
-  </button>
+  <!-- NAV -->
+  <nav>
+    
+    <a class="nav-logo" href="index.html">GK</a>
+
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="experience_new.html">Experience</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+      <i class="fas fa-moon"></i>
+    </button>
     <div class="nav-cmd" id="navCommand" title="Search (⌘K)">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
         stroke-linecap="round" stroke-linejoin="round">
@@ -1270,8 +73,8 @@
         </path>
       </svg>
     </div>
-<a class="nav-cta" href="contact.html">Hire me</a>
-</nav>
+    <a class="nav-cta" href="contact.html">Hire me</a>
+  </nav>
 
   <!-- COMMAND PALETTE MODAL -->
   <div class="cmd-palette-overlay" id="cmdPalette">
@@ -1302,7 +105,7 @@
           <span class="cmd-shortcut">G C</span>
         </a>
         <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
-          class="cmd-item">
+          rel="noopener noreferrer" class="cmd-item">
           <i class="fas fa-file-pdf"></i>
           <span>Download Resume</span>
           <span class="cmd-shortcut">⌘ D</span>
@@ -1318,795 +121,186 @@
   </div>
 
 
-  <!-- COMMAND PALETTE MODAL -->
-  <div class="cmd-palette-overlay" id="cmdPalette">
-    <div class="cmd-palette">
-      <div class="cmd-search-bar">
-        <i class="fas fa-search"></i>
-        <input type="text" placeholder="Type a command or search..." id="cmdSearch">
-      </div>
-      <div class="cmd-list">
-        <a href="projects.html" class="cmd-item">
-          <i class="fas fa-project-diagram"></i>
-          <span>View Projects</span>
-          <span class="cmd-shortcut">G P</span>
-        </a>
-        <a href="about.html" class="cmd-item">
-          <i class="fas fa-user"></i>
-          <span>About Gopikrishna</span>
-          <span class="cmd-shortcut">G A</span>
-        </a>
-        <a href="experience_new.html" class="cmd-item">
-          <i class="fas fa-briefcase"></i>
-          <span>Work Experience</span>
-          <span class="cmd-shortcut">G E</span>
-        </a>
-        <a href="contact.html" class="cmd-item">
-          <i class="fas fa-paper-plane"></i>
-          <span>Get in Touch</span>
-          <span class="cmd-shortcut">G C</span>
-        </a>
-        <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
-          class="cmd-item">
-          <i class="fas fa-file-pdf"></i>
-          <span>Download Resume</span>
-          <span class="cmd-shortcut">⌘ D</span>
-        </a>
-        <div class="cmd-item"
-          onclick="document.getElementById('chatbotToggle').click(); document.getElementById('cmdPalette').classList.remove('active');">
-          <i class="fas fa-robot"></i>
-          <span>Ask AI Assistant</span>
-          <span class="cmd-shortcut">⌘ J</span>
+  <main>
+    <!-- PAGE TITLE -->
+    <div class="page-title">
+      <div class="page-grid-bg" aria-hidden="true"></div>
+      <h1
+        style="position:relative;z-index:1;font-family: var(--font-heading);font-size:clamp(40px,5vw,72px);font-weight: 900;letter-spacing: -0.06em;line-height:1.05;margin-bottom:12px;">
+        Building the Future</h1>
+      <p style="position:relative;z-index:1;font-size:18px;max-width:600px;opacity:0.8;">A showcase of production-ready
+        AI systems, document intelligence pipelines, and automated outreach engines.</p>
+
+      <div class="filter-tabs-wrapper" style="margin-top: 32px;">
+        <div class="filter-indicator"></div>
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="all">All Projects <span class="count">4</span></button>
+          <button class="filter-tab" data-filter="AI/ML">AI & ML <span class="count">3</span></button>
+          <button class="filter-tab" data-filter="Automation">Automation <span class="count">1</span></button>
         </div>
       </div>
     </div>
-  </div>
 
-<main>
-  <!-- PAGE TITLE -->
-  <div class="page-title">
-    <div class="hero-bg-text" aria-hidden="true">WORKS</div>
-    <h1>Projects</h1>
-    <p>Five flagship AI/ML and full-stack projects — from end-to-end lead automation and document intelligence to enterprise multi-agent systems and content strategy engines.</p>
-  </div>
 
-  <!-- PROJECTS GRID (BENTO) -->
-  <div class="bento-grid" id="projectsGrid">
-    <!-- Projects will be rendered here -->
-  </div>
-
-  <!-- RESUME DOWNLOAD SECTION -->
-  <div style="grid-column: span 12; text-align: center; padding: 60px 24px; margin-top: 40px;">
-    <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank" class="nav-cta" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; text-decoration: none;">
-      <i class="fas fa-download" style="font-size: 16px;"></i>
-      Download Resume
-    </a>
-  </div>
-
-</main>
-
-<!-- MODAL -->
-<div class="modal-overlay" id="projectModal">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h2 class="modal-title" id="modalTitle">Project Title</h2>
-      <button class="modal-close" onclick="closeModal()">&times;</button>
-    </div>
-
-    <div class="modal-tabs-container" id="modalTabs"></div>
-
-    <div class="modal-body">
-      <!-- Overview Tab -->
-      <div class="tab-content active" data-tab="overview">
-        <div class="gallery-container" id="galleryContainer" style="height: 300px;">
-          <div class="gallery-nav" style="position: absolute; width: 100%; padding: 0 20px; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: auto;">
-            <button class="gallery-arrow" onclick="prevGallery()"><i class="fas fa-chevron-left"></i></button>
-            <button class="gallery-arrow" onclick="nextGallery()"><i class="fas fa-chevron-right"></i></button>
-          </div>
-          <div class="gallery-dots" id="galleryDots"></div>
-        </div>
-        <div id="modalDescription"></div>
-        <div id="modalTags"></div>
-        <div class="modal-actions" id="modalActions"></div>
+    <div class="projects-container">
+      <div class="projects-list-header">
+        <h2>Featured Projects</h2>
+        <a href="javascript:void(0)" class="view-all-link" onclick="resetFilters()">Reset Filters</a>
       </div>
-
-      <!-- Features Tab -->
-      <div class="tab-content" data-tab="features">
-        <h3 style="margin-bottom: 20px;">Key Features</h3>
-        <ul class="features-list" id="featuresList"></ul>
-      </div>
-
-      <!-- Gallery Tab -->
-      <div class="tab-content" data-tab="gallery">
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 20px;" id="galleryGrid"></div>
-      </div>
-
-      <!-- Metrics Tab -->
-      <div class="tab-content" data-tab="metrics">
-        <div class="chart-grid">
-          <div class="chart-container">
-            <canvas id="radarChart"></canvas>
-          </div>
-          <div class="chart-container">
-            <canvas id="barChart"></canvas>
-          </div>
-        </div>
-        <table class="metrics-table" id="metricsTable">
-          <thead>
-            <tr>
-              <th>Metric</th>
-              <th>Value</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="metricsBody"></tbody>
-        </table>
-      </div>
-
-      <!-- Tech Stack Tab -->
-      <div class="tab-content" data-tab="tech">
-        <h3 style="margin-bottom: 20px;">Technologies Used</h3>
-        <div class="tech-stack-grid" id="techGrid"></div>
+      <div id="projectsGrid">
+        <!-- Projects will be rendered here as rows -->
       </div>
     </div>
+
+
+  </main>
+
+  <!-- Ticker (Audit Step 10) -->
+  <div class="tech-ticker">
+    <div class="ticker-track">
+      <div class="ticker-item">PYTHON <span>•</span></div>
+      <div class="ticker-item">N8N <span>•</span></div>
+      <div class="ticker-item">RETELL AI <span>•</span></div>
+      <div class="ticker-item">DOCKER <span>•</span></div>
+      <div class="ticker-item">FASTAPI <span>•</span></div>
+      <div class="ticker-item">GEMINI <span>•</span></div>
+      <div class="ticker-item">SUPABASE <span>•</span></div>
+      <div class="ticker-item">PYDANTIC <span>•</span></div>
+      <div class="ticker-item">PYTHON <span>•</span></div>
+      <div class="ticker-item">N8N <span>•</span></div>
+      <div class="ticker-item">RETELL AI <span>•</span></div>
+      <div class="ticker-item">DOCKER <span>•</span></div>
+      <div class="ticker-item">FASTAPI <span>•</span></div>
+      <div class="ticker-item">GEMINI <span>•</span></div>
+      <div class="ticker-item">SUPABASE <span>•</span></div>
+      <div class="ticker-item">PYDANTIC <span>•</span></div>
+    </div>
   </div>
-</div>
 
-<footer>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:4px;opacity:.6;margin-bottom:12px;">GOPIKRISHNA CHEGONI</div>
-  <div>© 2025 · Aspiring AI/ML Engineer · Built with intention.</div>
-</footer>
 
-<script>
-  // Custom Cursor Setup
-  const cursor = document.createElement('div');
-  cursor.classList.add('custom-cursor');
-  document.body.appendChild(cursor);
-    let isMouseOnPage = true;
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
-    document.addEventListener('mouseleave', () => cursor.classList.add('hidden'));
-    document.addEventListener('mouseenter', () => cursor.classList.remove('hidden'));
-    // Project Data
-  const projects = [
-    {
-      id: 1,
-      title: "AI Lead-Gen & Outreach Automation Engine",
-      image: "images/hero_lead_gen_automation_1778071491746.png",
-      brief: "End-to-end lead generation pipeline — LinkedIn scraping, AI voice calls via Retell, and automated follow-ups powered by n8n and Gemini",
-      category: "ML/AI",
-      description: `A fully automated lead generation and outreach system built with n8n as the visual workflow engine. The pipeline takes prospect data, generates personalized LinkedIn outreach sequences using Google Gemini, scrapes LinkedIn profiles for deeper context, places real AI voice calls via Retell AI (with transcripts that actually sound human), analyzes each call outcome (booked, interested, rejected, voicemail), and sends tailored follow-up emails automatically. Failed calls retry up to 2 times, daily metrics are tracked in Supabase, and appointment times are extracted from natural language in transcripts. Originally built for real estate outreach but easily adaptable to any B2B sales scenario. Containerized with Docker for one-command deployment.`,
-      year: "2025",
-      tags: ["n8n", "Retell AI", "Gemini", "Automation"],
-      techStack: ["n8n", "Retell AI", "Google Gemini", "Supabase", "Docker", "SMTP", "PostgreSQL"],
-      metrics: {
-        automation: 95,
-        callAccuracy: 88,
-        followUpRate: 92,
-        systemReliability: 90
-      },
-      features: [
-        "Personalized LinkedIn outreach sequences generated by Google Gemini",
-        "LinkedIn profile scraping for contextual prospect enrichment",
-        "AI voice calls via Retell AI with human-like quality",
-        "Smart call transcript analysis — detects booked, interested, rejected, or voicemail outcomes",
-        "Automated follow-up emails routed based on call result",
-        "Automatic retry for failed/unanswered calls (up to 2 attempts)",
-        "Natural language appointment date/time extraction from transcripts",
-        "Daily metrics aggregation stored in Supabase PostgreSQL",
-        "Fully Dockerized — runs with a single docker run command"
-      ],
-      buttons: [
-        { label: "Case Study", url: "https://medium.com/@gkchegoni/ai-lead-gen-outreach-automation-engine-3e17c08ca667", icon: "fab fa-medium" },
-        { label: "GitHub", url: "https://github.com/gopikrishna818/AI-Lead-Gen-Outreach-Automation-Engine", icon: "fab fa-github" }
-      ]
-    },
-    {
-      id: 2,
-      title: "SmartDoc Parser",
-      image: "images/smartdoc_hero.png",
-      brief: "Production-grade OCR pipeline for extracting structured data from invoices and bank statements — built during ML internship at Kreativetimebox",
-      category: "ML/AI",
-      description: `A production-ready document intelligence system developed during an ML internship at Kreativetimebox. The system uses DocTR and PaddleOCR to extract structured fields from invoices and bank statements with 98%+ accuracy, completely eliminating third-party API dependencies. Built as a full-stack application with a FastAPI (or Streamlit) backend and a Dockerized frontend, the pipeline handles document upload, OCR processing, field extraction, and structured output via REST APIs. The codebase is organized into api/, service/, ml_models/, models/, and data/ layers for clean separation of concerns. Includes a category-matching CSV and configurable rules.json for flexible field mapping across document types.`,
-      year: "2024 – 2025",
-      tags: ["OCR", "DocTR", "PaddleOCR", "FastAPI"],
-      techStack: ["Python", "DocTR", "PaddleOCR", "FastAPI", "Streamlit", "Docker", "OpenCV"],
-      metrics: {
-        ocrAccuracy: 98,
-        fieldExtraction: 95,
-        processingSpeed: 89,
-        apiReliability: 97
-      },
-      features: [
-        "High-accuracy OCR using DocTR and PaddleOCR — no third-party APIs needed",
-        "Structured field extraction from invoices and bank statements",
-        "Modular architecture: api, service, ml_models, models, data layers",
-        "Category matching with configurable rules.json for flexible field mapping",
-        "REST API backend for seamless document ingestion",
-        "Full Docker Compose setup with separate backend and frontend containers",
-        "Streamlit-based interactive frontend for document upload and results",
-        "Reduced manual data entry effort by automating extraction workflows"
-      ],
-      buttons: [
-        { label: "GitHub", url: "https://github.com/gopikrishna818/SmartDoc-Parser-Invoice-Bank-Statement-Extraction-Invoice-Bank-Statement-Extraction", icon: "fab fa-github" }
-      ]
-    },
-    {
-      id: 3,
-      title: "AI Content Strategy Engine",
-      image: "images/content_engine_hero.png",
-      brief: "Full-stack AI-powered content strategy tool with a Python/FastAPI backend, TypeScript web frontend, and Nginx reverse proxy — all containerized with Docker",
-      category: "ML/AI",
-      description: `A full-stack AI application that automates content strategy generation. The architecture consists of three services orchestrated via Docker Compose: a Python/FastAPI backend (api/), a TypeScript + HTML/CSS web frontend (web/), and an Nginx reverse proxy for routing. The engine leverages AI models to generate content strategies, recommendations, or structured plans based on user inputs. The stack is production-ready — services are isolated, environment variables are used for configuration, and everything spins up with docker-compose up. Built with a clean separation between the AI logic layer (Python) and the presentation layer (TypeScript/HTML), making it easy to swap out models or extend the frontend independently.`,
-      year: "2025",
-      tags: ["AI", "FastAPI", "TypeScript", "Docker"],
-      techStack: ["Python", "FastAPI", "TypeScript", "HTML/CSS", "Nginx", "Docker", "Docker Compose"],
-      metrics: {
-        apiPerformance: 93,
-        frontendSpeed: 91,
-        contentQuality: 88,
-        systemUptime: 96
-      },
-      features: [
-        "AI-driven content strategy generation via FastAPI backend",
-        "TypeScript + HTML/CSS responsive web frontend",
-        "Nginx reverse proxy for clean service routing",
-        "Full Docker Compose orchestration — single command startup",
-        "Modular 3-service architecture: api, web, nginx",
-        "Environment-based configuration for easy deployment",
-        "Clean separation between AI logic and presentation layers",
-        "Production-ready containerized deployment setup"
-      ],
-      buttons: [
-        { label: "GitHub", url: "https://github.com/gopikrishna818/ai_content_strategy_engine", icon: "fab fa-github" }
-      ]
-    },
-    {
-      id: 4,
-      title: "Team Task Manager",
-      brief: "Collaborative task management application for teams — assign tasks, track progress, and manage team workflows with a clean full-stack interface",
-      category: "Web Dev",
-      description: `A collaborative team task management application built to streamline how teams assign, track, and complete work. The system supports creating team member accounts, assigning tasks with priorities and deadlines, and monitoring each member's progress through an intuitive dashboard. Built with a Python backend and a clean web frontend, the app enables real-time task status updates, role-based task assignment, and overall team efficiency tracking. The project demonstrates full-stack development skills — from backend API design and database modeling to frontend UI and deployment — making it an end-to-end productivity tool for small to mid-sized teams.`,
-      year: "2026",
-      tags: ["Full Stack", "Task Management", "Python"],
-      techStack: ["Python", "FastAPI", "PostgreSQL", "HTML/CSS", "JavaScript", "Docker"],
-      metrics: {
-        taskCompletion: 94,
-        apiResponse: 91,
-        uiUsability: 89,
-        dataAccuracy: 97
-      },
-      features: [
-        "Team member account creation and management",
-        "Task assignment with priority levels and deadlines",
-        "Real-time task status tracking (pending, in-progress, done)",
-        "Team efficiency and progress dashboard",
-        "Role-based task assignment and visibility",
-        "Clean and responsive web UI",
-        "RESTful API backend with structured data models",
-        "Containerized deployment with Docker"
-      ],
-      buttons: [
-        { label: "Live Demo", url: "https://worthy-encouragement-production-6af3.up.railway.app/", icon: "fas fa-external-link-alt" },
-        { label: "GitHub", url: "https://github.com/gopikrishna818", icon: "fab fa-github" }
-      ]
-    },
-    {
-      id: 5,
-      title: "Enterprise Multi-Agent RAG Support System",
-      image: "",
-      brief: "Production-grade multi-agent system for customer support. Intelligently routes queries, retrieves KB articles, and escalates complex issues.",
-      category: "ML/AI",
-      description: `A production-grade multi-agent customer support system designed to manage end-to-end interactions for a SaaS platform. Implements enterprise-level patterns including multi-agent orchestration (Triage → Specialist → Escalation), hybrid RAG (vector + BM25 search) over a custom knowledge base, strict input/output guardrails (prompt injection detection, PII redaction, hallucination checks), structured JSON logging with trace IDs, and configurable agents via YAML. Built with Python, FastAPI, and Groq.`,
-      year: "2026",
-      tags: ["AI Agents", "RAG", "FastAPI"],
-      techStack: ["Python", "FastAPI", "Groq API", "ChromaDB", "Docker"],
-      metrics: {
-        routingAccuracy: 95,
-        hallucinationPrevention: 98,
-        apiResponse: 92,
-        systemUptime: 99
-      },
-      features: [
-        "Multi-Agent Orchestration with Triage, Specialist, and Escalation agents",
-        "Hybrid RAG pipeline (Vector + BM25) for high-accuracy retrieval",
-        "Input/Output guardrails for prompt injection and PII redaction",
-        "Hallucination checks to ensure answers are grounded in the KB",
-        "Structured JSON logging with unique trace IDs per conversation",
-        "State Machine based routing to prevent infinite loops",
-        "Fully typed data models using Pydantic"
-      ],
-      buttons: [
-        { label: "Live Demo", url: "https://enterprise-multi-agent-rag-production.up.railway.app/", icon: "fas fa-external-link-alt" },
-        { label: "GitHub", url: "https://github.com/gopikrishna818/enterprise-multi-agent-rag.git", icon: "fab fa-github" }
-      ]
-    }
-  ];
+  <!-- CTA Section (Audit Step 11) -->
+  <div class="cta-card-wrapper">
+    <div class="cta-card">
+      <div class="cta-sub">Let's build together</div>
+      <h2 class="cta-title">Join our community<br>and help define it.</h2>
+      <p class="cta-desc">Interested in AI automation, machine learning collaborations, or have an open role? Let’s
+        connect and create something impactful.</p>
+      <a href="contact.html" class="cta-btn">Connect with me</a>
+    </div>
 
-  let currentProject = null;
-  let currentGalleryIndex = 0;
-  let currentCharts = { radar: null, bar: null };
-  let currentFilter = 'all';
-  let searchTerm = '';
+    <!-- RESUME DOWNLOAD SECTION (Moved per user request) -->
+    <div style="text-align: center; padding: 40px 24px 0;">
+      <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
+        rel="noopener noreferrer" class="nav-cta"
+        style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; text-decoration: none; background: #0a0a0a; color: #fff; border: 1px solid rgba(255,255,255,0.1); border-radius: 100px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+        <i class="fas fa-download" style="font-size: 16px; color: var(--accent);"></i>
+        Download Resume
+      </a>
+    </div>
+  </div>
 
-  // Initialize
-  function init() {
-    renderProjects(projects);
-    setupFilterTabs();
-    setupSearch();
-    setupModalTabs();
-  }
-
-  function renderProjects(projectsToRender) {
-    const grid = document.getElementById('projectsGrid');
-    const colors = ['project-card-dark', 'project-card-blue', 'project-card-white', 'project-card-orange', 'project-card-cream', 'project-card-blue'];
-    let html = '';
-
-    projectsToRender.forEach((project) => {
-      const projIndex = projects.indexOf(project);
-      const isFeatured = projIndex === 0;
-      const colorClass = colors[projIndex] || 'project-card-white';
-      const cardClass = `project-card ${isFeatured ? 'featured' : ''} ${colorClass}`;
-      const isLightText = colorClass === 'project-card-blue' || colorClass === 'project-card-orange' || colorClass === 'project-card-dark';
-      const tagClass = isLightText ? 'proj-tag-light' : 'proj-tag';
-
-      html += `
-        <div class="${cardClass}" onclick="openModal(${projIndex})">
-          <div class="proj-year">${project.year}</div>
-          <div class="proj-title">${project.title}</div>
-          <div class="proj-desc">${project.brief}</div>
-          <div class="project-tech-stack">
-            ${project.techStack.slice(0, 3).map(tech =>
-              `<span class="tech-mini-badge" ${isLightText ? 'style="background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);"' : ''}>${tech}</span>`
-            ).join('')}
-          </div>
-          <div class="proj-tags" style="margin-top: auto; margin-bottom: 0;">
-            ${project.tags.slice(0, 2).map(tag =>
-              `<span class="proj-tag ${tagClass}">${tag}</span>`
-            ).join('')}
+  <footer>
+    <div class="footer-container">
+      <div class="footer-main">
+        <div class="footer-brand">
+          <h2>Gopikrishna<br>Chegoni</h2>
+          <div class="footer-status">
+            <span class="status-dot"></span>
+            Available for new opportunities
           </div>
         </div>
-      `;
-    });
-
-    grid.innerHTML = html;
-  }
-
-  function getCategoryIcon(category) {
-    const icons = {
-      'ML/AI': '🤖',
-      'Web Dev': '💻',
-      'Data Science': '📊',
-      'Other': '⚙️'
-    };
-    return icons[category] || '📁';
-  }
-
-  function setupFilterTabs() {
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-        e.target.classList.add('active');
-        currentFilter = e.target.dataset.category;
-        filterProjects();
-      });
-    });
-  }
-
-  function setupSearch() {
-    document.getElementById('searchInput').addEventListener('input', (e) => {
-      searchTerm = e.target.value.toLowerCase();
-      filterProjects();
-    });
-  }
-
-  function filterProjects() {
-    const filtered = projects.filter(p => {
-      const matchFilter = currentFilter === 'all' || p.category === currentFilter;
-      const matchSearch = p.title.toLowerCase().includes(searchTerm) ||
-                         p.brief.toLowerCase().includes(searchTerm) ||
-                         p.techStack.some(t => t.toLowerCase().includes(searchTerm));
-      return matchFilter && matchSearch;
-    });
-    renderProjects(filtered);
-  }
-
-  function setupModalTabs() {
-    const tabs = ['overview', 'features', 'gallery', 'metrics', 'tech'];
-    const container = document.getElementById('modalTabs');
-    container.innerHTML = tabs.map(tab =>
-      `<button class="modal-tab-button ${tab === 'overview' ? 'active' : ''}" onclick="switchTab('${tab}')" data-tab="${tab}">${tab.charAt(0).toUpperCase() + tab.slice(1)}</button>`
-    ).join('');
-  }
-
-  function switchTab(tabName) {
-    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-    document.querySelector(`.tab-content[data-tab="${tabName}"]`).classList.add('active');
-    document.querySelectorAll('.modal-tab-button').forEach(btn => btn.classList.remove('active'));
-    document.querySelector(`.modal-tab-button[data-tab="${tabName}"]`).classList.add('active');
-
-    if (tabName === 'metrics') {
-      setTimeout(renderCharts, 100);
-    } else if (tabName === 'gallery') {
-      renderGalleryTab();
-    }
-  }
-
-  function openModal(projectIndex) {
-    currentProject = projects[projectIndex];
-    currentGalleryIndex = 0;
-    const modal = document.getElementById('projectModal');
-
-    document.getElementById('modalTitle').textContent = currentProject.title;
-
-    // Enhanced Description with metadata
-    const description = `
-      <div style="margin-bottom: 32px;">
-        <div style="font-size: 16px; line-height: 1.9; color: var(--text-muted); margin-bottom: 20px;">
-          ${currentProject.description}
+        <div class="footer-nav-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="experience_new.html">Experience</a></li>
+          </ul>
         </div>
-        <div style="display: grid; grid-template-columns: auto 1fr auto 1fr; gap: 40px; margin-top: 28px; padding-top: 28px; border-top: 1px solid var(--border);">
-          <div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: .6; margin-bottom: 10px;">Duration</div>
-            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 18px; font-weight: 700; color: var(--text);">${currentProject.year}</div>
+        <div class="footer-nav-col">
+          <h4>Social</h4>
+          <ul>
+            <li><a href="https://www.linkedin.com/in/gopikrishnachegoni/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/gopikrishna818" target="_blank">GitHub</a></li>
+            <li><a href="mailto:chegoni.gk@gmail.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-credit">
+          © <span id="footerYear">2025</span> · Built by <strong>Gopikrishna</strong>
+        </div>
+        <div class="footer-legal">
+          <a href="contact.html">Connect</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="modal-overlay" id="projectModal">
+    <div class="modal-content case-study-modal">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 20px;">
+          <div id="modalImpact"
+            style="font-family: var(--font-heading); font-weight: 900; letter-spacing: -0.06em; font-size: 32px; color: var(--accent); background: rgba(0,68,238,0.1); padding: 4px 16px; border-radius: 8px;">
+            98%</div>
+          <h2 class="modal-title" id="modalTitle" style="margin:0;">Project Title</h2>
+        </div>
+        <button class="modal-close" onclick="window.closeProjectModal()">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="case-study-grid">
+          <!-- Main Content -->
+          <div class="case-study-main">
+            <section class="cs-section">
+              <h3 class="cs-label">The Problem</h3>
+              <p id="modalProblem" class="cs-text"></p>
+            </section>
+
+            <section class="cs-section">
+              <h3 class="cs-label">The Approach</h3>
+              <p id="modalApproach" class="cs-text"></p>
+            </section>
+
+            <section class="cs-section">
+              <h3 class="cs-label">The Results</h3>
+              <p id="modalResults" class="cs-text"></p>
+            </section>
+
+            <section class="cs-section">
+              <h3 class="cs-label">Learnings</h3>
+              <p id="modalLearnings" class="cs-text"></p>
+            </section>
           </div>
-          <div>
-            <div style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: .6; margin-bottom: 10px;">Category</div>
-            <div style="font-family: 'Bebas Neue', sans-serif; font-size: 18px; font-weight: 700; color: var(--accent);">${currentProject.category}</div>
-          </div>
-          <div style="grid-column: span 2;">
-            <div style="font-family: 'Space Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; opacity: .6; margin-bottom: 10px;">Tech Stack</div>
-            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-              ${currentProject.techStack.map(tech => `<span style="padding: 4px 12px; background: rgba(26,107,255,0.1); color: var(--accent); border-radius: 100px; font-size: 12px; font-weight: 600;">${tech}</span>`).join('')}
+
+          <!-- Sidebar -->
+          <div class="case-study-side">
+            <div class="cs-side-box">
+              <h4 class="cs-side-label">Tech Stack</h4>
+              <div id="modalTechStack" class="cs-tech-grid"></div>
             </div>
+            <div class="cs-side-box">
+              <h4 class="cs-side-label">Project Details</h4>
+              <div class="cs-detail-item"><span>Year</span><strong id="modalYear"></strong></div>
+              <div class="cs-detail-item"><span>Category</span><strong id="modalCategory"></strong></div>
+            </div>
+            <div id="modalActions" class="cs-actions"></div>
           </div>
         </div>
       </div>
-    `;
-    document.getElementById('modalDescription').innerHTML = description;
+    </div>
+  </div>
 
-    const tagsHTML = currentProject.tags.map(tag => `<span class="modal-tag">${tag}</span>`).join('');
-    document.getElementById('modalTags').innerHTML = `<div style="display: flex; gap: 8px; flex-wrap: wrap;">${tagsHTML}</div>`;
+  <div class="custom-cursor" id="customCursor"></div>
+  <div class="page-transition-overlay" id="pageTransition"></div>
 
-    const buttonsHTML = currentProject.buttons.map(btn =>
-      `<a href="${btn.url}" target="_blank" class="modal-btn"><i class="${btn.icon}"></i>${btn.label}</a>`
-    ).join('');
-    document.getElementById('modalActions').innerHTML = buttonsHTML;
+  
 
-    // Setup features
-    const featuresList = document.getElementById('featuresList');
-    featuresList.innerHTML = currentProject.features.map(f => `<li>${f}</li>`).join('');
-
-    // Setup tech stack
-    const techGrid = document.getElementById('techGrid');
-    techGrid.innerHTML = currentProject.techStack.map(tech => `<div class="tech-item">${tech}</div>`).join('');
-
-    // Setup gallery
-    renderGalleryOverview();
-
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function renderGalleryOverview() {
-    const container = document.getElementById('galleryContainer');
-    if (currentProject.image) {
-      container.style.background = `url('${currentProject.image}') center/contain no-repeat, linear-gradient(135deg, var(--accent) 0%, #0f55e0 100%)`;
-    } else {
-      container.style.background = `linear-gradient(135deg, var(--accent) 0%, #0f55e0 100%)`;
-    }
-    container.innerHTML = `
-      <div class="gallery-nav" style="position: absolute; width: 100%; padding: 0 20px; top: 50%; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: auto;">
-        <button class="gallery-arrow" onclick="prevGallery()"><i class="fas fa-chevron-left"></i></button>
-        ${currentProject.image ? '' : `<div style="font-size: 64px; color: #fff;">${getCategoryIcon(currentProject.category)}</div>`}
-        <button class="gallery-arrow" onclick="nextGallery()"><i class="fas fa-chevron-right"></i></button>
-      </div>
-      <div class="gallery-dots" id="galleryDots" style="bottom: 16px; left: 50%; transform: translateX(-50%);"></div>
-    `;
-    updateGalleryDots();
-  }
-
-  function renderGalleryTab() {
-    const grid = document.getElementById('galleryGrid');
-    const mockImages = [
-      '📊 Dashboard View',
-      '📈 Performance Chart',
-      '🔍 Detail Analysis',
-      '⚙️ Configuration',
-      '🎯 Results View',
-      '📱 Mobile Layout'
-    ];
-    grid.innerHTML = mockImages.map((img, i) => `
-      <div style="aspect-ratio: 1; background: linear-gradient(135deg, var(--accent) 0%, #0f55e0 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 32px; cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">${img}</div>
-    `).join('');
-  }
-
-  function nextGallery() {
-    renderGalleryOverview();
-  }
-
-  function prevGallery() {
-    renderGalleryOverview();
-  }
-
-  function updateGalleryDots() {
-    const dotsContainer = document.getElementById('galleryDots');
-    if (dotsContainer) {
-      dotsContainer.innerHTML = `<div class="gallery-dot active" style="background: #fff; width: 24px; border-radius: 4px;"></div>`;
-    }
-  }
-
-  function renderCharts() {
-    if (currentCharts.radar) currentCharts.radar.destroy();
-    if (currentCharts.bar) currentCharts.bar.destroy();
-
-    const labels = Object.keys(currentProject.metrics).map(k => k.charAt(0).toUpperCase() + k.slice(1));
-    const data = Object.values(currentProject.metrics);
-
-    // Radar Chart
-    const radarCtx = document.getElementById('radarChart');
-    if (radarCtx) {
-      currentCharts.radar = new Chart(radarCtx, {
-        type: 'radar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Performance',
-            data: data,
-            borderColor: 'rgb(26, 107, 255)',
-            backgroundColor: 'rgba(26, 107, 255, 0.1)',
-            borderWidth: 2,
-            pointRadius: 6,
-            pointBackgroundColor: 'rgb(26, 107, 255)',
-            pointBorderColor: '#fff',
-            pointBorderWidth: 2
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          scales: { r: { beginAtZero: true, max: 100 } },
-          plugins: { legend: { display: true } }
-        }
-      });
-    }
-
-    // Bar Chart
-    const barCtx = document.getElementById('barChart');
-    if (barCtx) {
-      currentCharts.bar = new Chart(barCtx, {
-        type: 'bar',
-        data: {
-          labels: labels,
-          datasets: [{
-            label: 'Metrics',
-            data: data,
-            backgroundColor: 'rgba(26, 107, 255, 0.8)',
-            borderRadius: 8,
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          indexAxis: 'y',
-          scales: { x: { beginAtZero: true, max: 100 } }
-        }
-      });
-    }
-
-    // Metrics Table
-    const tbody = document.getElementById('metricsBody');
-    tbody.innerHTML = Object.entries(currentProject.metrics).map(([key, val]) => `
-      <tr>
-        <td>${key}</td>
-        <td>${Math.round(val)}%</td>
-        <td>${val > 90 ? '✅' : val > 80 ? '⚠️' : '❌'}</td>
-      </tr>
-    `).join('');
-  }
-
-  function closeModal() {
-    document.getElementById('projectModal').classList.remove('active');
-    document.body.style.overflow = 'auto';
-    if (currentCharts.radar) currentCharts.radar.destroy();
-    if (currentCharts.bar) currentCharts.bar.destroy();
-  }
-
-  // Close on ESC and outside click
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  document.getElementById('projectModal').addEventListener('click', (e) => {
-    if (e.target.id === 'projectModal') closeModal();
-  });
-
-  // Theme Toggle
-  const themeToggle = document.getElementById('themeToggle');
-  const htmlElement = document.documentElement;
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-    htmlElement.classList.add('dark-mode');
-    updateThemeIcon(true);
-  }
-
-  themeToggle.addEventListener('click', () => {
-    htmlElement.classList.toggle('dark-mode');
-    const isDarkMode = htmlElement.classList.contains('dark-mode');
-    localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-    updateThemeIcon(isDarkMode);
-  });
-
-  function updateThemeIcon(isDarkMode) {
-    const icon = themeToggle.querySelector('i');
-    if (isDarkMode) {
-      icon.classList.remove('fa-moon');
-      icon.classList.add('fa-sun');
-    } else {
-      icon.classList.remove('fa-sun');
-      icon.classList.add('fa-moon');
-    }
-  }
-
-  // Initialize on load
-  window.addEventListener('DOMContentLoaded', init);
-</script>
-
-
-  <script>
-  // Chatbot Logic
-  const chatbotToggle = document.getElementById('chatbotToggle');
-  const chatbotContainer = document.getElementById('chatbotContainer');
-  const chatbotClose = document.getElementById('chatbotClose');
-  const chatInput = document.getElementById('chatInput');
-  const chatSend = document.getElementById('chatSend');
-  const chatbotMessages = document.getElementById('chatbotMessages');
-
-  if(chatbotToggle) {
-    chatbotToggle.addEventListener('click', () => {
-      chatbotContainer.classList.add('active');
-    });
-    chatbotClose.addEventListener('click', () => {
-      chatbotContainer.classList.remove('active');
-    });
-
-    function appendMessage(text, sender) {
-      const msgDiv = document.createElement('div');
-      msgDiv.className = `chat-msg ${sender}-msg`;
-      msgDiv.textContent = text;
-      chatbotMessages.appendChild(msgDiv);
-      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-    }
-
-    function handleSend() {
-      const text = chatInput.value.trim();
-      if (!text) return;
-      appendMessage(text, 'user');
-      chatInput.value = '';
-      
-      // Smart RAG response
-      setTimeout(() => {
-        const query = text.toLowerCase();
-        let response = "";
-        
-        if (query.includes("experience") || query.includes("work") || query.includes("intern")) {
-            response = "Gopikrishna worked as a Machine Learning Intern at Kreativetimebox (Sept 2024 - Sept 2025). He built a duplicate detection pipeline reducing redundancy by 30%, designed REST APIs, and implemented PaddleOCR for automating data extraction.";
-        } else if (query.includes("project") || query.includes("portfolio") || query.includes("smartdoc") || query.includes("lead")) {
-            response = "He has five main projects: 1) 'AI Lead-Gen & Outreach Automation Engine' — n8n workflow with Retell AI voice calls and Gemini-generated outreach. 2) 'SmartDoc Parser' — DocTR & PaddleOCR for invoice/bank statement extraction with 98% accuracy. 3) 'AI Content Strategy Engine' — full-stack FastAPI + TypeScript app for AI-driven content planning. 4) 'Team Task Manager' — collaborative task management system with FastAPI and PostgreSQL. 5) 'Enterprise Multi-Agent RAG' — production-grade support system with hybrid RAG and guardrails.";
-        } else if (query.includes("skill") || query.includes("technology") || query.includes("stack") || query.includes("python") || query.includes("java")) {
-            response = "His technical skills include Python, Java, SQL, Machine Learning (Scikit-learn, PyTorch, TensorFlow), OCR (PaddleOCR, DocTR), and tools like n8n, REST APIs, Git, and AWS.";
-        } else if (query.includes("education") || query.includes("degree") || query.includes("college") || query.includes("university") || query.includes("btech") || query.includes("cgpa")) {
-            response = "He holds a B.Tech in Computer Science (Data Science) from Guru Nanak Institutions Technical Campus (2020-2024) with an 8.42 CGPA, and completed his Intermediate at Narayana Junior College with a 9.78 CGPA.";
-        } else if (query.includes("ocr") || query.includes("document") || query.includes("parser") || query.includes("paddleocr") || query.includes("doctr")) {
-            response = "He has strong expertise in OCR! He built 'SmartDoc Parser' using DocTR and PaddleOCR to extract structured data from invoices and bank statements with 98% accuracy, completely eliminating third-party API dependencies.";
-        } else if (query.includes("contact") || query.includes("email") || query.includes("phone") || query.includes("reach") || query.includes("hire") || query.includes("number")) {
-            response = "You can reach Gopikrishna at chegoni.gk@gmail.com or call him at +91-8184835291. He's based in Hyderabad and his GitHub is github.com/gopikrishna818.";
-        } else if (query.includes("achieve") || query.includes("rank") || query.includes("certif") || query.includes("nptel")) {
-            response = "He secured All India Rank 992 in the Codekaze Naukri Engineers Week Test (out of 1.05M applicants) and holds a Python for Data Science Certification from NPTEL IIT Madras.";
-        } else if (query.includes("hi") || query.includes("hello") || query.includes("hey") || query.includes("greetings")) {
-            response = "Hello! I'm Gopikrishna's AI assistant. You can ask me about his experience, skills, projects, education, or contact info based on his resume.";
-        } else if (query.includes("who are you") || query.includes("what are you") || query.includes("your name")) {
-            response = "I am an AI assistant built to answer questions about Gopikrishna Chegoni's portfolio and resume. Feel free to ask about his skills, education, or projects!";
-        } else {
-            response = "Based on his resume, I don't have the exact answer to that, but Gopikrishna is a passionate aspiring AI/ML Engineer with strong skills in Python, OCR, and data pipelines. Would you like to know about his projects or experience?";
-        }
-        
-        appendMessage(response, 'ai');
-      }, 600);
-    }
-
-    if(chatSend) {
-      chatSend.addEventListener('click', handleSend);
-    }
-    if(chatInput) {
-      chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') handleSend();
-      });
-    }
-  }
-      // Magnetic Button Effect (50px proximity pull) - ONLY HIRE ME
-    const magneticButtons = document.querySelectorAll('.nav-cta');
-
-    document.addEventListener('mousemove', (e) => {
-      magneticButtons.forEach(btn => {
-        if(typeof gsap === 'undefined') return;
-        const rect = btn.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-
-        const distanceX = e.clientX - centerX;
-        const distanceY = e.clientY - centerY;
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-        const threshold = 80;
-
-        if (distance < threshold) {
-          gsap.to(btn, {
-            x: distanceX * 0.3,
-            y: distanceY * 0.3,
-            duration: 0.4,
-            ease: "power2.out"
-          });
-        } else {
-          gsap.to(btn, {
-            x: 0,
-            y: 0,
-            duration: 0.6,
-            ease: "elastic.out(1, 0.3)"
-          });
-        }
-      });
-    });
-
-
-
-        // Command Palette Logic
-    const cmdBtn = document.getElementById('navCommand');
-    const cmdPalette = document.getElementById('cmdPalette');
-
-    if (cmdBtn) {
-      cmdBtn.addEventListener('click', () => {
-        cmdPalette.classList.add('active');
-        setTimeout(() => document.getElementById('cmdSearch').focus(), 100);
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        cmdPalette.classList.toggle('active');
-        if (cmdPalette.classList.contains('active')) {
-          setTimeout(() => document.getElementById('cmdSearch').focus(), 100);
-        }
-      }
-      if (e.key === 'Escape') cmdPalette.classList.remove('active');
-    });
-
-    cmdPalette.addEventListener('click', (e) => {
-      if (e.target === cmdPalette) cmdPalette.classList.remove('active');
-    });
-
-
-
-  </script>
-
-<div class="side-socials">
-  <a href="https://www.linkedin.com/in/gopikrishnachegoni/" title="LinkedIn" target="_blank">in</a>
-  <a href="https://github.com/gopikrishna818" title="GitHub" target="_blank">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-  </a>
-  <div class="soc-line"></div>
-  <a href="mailto:chegoni.gk@gmail.com" title="Email" target="_blank">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-  </a>
-  <a href="tel:+918184835291" title="Phone">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.14 13.9 19.79 19.79 0 0 1 1.07 5.27 2 2 0 0 1 3.06 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 17.92z"/></svg>
-  </a>
-</div>
+  
+  <script src="js/chatbot.js"></script>
+  <script src="js/shared.js"></script>
 </body>
+
 </html>

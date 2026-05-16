@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style>
+    :root {
+      --bg: #f8f7f4;
+      --card: #ffffff;
+      --text: #050505;
+      --text-muted: #666666;
+      --accent: #0044ee;
+    }
+    :root.dark-mode {
+      --bg: #030303;
+      --card: #0a0a0a;
+      --text: #ffffff;
+      --text-muted: #999999;
+      --accent: #0066ff;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      cursor: auto;
+    }
+
+    /* Mesh Gradient */
+    .mesh-gradient {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1;
+      background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 68, 238, 0.15) 0%, transparent 45%),
+                  radial-gradient(circle at 80% 20%, rgba(255, 51, 0, 0.08) 0%, transparent 35%);
+      pointer-events: none; filter: blur(80px);
+    }
+    /* Custom Cursor */
+    .custom-cursor {
+      display: none;
+      position: fixed; width: 12px; height: 12px; background-color: var(--accent);
+      border-radius: 50%; pointer-events: none; z-index: 99999; will-change: transform; top: 0; left: 0;
+    }
+
+    /* Show custom cursor only on desktop/fine-pointer devices */
+    @media (pointer: fine) {
+      body { cursor: none; }
+      .custom-cursor { display: block; }
+    }
+    /* Content */
+    .container {
+      text-align: center; z-index: 1; padding: 40px;
+    }
+    h1 {
+      font-family: var(--font-heading); font-size: clamp(100px, 15vw, 200px); font-weight: 700;
+      line-height: 1; letter-spacing: -0.03em; color: var(--text); margin-bottom: 20px;
+    }
+    .glitch { position: relative; }
+    .glitch::before, .glitch::after {
+      content: "404"; position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
+    }
+    .glitch::before { color: var(--accent); z-index: -1; animation: glitch-anim 2s infinite linear alternate-reverse; }
+    .glitch::after { color: #ff3300; z-index: -2; animation: glitch-anim2 3s infinite linear alternate-reverse; }
+    @keyframes glitch-anim { 0% { transform: translate(0) } 20% { transform: translate(-5px, 5px) } 40% { transform: translate(-5px, -5px) } 60% { transform: translate(5px, 5px) } 80% { transform: translate(5px, -5px) } 100% { transform: translate(0) } }
+    @keyframes glitch-anim2 { 0% { transform: translate(0) } 20% { transform: translate(5px, -5px) } 40% { transform: translate(5px, 5px) } 60% { transform: translate(-5px, -5px) } 80% { transform: translate(-5px, 5px) } 100% { transform: translate(0) } }
+    
+    p { font-size: 20px; color: var(--text-muted); margin-bottom: 40px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 16px 32px;
+      background: var(--text); color: var(--bg); text-decoration: none; border-radius: 100px;
+      font-family: var(--font-body);
+      font-weight: 500; font-size: 15px; letter-spacing: -0.01em; transition: transform 0.2s;
+    }
+    .btn:hover { transform: scale(1.05); }
+  
+    h1, h2, h3, h4, .hero-title, .page-title, .nav-logo {
+      font-family: var(--font-heading) !important;
+    }
+    body {
+      font-family: var(--font-body);
+    }
+    
+  
+    /* ── SCROLL PROGRESS BAR (Top of Viewport) ── */
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--accent) 0%, #7b2ff7 100%);
+      transform-origin: left;
+      transform: scaleX(0);
+      z-index: 999999;
+      pointer-events: none;
+    }
+</style>
+  <link rel="stylesheet" href="css/shared.css">
+</head>
+<body>
+  <div class="mesh-gradient"></div>
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <div class="container">
+    <div style="font-family: var(--font-body);font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;opacity:0.5;color:var(--accent);margin-bottom:20px;">System Error</div>
+    <h1 class="glitch">404</h1>
+    <p>Oops! The page you're looking for has been routed to the void.</p>
+    <a href="index.html" class="btn"><i class="fas fa-home"></i> Return to Base</a>
+  </div>
+
+  <script>
+    const cursor = document.getElementById('customCursor');
+    gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+    const xTo = gsap.quickTo(cursor, "x", { duration: 0.15, ease: "power2.out" });
+    const yTo = gsap.quickTo(cursor, "y", { duration: 0.15, ease: "power2.out" });
+
+    document.addEventListener('mousemove', (e) => {
+      xTo(e.clientX);
+      yTo(e.clientY);
+      const x = (e.clientX / window.innerWidth) * 100;
+      const y = (e.clientY / window.innerHeight) * 100;
+      document.body.style.setProperty('--mouse-x', `${x}%`);
+      document.body.style.setProperty('--mouse-y', `${y}%`);
+    });
+
+    // Theme logic
+    const htmlElement = document.documentElement;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      htmlElement.classList.add('dark-mode');
+    }
+  </script>
+  <script src="js/shared.js"></script>
+</body>
+</html>
