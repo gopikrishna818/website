@@ -104,20 +104,6 @@ const initAnimations = () => {
     .from('.hero-btns', { opacity: 0, y: 8, duration: 0.3 }, '-=0.15')
     .from('.photo-card', { opacity: 0, scale: 0.98, duration: 0.5 }, '-=0.4');
 
-  // ── 3D TILT ──
-  document.querySelectorAll('.photo-card, .project-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-      const r = card.getBoundingClientRect();
-      const x = e.clientX - r.left;
-      const y = e.clientY - r.top;
-      const rx = (y - r.height / 2) / 10;
-      const ry = (r.width / 2 - x) / 10;
-      gsap.to(card, { rotateX: rx, rotateY: ry, transformPerspective: 1000, duration: 0.5 });
-    });
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, { rotateX: 0, rotateY: 0, duration: 0.8, ease: "elastic.out(1, 0.3)" });
-    });
-  });
 
   // ── PHOTO PARALLAX ──
   const photoImg = document.querySelector('.photo-inner img');
@@ -189,16 +175,105 @@ const initAnimations = () => {
   const moments = gsap.utils.toArray('.moment-section');
   moments.forEach((section, i) => {
     const isLast = i === moments.length - 1;
+    const content = section.querySelector('.moment-content');
+    const number = section.querySelector('.moment-number');
+    const eyebrow = section.querySelector('.moment-eyebrow');
+    const narrative = section.querySelector('.moment-narrative');
+    const flare = section.querySelector('.moment-flare');
+
+    const mt = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "+=60%", // Drastically reduced for nearly immediate clarity
+        pin: true,
+        scrub: 0.5, // Faster tracking
+        anticipatePin: 1
+      }
+    });
+
+    mt.to(number, { opacity: 1, scale: 1, y: 0, duration: 0.4 })
+      .to(eyebrow, { opacity: 1, y: 0, duration: 0.2 }, "-=0.2")
+      .to(narrative, { opacity: 1, y: 0, duration: 0.3 }, "-=0.1")
+      .to(flare, { opacity: i % 2 === 0 ? 0.1 : 0.2, scale: 1.1, duration: 0.5 }, 0);
+
+    // Fade out effect for all but the last section
+    if (!isLast) {
+      mt.to(content, { opacity: 0, y: -20, duration: 0.3 }, "+=0.1");
+    }
+  });
+
+  // ── PROJECT SCROLLER PAGINATION SYNC ──
+  const rail = document.querySelector('.projects-rail');
+  const cards = document.querySelectorAll('.scroller-project-card');
+  const dots = document.querySelectorAll('.pagination-dot');
+
+  if (rail && cards.length > 0 && dots.length > 0) {
+    const observerOptions = {
+      root: rail,
+      threshold: 0.6 // Card must be 60% visible to trigger
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(cards).indexOf(entry.target);
+          dots.forEach((dot, i) => {
+            if (i === index) {
+              dot.classList.add('active');
+              dot.style.background = 'var(--accent)';
+              dot.style.transform = 'scale(1.5)';
+            } else {
+              dot.classList.remove('active');
+              dot.style.background = 'rgba(0,0,0,0.1)';
+              dot.style.transform = 'scale(1)';
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    cards.forEach(card => observer.observe(card));
+  }
+
+  // ── STICKY SECTION LABELS ──
+  const stickyLabel = document.getElementById('sticky-label');
+  const sections = [
+    { id: '.moments-stack', label: '02 // CREDIBILITY' },
+    { id: '#methodology', label: '03 // METHODOLOGY' },
+    { id: '#projects', label: '04 // PROJECTS' },
+    { id: '#github-activity', label: '05 // LIVE ACTIVITY' },
+    { id: '#skills', label: '06 // TECH STACK' },
+    { id: '#contact', label: '07 // CONNECT' }
+  ];
+
+  sections.forEach(sec => {
+    const el = document.querySelector(sec.id);
+    if (!el) return;
+
     ScrollTrigger.create({
-      trigger: section,
-      start: "top top",
-      end: "+=60%", // Faster unpinning for snappier feel
-      pin: true,
-      pinSpacing: isLast,
-      zIndex: i + 1,
-      onEnter: () => gsap.to(section, { boxShadow: "0 -20px 80px rgba(0,0,0,0.15)", duration: 0.5 })
+      trigger: el,
+      start: "top 40%",
+      end: "bottom 40%",
+      onEnter: () => updateLabel(sec.label),
+      onEnterBack: () => updateLabel(sec.label),
+      onLeave: () => hideLabelIfLast(sec.id),
+      onLeaveBack: () => hideLabelIfFirst(sec.id)
     });
   });
+
+  function updateLabel(text) {
+    stickyLabel.innerText = text;
+    stickyLabel.classList.add('active');
+  }
+
+  function hideLabelIfLast(id) {
+    if (id === '#contact') stickyLabel.classList.remove('active');
+  }
+
+  function hideLabelIfFirst(id) {
+    if (id === '.moments-stack') stickyLabel.classList.remove('active');
+  }
 };
 
 // ── GITHUB LIVE ACTIVITY FEED ──

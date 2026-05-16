@@ -47,39 +47,7 @@
       });
     }
 
-    // ── 2. AUDIENCE MODE (Developer vs Recruiter) ──
-    const audienceToggle = document.getElementById('audienceToggle');
-    const audienceSlider = document.querySelector('.audience-slider');
-    const audienceBtns = document.querySelectorAll('.audience-btn');
 
-    const applyAudience = (view) => {
-      if (view === 'rec') {
-        document.body.classList.add('view-recruiter');
-        document.body.classList.remove('view-developer');
-        if (audienceSlider) audienceSlider.style.transform = 'translateX(100%)';
-      } else {
-        document.body.classList.add('view-developer');
-        document.body.classList.remove('view-recruiter');
-        if (audienceSlider) audienceSlider.style.transform = 'translateX(0)';
-      }
-
-      audienceBtns.forEach(btn => {
-        btn.classList.toggle('active', btn.getAttribute('data-view') === view);
-      });
-      localStorage.setItem('audience-view', view);
-    };
-
-    // Load initial view
-    const savedAudience = localStorage.getItem('audience-view') || 'dev';
-    applyAudience(savedAudience);
-
-    if (audienceToggle) {
-      audienceBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          applyAudience(btn.getAttribute('data-view'));
-        });
-      });
-    }
 
     // ── 2. CUSTOM CURSOR ──
     const cursor = document.querySelector('.custom-cursor');
@@ -302,93 +270,113 @@
     // Shared projects data for detail modal
     window.portfolioProjects = [
       {
-        id: 1, title: "AI Lead-Gen & Outreach Automation Engine", impact: "95% Automation",
+        id: 1, title: "AI Lead-Gen & Outreach Production Engine", impact: "70% Manual Reduction",
         image: "images/lead_gen_rel.png",
-        brief: "Cut lead response time from 48 hours to 4 minutes for a B2B sales team using automated AI voice and outreach.",
+        brief: "An automated growth engine that moves beyond 'working code' to a production system that manages LinkedIn scraping and AI voice calls at scale.",
         category: "Automation",
         beforeAfter: {
-          before: "Sales team spent 8+ hours/day manually finding leads, writing emails, and making follow-up calls.",
-          after: "Fully automated pipeline handles prospecting, outreach & voice calls in the background.",
-          stat: "95% of outreach",
-          statLabel: "now runs without human input"
+          before: "Sales team spent 8+ hours/day manually finding leads and making follow-up calls.",
+          after: "Autonomous pipeline handles prospecting and voice calls, freeing the team for high-value closing.",
+          stat: "70% Reduction",
+          statLabel: "in manual outreach work"
         },
-        caseStudy: { problem: "Manual lead outreach is slow and expensive.", approach: "Built n8n pipeline with Retell AI and Gemini.", results: "Reduced outreach time by 95%.", learnings: "Mastered workflow orchestration." },
-        year: "2025", techStack: ["n8n", "Retell AI", "Gemini"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }],
+        caseStudy: { 
+          problem: "Business growth stalled by manual lead-gen bottlenecks.", 
+          approach: "Translated n8n, Retell AI, and Gemini research into a production-grade automation engine.", 
+          results: "Reclaimed 5+ hours daily for the sales team while maintaining 95% lead quality.", 
+          learnings: "Production reliability > Model accuracy." 
+        },
+        year: "2025", techStack: ["n8n", "Retell AI", "Gemini"], buttons: [{ label: "GitHub", url: "https://github.com/gopikrishna818/AI-Lead-Gen-Outreach-Automation-Engine", icon: "fab fa-github" }],
         diagram: [
-          { name: "LinkedIn Scraper", x: 50, y: 40, tooltip: "Automated agent that extracts target profiles based on ICP." },
-          { name: "Gemini Processor", x: 200, y: 40, tooltip: "LMM analyzing profiles to generate hyper-personalized scripts." },
-          { name: "Retell AI Voice", x: 350, y: 40, tooltip: "Handles outbound voice calls. Reduced response time from 48hrs to 4min." },
+          { name: "LinkedIn Agent", x: 50, y: 40, tooltip: "Automated agent that extracts target profiles based on ICP." },
+          { name: "Gemini Brain", x: 200, y: 40, tooltip: "LMM analyzing profiles to generate hyper-personalized scripts." },
+          { name: "Retell AI Voice", x: 350, y: 40, tooltip: "Production voice interface for outbound lead qualification." },
           { name: "Supabase CRM", x: 500, y: 40, tooltip: "Centralized database for lead status and call transcripts." },
-          { name: "n8n Orchestrator", x: 200, y: 100, tooltip: "The brain connecting all services and handling retries/errors." }
+          { name: "n8n Orchestrator", x: 200, y: 100, tooltip: "The production brain managing retries and business logic." }
         ],
         connections: [
           { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 }, { from: 1, to: 4 }
         ]
       },
       {
-        id: 2, title: "SmartDoc Parser", impact: "98% OCR Accuracy",
+        id: 2, title: "SmartDoc Parser (Production OCR)", impact: "80% Efficiency Gain",
         image: "images/smartdoc_rel.png",
-        brief: "Eliminated 5+ hours of manual data entry daily by extracting structured data from financial docs with 98% accuracy.",
+        brief: "A production-grade OCR pipeline that takes paper research (DocTR/Paddle) and transforms it into a system that replaces manual data entry.",
         category: "AI/ML",
         beforeAfter: {
-          before: "Team spent 6hrs/day manually re-typing data from invoices & bank statements. Error rate: ~12%.",
-          after: "SmartDoc extracts everything in under 45 seconds. Error rate: ~2%.",
-          stat: "87% of their day",
-          statLabel: "back in their hands"
+          before: "Manual entry from invoices took 6hrs/day with a 12% error rate.",
+          after: "SmartDoc extracts financial data in 45s with 98.2% reliability in production.",
+          stat: "80% Efficiency",
+          statLabel: "gain across document workflows"
         },
-        caseStudy: { problem: "Financial data entry is error-prone.", approach: "DocTR and PaddleOCR hybrid strategy.", results: "98% extraction accuracy.", learnings: "Deep CV expertise." },
-        year: "2024", techStack: ["Python", "DocTR", "PaddleOCR"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }],
+        caseStudy: { 
+          problem: "Financial data entry is an expensive, error-prone human bottleneck.", 
+          approach: "Ensembled DocTR and PaddleOCR for production reliability over benchmark scores.", 
+          results: "Reduced manual data entry time by 80% while increasing accuracy by 10%.", 
+          learnings: "Edge cases in production define true system performance." 
+        },
+        year: "2024", techStack: ["Python", "DocTR", "PaddleOCR"], buttons: [{ label: "GitHub", url: "https://github.com/gopikrishna818/SmartDoc-Parser-Invoice-Bank-Statement-Extraction", icon: "fab fa-github" }],
         diagram: [
-          { name: "Document Upload", x: 50, y: 60, tooltip: "Secure S3 bucket ingestion with virus scanning." },
-          { name: "PaddleOCR / DocTR", x: 220, y: 60, tooltip: "Hybrid ensemble achieving 98%+ accuracy on noisy docs." },
-          { name: "Post-Processing", x: 390, y: 60, tooltip: "Regex and LLM-based verification for structural integrity." },
-          { name: "JSON Export", x: 560, y: 60, tooltip: "Structured API output for ERP integration." }
+          { name: "Doc Ingestion", x: 50, y: 60, tooltip: "Production-ready S3 bucket ingestion with validation." },
+          { name: "OCR Ensemble", x: 220, y: 60, tooltip: "Ensembled PaddleOCR/DocTR for 98.2% production reliability." },
+          { name: "Data Extraction", x: 390, y: 60, tooltip: "Regex and LLM-based verification for structural integrity." },
+          { name: "ERP Export", x: 560, y: 60, tooltip: "Structured API output for business system integration." }
         ],
         connections: [
           { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 }
         ]
       },
       {
-        id: 3, title: "AI Content Strategy Engine", impact: "10x Faster",
+        id: 3, title: "AI Content Strategy Production Engine", impact: "10x Delivery ROI",
         image: "images/content_strategy_rel.png",
-        brief: "Accelerated content strategy delivery by 10x, reducing research and planning from 3 days to 18 minutes.",
+        brief: "Accelerated business content delivery by 10x, reducing research and planning from days to minutes.",
         category: "AI/ML",
         beforeAfter: {
-          before: "Marketing team needed 2–3 days to research, plan, and draft a content strategy per campaign.",
-          after: "Full content strategy — with audience targeting, topic clusters & copy — generated in 18 minutes.",
-          stat: "10x faster",
-          statLabel: "strategy delivery, zero quality loss"
+          before: "Marketing team needed 3 days to research and plan a content strategy.",
+          after: "Full production-ready strategy generated in 18 minutes, including topic clusters and copy.",
+          stat: "10x ROI",
+          statLabel: "on content planning delivery speed"
         },
-        caseStudy: { problem: "Content planning is research-intensive.", approach: "FastAPI architecture with LLM integration.", results: "Planning time cut by 90%.", learnings: "System architecture focus." },
+        caseStudy: { 
+          problem: "High-quality content planning is a slow research-intensive manual process.", 
+          approach: "FastAPI-based production architecture for scalable LLM orchestration.", 
+          results: "Strategic planning time cut by 90%, enabling faster campaign cycles.", 
+          learnings: "Architecting for scale is as critical as the AI itself." 
+        },
         year: "2025", techStack: ["FastAPI", "Nginx", "Docker"], buttons: [{ label: "GitHub", url: "#", icon: "fab fa-github" }],
         diagram: [
-          { name: "SEO Research", x: 60, y: 60, tooltip: "Real-time SERP analysis and keyword intent mapping." },
-          { name: "LLM Orchestrator", x: 250, y: 60, tooltip: "Multi-prompt chain generating content pillars and briefs." },
-          { name: "Content Dashboard", x: 440, y: 60, tooltip: "Interactive UI for editing and scheduling generated content." }
+          { name: "SERP Research", x: 60, y: 60, tooltip: "Real-time analysis for business intent mapping." },
+          { name: "LLM Chain", x: 250, y: 60, tooltip: "Multi-prompt chain generating content pillars and briefs." },
+          { name: "Prod Dashboard", x: 440, y: 60, tooltip: "Interface for final review and production scheduling." }
         ],
         connections: [
           { from: 0, to: 1 }, { from: 1, to: 2 }
         ]
       },
       {
-        id: 4, title: "Enterprise Multi-Agent RAG", impact: "98% Accuracy",
+        id: 4, title: "Enterprise Multi-Agent RAG", impact: "95% Self-Service",
         image: "images/rag_agents_rel.png",
-        brief: "Reduced enterprise support hallucinations by 98% using a multi-agent validation layer and hybrid search.",
+        brief: "A complex agentic architecture designed for production environments, reducing support overhead by resolving 95% of queries.",
         category: "AI/ML",
         beforeAfter: {
-          before: "Support chatbots hallucinated answers on 30%+ of complex queries, eroding user trust completely.",
-          after: "Multi-agent orchestration with strict guardrails delivers verifiably grounded answers every time.",
-          stat: "98% hallucination-free",
-          statLabel: "responses across all queries"
+          before: "Support team overwhelmed by repetitive queries; existing bots hallucinated on 30% of cases.",
+          after: "Grounded RAG agents provide verifiably accurate answers with citations for 95% of queries.",
+          stat: "95% ROI",
+          statLabel: "increase in automated support resolution"
         },
-        caseStudy: { problem: "Chatbots hallucinate on complex support queries.", approach: "Hybrid vector search with multi-agent orchestration.", results: "98% hallucination-free groundedness.", learnings: "Agentic design patterns." },
-        year: "2026", techStack: ["Python", "Groq", "ChromaDB"], buttons: [{ label: "Live Demo", url: "#", icon: "fas fa-external-link-alt" }],
+        caseStudy: { 
+          problem: "Production support bots erode trust when they hallucinate on complex data.", 
+          approach: "Built a multi-agent critique layer to ensure business-grounded responses.", 
+          results: "Reduced support overhead while maintaining 98%+ groundedness scores.", 
+          learnings: "Agentic guardrails are the key to production RAG trust." 
+        },
+        year: "2026", techStack: ["Python", "Groq", "ChromaDB"], buttons: [{ label: "GitHub", url: "https://github.com/gopikrishna818/enterprise-multi-agent-rag.git", icon: "fab fa-github" }],
         diagram: [
-          { name: "User Query", x: 50, y: 60, tooltip: "Complex enterprise question input." },
+          { name: "User Intent", x: 50, y: 60, tooltip: "Complex query ingestion from production frontend." },
           { name: "Router Agent", x: 200, y: 60, tooltip: "Analyzes intent and routes to specialized domain agents." },
-          { name: "Vector DB", x: 350, y: 30, tooltip: "ChromaDB holding high-dimensional document embeddings." },
-          { name: "Critic Agent", x: 350, y: 90, tooltip: "Strict guardrail agent verifying groundedness of responses." },
-          { name: "Final Answer", x: 500, y: 60, tooltip: "Hallucination-free response delivered with citations." }
+          { name: "Knowledge Base", x: 350, y: 30, tooltip: "Production vector store holding business knowledge." },
+          { name: "Critic Agent", x: 350, y: 90, tooltip: "Guardrail agent verifying groundedness of responses." },
+          { name: "Production API", x: 500, y: 60, tooltip: "Hallucination-free response delivered with citations." }
         ],
         connections: [
           { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 1, to: 3 }, { from: 2, to: 4 }, { from: 3, to: 4 }
@@ -607,6 +595,49 @@
       const body = encodeURIComponent(text);
       window.location.href = `mailto:chegoni.gk@gmail.com?subject=${subject}&body=${body}`;
     };
+
+
+    // ── 16. PAGE TRANSITION WIPE ──
+    const initPageTransitions = () => {
+      const wipe = document.createElement('div');
+      wipe.className = 'page-wipe';
+      document.body.appendChild(wipe);
+
+      // Inbound reveal: Slide the wipe out to the right
+      gsap.set(wipe, { x: '0%' });
+      gsap.to(wipe, {
+        x: '100%',
+        duration: 0.4,
+        ease: "expo.inOut",
+        onComplete: () => {
+          gsap.set(wipe, { x: '-100%' }); // Reset for outbound
+        }
+      });
+
+      // Outbound transition: Intercept internal link clicks
+      document.body.addEventListener('click', (e) => {
+        const link = e.target.closest('a');
+        if (!link) return;
+
+        const href = link.getAttribute('href');
+        const target = link.getAttribute('target');
+
+        // Only trigger for internal .html pages
+        if (href && href.includes('.html') && !href.startsWith('http') && target !== '_blank') {
+          e.preventDefault();
+          gsap.to(wipe, {
+            x: '0%',
+            duration: 0.3,
+            ease: "expo.inOut",
+            onComplete: () => {
+              window.location.href = href;
+            }
+          });
+        }
+      });
+    };
+
+    initPageTransitions();
 
   }); // end DOMContentLoaded
 

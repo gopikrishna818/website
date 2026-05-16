@@ -43,15 +43,9 @@
       <a href="about.html">About</a>
       <a href="projects.html">Projects</a>
       <a href="experience_new.html">Experience</a>
-      <a href="contact.html">Contact</a>
+      <a href="#contact">Contact</a>
     </div>
-    <div class="audience-toggle-container">
-      <div class="audience-toggle" id="audienceToggle">
-        <div class="audience-slider"></div>
-        <button class="audience-btn active" data-view="dev" title="Developer Mode: Technical Depth">Dev</button>
-        <button class="audience-btn" data-view="rec" title="Recruiter Mode: Business Impact">Rec</button>
-      </div>
-    </div>
+
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
       <i class="fas fa-moon"></i>
     </button>
@@ -63,7 +57,7 @@
         </path>
       </svg>
     </div>
-    <a class="nav-cta" href="contact.html">Hire me</a>
+    <a class="nav-cta" href="#contact">Hire me</a>
   </nav>
 
   <!-- COMMAND PALETTE MODAL -->
@@ -130,14 +124,11 @@
           <div class="hero-role">Production AI Engineer</div>
           <div class="hero-name">GOPIKRISHNA <span class="blue">CHEGONI</span></div>
 
-          <!-- DEV BIO -->
-          <div class="hero-desc dev-only" style="max-width:540px;">I build production AI systems that <strong>cut manual
-              work by 70%+</strong> using state-of-the-art OCR and agentic RAG architectures.</div>
-
-          <!-- REC BIO -->
-          <div class="hero-desc rec-only" style="max-width:540px;">I help businesses scale by <strong>automating complex
-              data workflows</strong>. I transform manual document processing into high-efficiency, AI-driven digital
-            assets.</div>
+          <!-- CORE NARRATIVE -->
+          <div class="hero-desc" style="max-width:580px;">
+            I am the person who takes an AI idea from research paper to production system — and I measure success in
+            <strong>business outcomes</strong>, not model metrics.
+          </div>
 
           <div class="hero-btns">
             <a class="btn btn-primary" href="#projects">See My Work →</a>
@@ -155,48 +146,60 @@
           </div>
         </div>
       </div>
-      </div>
+    </div>
     </div>
 
     <!-- ══ MOMENTS STACK ══ -->
     <div class="moments-stack">
       <!-- ══ MOMENT 1: GLOBAL AUTHORITY (#992) ══ -->
-      <section class="moment-section scrolly-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; padding: 100px 0;">
-        <div class="moment-content" style="text-align: center; max-width: 900px; padding: 0 40px;">
-          <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; font-weight: 800;">Global Authority</div>
-          <h2 style="font-family: var(--font-heading); font-size: clamp(48px, 8vw, 120px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 40px;">
-            Ranked <span class="blue">#992</span> <br> <span style="font-size: 0.4em; opacity: 0.5; letter-spacing: -0.01em;">Globally out of 1M+ Engineers</span>
+      <section class="moment-section">
+        <div class="moment-flare"></div>
+        <div class="moment-content">
+          <div class="moment-eyebrow">Global Authority</div>
+          <h2 class="moment-number">Ranked <span class="blue">#992</span>
+            <span class="moment-sub-number">Globally out of 1M+ Engineers</span>
           </h2>
-          <p style="font-size: clamp(18px, 2vw, 24px); color: var(--text-muted); line-height: 1.5; font-weight: 600;">Technical authority isn't claimed; it's proven through consistent, high-performance execution on a global scale.</p>
+          <p class="moment-narrative">
+            True technical authority isn't just winning competitions; it's the ability to build production systems that
+            meet global standards of reliability.
+          </p>
         </div>
       </section>
 
       <!-- ══ MOMENT 2: TECHNICAL PRECISION (98% OCR) ══ -->
-      <section class="moment-section scrolly-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #0a0a0a; color: #fff; position: relative; overflow: hidden; padding: 100px 0;">
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 50% 50%, rgba(0,68,238,0.15) 0%, transparent 70%); pointer-events: none;"></div>
-        <div class="moment-content" style="text-align: center; max-width: 1000px; padding: 0 40px; position: relative; z-index: 2;">
-          <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; font-weight: 800;">Precision Engineering</div>
-          <h2 style="font-family: var(--font-heading); font-size: clamp(48px, 8vw, 120px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 40px; color: #fff;">
-            98<span style="color: var(--accent);">.</span>2% <br> <span style="font-size: 0.45em; opacity: 0.6; letter-spacing: -0.01em;">OCR Extraction Accuracy</span>
+      <section class="moment-section dark">
+        <div class="moment-flare"></div>
+        <div class="moment-content">
+          <div class="moment-eyebrow">Precision Engineering</div>
+          <h2 class="moment-number">98<span style="color: var(--accent);">.</span>2%
+            <span class="moment-sub-number">Reliability at Scale</span>
           </h2>
-          <p style="font-size: clamp(18px, 2vw, 24px); color: rgba(255,255,255,0.5); line-height: 1.5; font-weight: 600;">Building production-grade AI means eliminating the gap between "working" and "reliable."</p>
+          <p class="moment-narrative">
+            In production, 98% isn't just a model metric—it's the threshold where AI replaces manual costs and becomes a
+            business asset.
+          </p>
         </div>
       </section>
 
       <!-- ══ MOMENT 3: BUSINESS IMPACT (70% AUTOMATION) ══ -->
-      <section class="moment-section scrolly-section" style="height: 100vh; display: flex; align-items: center; justify-content: center; background: #fff; position: relative; padding: 100px 0;">
-        <div class="moment-content" style="text-align: center; max-width: 900px; padding: 0 40px;">
-          <div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; font-weight: 800;">Measurable Impact</div>
-          <h2 style="font-family: var(--font-heading); font-size: clamp(48px, 8vw, 120px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; margin-bottom: 40px;">
-            70% <span style="color: var(--accent);">+</span> <br> <span style="font-size: 0.4em; opacity: 0.5; letter-spacing: -0.01em;">Reduction in Manual Work</span>
+      <section class="moment-section">
+        <div class="moment-flare"></div>
+        <div class="moment-content">
+          <div class="moment-eyebrow">Measurable Impact</div>
+          <h2 class="moment-number">70% <span style="color: var(--accent);">+</span>
+            <span class="moment-sub-number">Efficiency ROI</span>
           </h2>
-          <p style="font-size: clamp(18px, 2vw, 24px); color: var(--text-muted); line-height: 1.5; font-weight: 600;">I don't just write code; I reclaim time by automating the complex workflows that stall growth.</p>
+          <p class="moment-narrative">
+            I bridge the gap between research and profit by turning complex AI models into scalable production
+            workflows.
+          </p>
         </div>
       </section>
     </div>
 
+
     <!-- ══ DETAILS SECTION (Bento Grid 2) ══ -->
-    <div class="bento-grid scrolly-section" style="padding-top: 100px;">
+    <div id="methodology" class="bento-grid scrolly-section" style="padding-top: 100px;">
       <div class="card card-white about-card">
         <div style="display:flex; justify-content:space-between; align-items:flex-start;">
           <div class="section-tag">About Me</div>
@@ -210,15 +213,11 @@
               Multi-Agent RAG</span>
           </div>
         </div>
-        <h2 class="dev-only">Computer Science<br>× AI/ML</h2>
-        <h2 class="rec-only">Production AI<br>Solutions</h2>
-        <p class="dev-only">B.Tech graduate in CSE (Data Science) from Guru Nanak Institutions Technical Campus with
-          expertise in machine learning pipelines, intelligent document processing, and automation workflows. I build
-          production-grade AI systems that solve real business problems — from 88% accurate OCR engines to lead-gen
-          automation that cuts manual effort by 70%.</p>
-        <p class="rec-only">Specialized in developing automated AI solutions that deliver measurable business value. I
-          transform manual document workflows into high-efficiency digital assets, helping organizations scale through
-          intelligent automation and operational excellence.</p>
+        <h2>Research to<br>Production</h2>
+        <p>I am the engineer who takes an AI idea from research paper to production system. While others focus on model
+          metrics like F1-scores, I measure success in <strong>business outcomes</strong>—like reducing manual data
+          entry by 80% or automating lead-gen workflows that stall growth. With a focus on CSE (Data Science), I bridge
+          the gap between "working in the lab" and "working for the business."</p>
       </div>
 
       <!-- TECH STACK CARD -->
@@ -278,8 +277,8 @@
               style="width: 36px; height: 36px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: bold; color: #fff; font-size: 14px;">
               KT</div>
             <div>
-              <div style="font-size: 14px; font-weight: 900; color: #fff;">[Manager's Name]</div>
-              <div style="font-size: 12px; color: rgba(255,255,255,0.5);">Engineering Manager · KreativeTimebox</div>
+              <div style="font-size: 14px; font-weight: 900; color: #fff;">Raj</div>
+              <div style="font-size: 12px; color: rgba(255,255,255,0.5);">CTO · KreativeTimebox</div>
             </div>
           </div>
         </div>
@@ -310,8 +309,8 @@
           How I Think & Build</h2>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
-        <div class="card card-white" style="padding: 32px; position: relative;">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+        <div class="card card-white" style="padding: 32px; position: relative; min-height: 340px;">
           <div
             style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(0,0,0,0.03); font-weight: 900; font-family: var(--font-heading);">
             01</div>
@@ -320,13 +319,13 @@
             <i class="fas fa-search" style="color: var(--accent); font-size: 20px;"></i>
           </div>
           <h3
-            style="font-size: 20px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
+            style="font-size: 22px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
             Research</h3>
           <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Dive deep into the problem domain,
             review state-of-the-art papers, and evaluate open-source models.</p>
         </div>
 
-        <div class="card card-white" style="padding: 32px; position: relative;">
+        <div class="card card-white" style="padding: 32px; position: relative; min-height: 340px;">
           <div
             style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(0,0,0,0.03); font-weight: 900; font-family: var(--font-heading);">
             02</div>
@@ -335,13 +334,13 @@
             <i class="fas fa-project-diagram" style="color: var(--accent); font-size: 20px;"></i>
           </div>
           <h3
-            style="font-size: 20px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
+            style="font-size: 22px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
             Design</h3>
           <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Architect scalable data pipelines and
             API structures using FastAPI, Docker, and vector databases.</p>
         </div>
 
-        <div class="card card-white" style="padding: 32px; position: relative;">
+        <div class="card card-white" style="padding: 32px; position: relative; min-height: 340px;">
           <div
             style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(0,0,0,0.03); font-weight: 900; font-family: var(--font-heading);">
             03</div>
@@ -350,13 +349,14 @@
             <i class="fas fa-code" style="color: var(--accent); font-size: 20px;"></i>
           </div>
           <h3
-            style="font-size: 20px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
+            style="font-size: 22px; font-weight: 900; margin-bottom: 12px; font-family: var(--font-heading); letter-spacing: -0.06em;">
             Build</h3>
           <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Develop the core models and backend
             logic, focusing on modularity, clean code, and type safety.</p>
         </div>
 
-        <div class="card card-dark" style="padding: 32px; position: relative; border: 1px solid rgba(0,68,238,0.3);">
+        <div class="card card-dark"
+          style="padding: 32px; position: relative; min-height: 340px; border: 1px solid rgba(0,68,238,0.3);">
           <div
             style="position: absolute; top: 20px; right: 20px; font-size: 40px; color: rgba(255,255,255,0.05); font-weight: 900; font-family: var(--font-heading);">
             04</div>
@@ -365,7 +365,7 @@
             <i class="fas fa-rocket" style="color: #fff; font-size: 20px;"></i>
           </div>
           <h3
-            style="font-size: 20px; font-weight: 900; margin-bottom: 12px; color: #fff; font-family: var(--font-heading); letter-spacing: -0.06em;">
+            style="font-size: 22px; font-weight: 900; margin-bottom: 12px; color: #fff; font-family: var(--font-heading); letter-spacing: -0.06em;">
             Ship</h3>
           <p style="font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6;">Deploy to production environments,
             set up CI/CD, and optimize for latency and scale.</p>
@@ -374,586 +374,501 @@
     </div>
 
 
-    <!-- ══ PROJECTS ══ -->
-    <div class="bento-grid" id="projects" style="margin-top:60px;">
-      <div class="section-header">
+    <!-- ══ PROJECTS SCROLLER ══ -->
+    <div id="projects" style="margin-top: 80px;">
+      <div class="section-header" style="margin-bottom: 60px;">
         <div
-          style="font-family: var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:12px;">
+          style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: .4; margin-bottom: 12px;">
           Featured Work</div>
         <h2
-          style="font-family: var(--font-heading);font-size:clamp(40px,5vw,64px);letter-spacing: -0.06em;font-weight: 900;">
-          Projects</h2>
+          style="font-family: var(--font-heading); font-size: clamp(40px, 5vw, 64px); letter-spacing: -0.06em; font-weight: 900;">
+          Selected Projects</h2>
+      </div>
+
+      <div class="projects-scroller-container">
+        <div class="projects-rail">
+
+          <!-- Project 1: SmartDoc Parser -->
+          <div class="card card-blue project-card scroller-project-card">
+            <div class="proj-year">2025</div>
+            <div class="proj-accuracy">98.2%</div>
+            <div class="proj-accuracy-label">Reliability in Prod</div>
+            <div class="proj-title">SmartDoc Parser</div>
+            <div class="proj-desc">A production-grade OCR pipeline that transforms paper research into a system that
+              cuts manual data entry by 80%.</div>
+            <div class="proj-tags">
+              <span class="proj-tag" style="background:rgba(255,255,255,0.18);color:#fff;">DocTR</span>
+              <span class="proj-tag" style="background:rgba(255,255,255,0.18);color:#fff;">PaddleOCR</span>
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 12px;">
+              <a class="proj-link"
+                href="https://github.com/gopikrishna818/SmartDoc-Parser-Invoice-Bank-Statement-Extraction"
+                target="_blank" rel="noopener noreferrer" style="color:#fff;"><i class="fab fa-github"></i> GitHub</a>
+              <a class="proj-link" href="projects.html" style="color:#fff;">Details →</a>
+            </div>
+          </div>
+
+          <!-- Project 2: AI Lead-Gen -->
+          <div class="card card-dark project-card scroller-project-card">
+            <div class="proj-year">2025</div>
+            <div class="proj-accuracy" style="color:var(--accent);">70%</div>
+            <div class="proj-accuracy-label" style="color:rgba(255,255,255,0.5);">Growth ROI</div>
+            <div class="proj-title" style="color:#fff;">AI Lead-Gen & Outreach</div>
+            <div class="proj-desc">An automated growth engine that manages LinkedIn scraping and AI voice calls at
+              scale.</div>
+            <div class="proj-tags">
+              <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">n8n</span>
+              <span class="proj-tag"
+                style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Supabase</span>
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 12px;">
+              <a class="proj-link" href="https://github.com/gopikrishna818/AI-Lead-Gen-Outreach-Automation-Engine"
+                target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.5);"><i
+                  class="fab fa-github"></i> GitHub</a>
+              <a class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a>
+            </div>
+          </div>
+
+          <!-- Project 3: Multi-Agent RAG -->
+          <div class="card card-white project-card scroller-project-card">
+            <div class="proj-year" style="color:var(--text-muted);">2026</div>
+            <div class="proj-accuracy">95%</div>
+            <div class="proj-accuracy-label" style="color:var(--text-muted);">Self-Service ROI</div>
+            <div class="proj-title">Enterprise Multi-Agent RAG</div>
+            <div class="proj-desc">A complex agentic architecture designed for high-stakes production environments.
+            </div>
+            <div class="proj-tags">
+              <span class="proj-tag">AI Agents</span>
+              <span class="proj-tag">RAG</span>
+              <span class="proj-tag">FastAPI</span>
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 12px;">
+              <a class="proj-link" href="https://github.com/gopikrishna818/enterprise-multi-agent-rag.git"
+                target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
+              <a class="proj-link" href="projects.html">Details →</a>
+            </div>
+          </div>
+
+          <!-- Project 4: Inventory Forecaster -->
+          <div class="card card-dark project-card scroller-project-card">
+            <div class="proj-year">2024</div>
+            <div class="proj-accuracy" style="color:var(--accent);">30%</div>
+            <div class="proj-accuracy-label" style="color:rgba(255,255,255,0.4);">Overstock Reduction</div>
+            <div class="proj-title" style="color:#fff;">Inventory Demand Forecaster</div>
+            <div class="proj-desc">Translating time-series research into a business tool that optimizes inventory.</div>
+            <div class="proj-tags">
+              <span class="proj-tag"
+                style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Prophet</span>
+              <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">LSTM</span>
+            </div>
+            <div style="display: flex; gap: 12px; margin-top: 12px;">
+              <a class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="projects-pagination" style="display: flex; justify-content: center; gap: 12px; margin-top: 40px;">
+          <div class="pagination-dot active" data-index="0"
+            style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent); transition: all 0.3s;"></div>
+          <div class="pagination-dot" data-index="1"
+            style="width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.1); transition: all 0.3s;">
+          </div>
+          <div class="pagination-dot" data-index="2"
+            style="width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.1); transition: all 0.3s;">
+          </div>
+          <div class="pagination-dot" data-index="3"
+            style="width: 8px; height: 8px; border-radius: 50%; background: rgba(0,0,0,0.1); transition: all 0.3s;">
+          </div>
+        </div>
       </div>
 
 
-      <!-- SmartDoc Parser -->
-      <div class="card card-blue project-card">
-        <div>
-          <div class="proj-year">2025</div>
-          <div class="proj-accuracy">98%</div>
-          <div class="proj-accuracy-label">Extraction Accuracy</div>
-          <div class="proj-title">SmartDoc Parser</div>
-          <div class="proj-desc">Production-grade OCR pipeline for extracting structured data from invoices and bank
-            statements — built during ML internship.</div>
-        </div>
-        <div>
-          <div class="proj-tags">
-            <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">DocTR</span>
-            <span class="proj-tag proj-tag-light" style="background:rgba(255,255,255,0.18);color:#fff;">PaddleOCR</span>
+      <!-- ══ GITHUB LIVE ACTIVITY ══ -->
+      <div id="github-activity" style="margin-top:60px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;">
+          <div>
+            <div
+              style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:10px;">
+              Live Activity</div>
+            <h2
+              style="font-family:var(--font-heading);font-size:clamp(32px,4vw,48px);letter-spacing: -0.06em;font-weight: 900;">
+              GitHub Momentum</h2>
           </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
-              href="https://github.com/gopikrishna818/SmartDoc-Parser-Invoice-Bank-Statement-Extraction" target="_blank"
-              rel="noopener noreferrer" style="color:#fff;"><i class="fab fa-github"></i> GitHub</a><a class="proj-link"
-              href="projects.html" style="color:#fff;">Details →</a></div>
-        </div>
-      </div>
-
-
-
-      <!-- AI Lead-Gen -->
-      <div class="card card-dark project-card">
-        <div>
-          <div class="proj-year">2025</div>
-          <div class="proj-accuracy" style="color:var(--accent);">70%</div>
-          <div class="proj-accuracy-label" style="color:rgba(255,255,255,0.5);">Less Manual Effort</div>
-          <div class="proj-title" style="color:#fff;">AI Lead-Gen & Outreach</div>
-          <div class="proj-desc">End-to-end lead generation pipeline — LinkedIn scraping, AI voice calls via Retell, and
-            automated follow-ups powered by n8n and Gemini.</div>
-        </div>
-        <div>
-          <div class="proj-tags">
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">n8n</span>
-            <span class="proj-tag"
-              style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Supabase</span>
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Gemini</span>
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Retell
-              AI</span>
+          <div id="velocity-indicator"
+            style="display: flex; gap: 32px; align-items: center; background: #fafafa; padding: 12px 32px; border-radius: 100px; border: 1px solid #eee;">
+            <div class="velocity-item">
+              <span
+                style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Last
+                Commit</span>
+              <strong id="last-commit-time"
+                style="font-size: 16px; font-weight: 900; color: var(--accent);">Loading...</strong>
+            </div>
+            <div style="width: 1px; height: 24px; background: #eee;"></div>
+            <div class="velocity-item">
+              <span
+                style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Current
+                Streak</span>
+              <strong style="font-size: 16px; font-weight: 900; color: #000;">47 Days</strong>
+            </div>
+            <div style="width: 1px; height: 24px; background: #eee;"></div>
+            <div class="velocity-item">
+              <span
+                style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">This
+                Month</span>
+              <strong id="features-shipped" style="font-size: 16px; font-weight: 900; color: #00b96b;">3
+                Features</strong>
+            </div>
           </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
-              href="https://github.com/gopikrishna818/AI-Lead-Gen-Outreach-Automation-Engine" target="_blank"
-              rel="noopener noreferrer" style="color:rgba(255,255,255,0.5);"><i class="fab fa-github"></i> GitHub</a><a
-              class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a></div>
+          <a href="https://github.com/gopikrishna818" target="_blank" rel="noopener noreferrer"
+            style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:100px;transition:all 0.2s;"
+            onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--text)';"
+            onmouseleave="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)';">
+            <i class="fab fa-github"></i> gopikrishna818
+          </a>
         </div>
-      </div>
-
-      <!-- Enterprise Multi-Agent RAG — uniform 4-col span -->
-      <div class="card card-white project-card">
-        <div>
-          <div class="proj-year" style="color:var(--text-muted);">2026</div>
-          <div class="proj-accuracy">95%</div>
-          <div class="proj-accuracy-label" style="color:var(--text-muted);">Routing Accuracy</div>
-          <div class="proj-title">Enterprise Multi-Agent RAG</div>
-          <div class="proj-desc">Production-grade multi-agent system for customer support. Intelligently routes queries,
-            retrieves KB articles, and escalates complex issues.</div>
-        </div>
-        <div>
-          <div class="proj-tags">
-            <span class="proj-tag">AI Agents</span>
-            <span class="proj-tag">RAG</span>
-            <span class="proj-tag">FastAPI</span>
-          </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;">
-            <a class="proj-link" href="https://github.com/gopikrishna818/enterprise-multi-agent-rag.git" target="_blank"
-              rel="noopener noreferrer">
-              <i class="fab fa-github"></i> GitHub
-            </a>
-            <a class="proj-link" href="projects.html">Details →</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Content Strategy Engine — uniform 4-col span -->
-      <div class="card card-white project-card" style="grid-column:span 4;grid-row:span 3;">
-        <div>
-          <div class="proj-year">2025</div>
-          <div class="proj-accuracy" style="color:var(--accent2);">93%</div>
-          <div class="proj-accuracy-label">API Performance</div>
-          <div class="proj-title">AI Content Strategy Engine</div>
-          <div class="proj-desc">Full-stack AI-powered content strategy tool with a Python/FastAPI backend, TypeScript
-            web frontend, and Nginx reverse proxy.</div>
-        </div>
-        <div>
-          <div class="proj-tags">
-            <span class="proj-tag">FastAPI</span>
-            <span class="proj-tag">TypeScript</span>
-            <span class="proj-tag">Docker</span>
-            <span class="proj-tag">Nginx</span>
-          </div>
-          <a class="proj-link" href="projects.html">Details →</a>
-        </div>
-      </div>
-
-      <!-- Team Task Manager — uniform 4-col span -->
-      <div class="card card-dark project-card" style="grid-column:span 4;grid-row:span 3;">
-        <div>
-          <div class="proj-year">2026</div>
-          <div class="proj-accuracy" style="color:var(--accent);">94%</div>
-          <div class="proj-accuracy-label" style="color:rgba(255,255,255,0.4);">Task Completion</div>
-          <div class="proj-title" style="color:#fff;">Team Task Manager</div>
-          <div class="proj-desc">Collaborative task management application for teams — assign tasks, track progress, and
-            manage team workflows.</div>
-        </div>
-        <div>
-          <div class="proj-tags">
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Python</span>
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">FastAPI</span>
-            <span class="proj-tag"
-              style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">PostgreSQL</span>
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Docker</span>
-          </div>
-          <div style="display: flex; gap: 12px; margin-top: 12px;"><a class="proj-link"
-              href="https://worthy-encouragement-production-6af3.up.railway.app/" target="_blank"
-              rel="noopener noreferrer" style="color:rgba(255,255,255,0.4);"><i class="fas fa-external-link-alt"></i>
-              Live Demo</a><a class="proj-link" href="https://github.com/gopikrishna818" target="_blank"
-              rel="noopener noreferrer" style="color:rgba(255,255,255,0.4);"><i class="fab fa-github"></i> GitHub</a><a
-              class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.4);">Details →</a></div>
-        </div>
-      </div>
-
-      <!-- Inventory — uniform 4-col span -->
-      <div class="card card-dark project-card" style="grid-column:span 4;grid-row:span 3;">
-        <div>
-          <div class="proj-year">2024</div>
-          <div class="proj-accuracy" style="color:var(--accent);">88%</div>
-          <div class="proj-accuracy-label" style="color:rgba(255,255,255,0.4);">Forecast MAPE</div>
-          <div class="proj-title" style="color:#fff;">Inventory Demand Forecaster</div>
-          <div class="proj-desc">Time-series demand forecasting for retail inventory using Prophet and LSTM, reducing
-            overstock by 30%.</div>
-        </div>
-        <div>
-          <div class="proj-tags">
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Prophet</span>
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">LSTM</span>
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">PyTorch</span>
-            <span class="proj-tag" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);">Plotly</span>
-          </div>
-          <a class="proj-link" href="projects.html" style="color:rgba(255,255,255,0.5);">Details →</a>
-        </div>
-      </div>
-
-    </div><!-- end projects grid -->
-
-    <!-- ══ GITHUB LIVE ACTIVITY ══ -->
-    <div id="github-activity" style="margin-top:60px;">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:28px;">
-        <div>
+        <div id="gh-feed" style="display:flex;flex-direction:column;gap:10px;">
           <div
-            style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;opacity:.4;margin-bottom:10px;">
-            Live Activity</div>
+            style="display:flex;align-items:center;justify-content:center;height:120px;color:var(--text-muted);font-size:14px;">
+            <i class="fas fa-spinner fa-spin" style="margin-right:10px;"></i> Loading recent activity...
+          </div>
+        </div>
+      </div>
+
+      <!-- ══ SKILLS / STACK ══ -->
+      <div id="skills" style="margin-top:60px;">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;">
           <h2
-            style="font-family:var(--font-heading);font-size:clamp(32px,4vw,48px);letter-spacing: -0.06em;font-weight: 900;">
-            GitHub Momentum</h2>
+            style="font-family: var(--font-heading);font-size:clamp(40px,5vw,64px);letter-spacing: -0.06em;font-weight: 900;line-height:0.95;">
+            Tech Stack</h2>
+          <p style="font-size:14px;color:var(--text-muted);max-width:320px;text-align:right;">The tools & technologies I
+            use to build intelligent systems</p>
         </div>
-        <div id="velocity-indicator"
-          style="display: flex; gap: 32px; align-items: center; background: #fafafa; padding: 12px 32px; border-radius: 100px; border: 1px solid #eee;">
-          <div class="velocity-item">
-            <span
-              style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Last
-              Commit</span>
-            <strong id="last-commit-time"
-              style="font-size: 16px; font-weight: 900; color: var(--accent);">Loading...</strong>
-          </div>
-          <div style="width: 1px; height: 24px; background: #eee;"></div>
-          <div class="velocity-item">
-            <span
-              style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">Current
-              Streak</span>
-            <strong style="font-size: 16px; font-weight: 900; color: #000;">47 Days</strong>
-          </div>
-          <div style="width: 1px; height: 24px; background: #eee;"></div>
-          <div class="velocity-item">
-            <span
-              style="font-size: 10px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;">This
-              Month</span>
-            <strong id="features-shipped" style="font-size: 16px; font-weight: 900; color: #00b96b;">3 Features</strong>
-          </div>
-        </div>
-        <a href="https://github.com/gopikrishna818" target="_blank" rel="noopener noreferrer"
-          style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--text-muted);text-decoration:none;border:1px solid var(--border);padding:8px 16px;border-radius:100px;transition:all 0.2s;"
-          onmouseenter="this.style.color='var(--text)';this.style.borderColor='var(--text)';"
-          onmouseleave="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)';">
-          <i class="fab fa-github"></i> gopikrishna818
-        </a>
-      </div>
-      <div id="gh-feed" style="display:flex;flex-direction:column;gap:10px;">
-        <div
-          style="display:flex;align-items:center;justify-content:center;height:120px;color:var(--text-muted);font-size:14px;">
-          <i class="fas fa-spinner fa-spin" style="margin-right:10px;"></i> Loading recent activity...
-        </div>
-      </div>
-    </div>
 
-    <!-- ══ SKILLS / STACK ══ -->
-    <div id="skills" style="margin-top:60px;">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px;">
-        <h2
-          style="font-family: var(--font-heading);font-size:clamp(40px,5vw,64px);letter-spacing: -0.06em;font-weight: 900;line-height:0.95;">
-          Tech Stack</h2>
-        <p style="font-size:14px;color:var(--text-muted);max-width:320px;text-align:right;">The tools & technologies I
-          use to build intelligent systems</p>
-      </div>
-
-      <!-- Category: Languages & Core -->
-      <div style="margin-bottom:32px;">
-        <div class="stack-cat-label">Languages & Core</div>
-        <div class="stack-row">
-          <div class="stack-card stack-card-dark">
-            <div class="stack-icon" style="background:#3776ab;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-python" style="font-size:24px;color:#fff;"></i>
+        <!-- Category: Languages & Core -->
+        <div style="margin-bottom:32px;">
+          <div class="stack-cat-label">Languages & Core</div>
+          <div class="stack-row">
+            <div class="stack-card stack-card-dark">
+              <div class="stack-icon"
+                style="background:#3776ab;display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-python" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">Python</div>
+              <div class="stack-sub">Core Language</div>
             </div>
-            <div class="stack-name">Python</div>
-            <div class="stack-sub">Core Language</div>
-          </div>
-          <div class="stack-card stack-card-cream">
-            <div class="stack-icon" style="background:#f7df1e;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-js" style="font-size:24px;color:#000;"></i>
+            <div class="stack-card stack-card-cream">
+              <div class="stack-icon"
+                style="background:#f7df1e;display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-js" style="font-size:24px;color:#000;"></i>
+              </div>
+              <div class="stack-name">JavaScript</div>
+              <div class="stack-sub">Scripting</div>
             </div>
-            <div class="stack-name">JavaScript</div>
-            <div class="stack-sub">Scripting</div>
-          </div>
-          <div class="stack-card stack-card-blue">
-            <div class="stack-icon"
-              style="background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-database" style="font-size:24px;color:#fff;"></i>
+            <div class="stack-card stack-card-blue">
+              <div class="stack-icon"
+                style="background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-database" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">SQL</div>
+              <div class="stack-sub">Databases</div>
             </div>
-            <div class="stack-name">SQL</div>
-            <div class="stack-sub">Databases</div>
-          </div>
-          <div class="stack-card stack-card-dark">
-            <div class="stack-icon"
-              style="background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-html5" style="font-size:24px;color:#fff;"></i>
+            <div class="stack-card stack-card-dark">
+              <div class="stack-icon"
+                style="background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-html5" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">HTML/CSS</div>
+              <div class="stack-sub">Frontend</div>
             </div>
-            <div class="stack-name">HTML/CSS</div>
-            <div class="stack-sub">Frontend</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#00758f;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-mysql" style="font-size:24px;color:#fff;"></i>
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#00758f;display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-mysql" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">MySQL</div>
+              <div class="stack-sub">Database</div>
             </div>
-            <div class="stack-name">MySQL</div>
-            <div class="stack-sub">Database</div>
           </div>
         </div>
-      </div>
 
-      <!-- Category: ML / AI -->
-      <div style="margin-bottom:32px;">
-        <div class="stack-cat-label">AI / ML Frameworks</div>
-        <div class="stack-row">
-          <div class="stack-card stack-card-dark">
-            <div class="stack-icon" style="background:#ff6f00;display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-brain" style="font-size:24px;color:#fff;"></i>
+        <!-- Category: ML / AI -->
+        <div style="margin-bottom:32px;">
+          <div class="stack-cat-label">AI / ML Frameworks</div>
+          <div class="stack-row">
+            <div class="stack-card stack-card-dark">
+              <div class="stack-icon"
+                style="background:#ff6f00;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-brain" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">TensorFlow</div>
+              <div class="stack-sub">Deep Learning</div>
             </div>
-            <div class="stack-name">TensorFlow</div>
-            <div class="stack-sub">Deep Learning</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#ee4c2c;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-python" style="font-size:24px;color:#fff;"></i>
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#ee4c2c;display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-python" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">PyTorch</div>
+              <div class="stack-sub">Neural Networks</div>
             </div>
-            <div class="stack-name">PyTorch</div>
-            <div class="stack-sub">Neural Networks</div>
-          </div>
-          <div class="stack-card stack-card-cream">
-            <div class="stack-icon" style="background:#f7931e;display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-chart-bar" style="font-size:24px;color:#fff;"></i>
+            <div class="stack-card stack-card-cream">
+              <div class="stack-icon"
+                style="background:#f7931e;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-chart-bar" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">Scikit-learn</div>
+              <div class="stack-sub">ML Algorithms</div>
             </div>
-            <div class="stack-name">Scikit-learn</div>
-            <div class="stack-sub">ML Algorithms</div>
-          </div>
-          <div class="stack-card stack-card-blue">
-            <div class="stack-icon"
-              style="background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-cube" style="font-size:24px;color:#fff;"></i>
+            <div class="stack-card stack-card-blue">
+              <div class="stack-icon"
+                style="background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-cube" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">NumPy</div>
+              <div class="stack-sub">Numerical Computing</div>
             </div>
-            <div class="stack-name">NumPy</div>
-            <div class="stack-sub">Numerical Computing</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#150458;display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-table" style="font-size:24px;color:#E70488;"></i>
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#150458;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-table" style="font-size:24px;color:#E70488;"></i>
+              </div>
+              <div class="stack-name">Pandas</div>
+              <div class="stack-sub">Data Analysis</div>
             </div>
-            <div class="stack-name">Pandas</div>
-            <div class="stack-sub">Data Analysis</div>
-          </div>
-          <div class="stack-card stack-card-cream">
-            <div class="stack-icon" style="background:#11557c;display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-chart-line" style="font-size:24px;color:#fff;"></i>
+            <div class="stack-card stack-card-cream">
+              <div class="stack-icon"
+                style="background:#11557c;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-chart-line" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">Matplotlib</div>
+              <div class="stack-sub">Visualisation</div>
             </div>
-            <div class="stack-name">Matplotlib</div>
-            <div class="stack-sub">Visualisation</div>
           </div>
         </div>
-      </div>
 
-      <!-- Category: Tools & Platforms -->
-      <div style="margin-bottom:12px;">
-        <div
-          style="font-family: var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
-          Tools & Platforms</div>
-        <div class="stack-row">
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#f05032;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-git-alt" style="font-size:24px;color:#fff;"></i>
-            </div>
-            <div class="stack-name">Git</div>
-            <div class="stack-sub">Version Control</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#181717;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-github" style="font-size:24px;color:#fff;"></i>
-            </div>
-            <div class="stack-name">GitHub</div>
-            <div class="stack-sub">Code Hosting</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#2496ed;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-docker" style="font-size:24px;color:#fff;"></i>
-            </div>
-            <div class="stack-name">Docker</div>
-            <div class="stack-sub">Containerisation</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#232f3e;display:flex;align-items:center;justify-content:center;">
-              <i class="fab fa-aws" style="font-size:24px;color:#ff9900;"></i>
-            </div>
-            <div class="stack-name">AWS</div>
-            <div class="stack-sub">Cloud Platform</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#4285f4;display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-flask" style="font-size:24px;color:#fff;"></i>
-            </div>
-            <div class="stack-name">Colab</div>
-            <div class="stack-sub">Notebooks</div>
-          </div>
-          <div class="stack-card">
-            <div class="stack-icon" style="background:#f37626;display:flex;align-items:center;justify-content:center;">
-              <i class="fas fa-book" style="font-size:24px;color:#fff;"></i>
-            </div>
-            <div class="stack-name">Jupyter</div>
-            <div class="stack-sub">Notebooks</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Category: Specialisations -->
-      <div>
-        <div
-          style="font-family: var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
-          Specialisations</div>
-        <div class="stack-row">
-          <div class="stack-card stack-card-accent">
-            <div class="stack-icon" style="background:rgba(26,107,255,0.15);border:1px solid rgba(26,107,255,0.3);">
-              <svg viewBox="0 0 24 24" fill="#1a6bff" width="24" height="24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
-              </svg>
-            </div>
-            <div class="stack-name">Computer Vision</div>
-            <div class="stack-sub">OCR · Detection</div>
-          </div>
-          <div class="stack-card stack-card-accent">
-            <div class="stack-icon" style="background:rgba(26,107,255,0.15);border:1px solid rgba(26,107,255,0.3);">
-              <svg viewBox="0 0 24 24" fill="#1a6bff" width="24" height="24">
-                <path
-                  d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z" />
-              </svg>
-            </div>
-            <div class="stack-name">NLP</div>
-            <div class="stack-sub">Text · Sentiment</div>
-          </div>
-          <div class="stack-card stack-card-accent">
-            <div class="stack-icon" style="background:rgba(26,107,255,0.15);border:1px solid rgba(26,107,255,0.3);">
-              <svg viewBox="0 0 24 24" fill="#1a6bff" width="24" height="24">
-                <path
-                  d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z" />
-              </svg>
-            </div>
-            <div class="stack-name">MLOps</div>
-            <div class="stack-sub">Deploy · Monitor</div>
-          </div>
-          <div class="stack-card stack-card-accent">
-            <div class="stack-icon" style="background:rgba(26,107,255,0.15);border:1px solid rgba(26,107,255,0.3);">
-              <svg viewBox="0 0 24 24" fill="#1a6bff" width="24" height="24">
-                <path d="M4 9h4v11H4zm6-5h4v16h-4zm6 8h4v8h-4z" />
-              </svg>
-            </div>
-            <div class="stack-name">Data Analysis</div>
-            <div class="stack-sub">EDA · Insights</div>
-          </div>
-          <div class="stack-card stack-card-accent">
-            <div class="stack-icon" style="background:rgba(255,77,0,0.12);border:1px solid rgba(255,77,0,0.25);">
-              <svg viewBox="0 0 24 24" fill="#ff4d00" width="24" height="24">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <div class="stack-name">REST APIs</div>
-            <div class="stack-sub">FastAPI · Flask</div>
-          </div>
-          <div class="stack-card stack-card-accent">
-            <div class="stack-icon" style="background:rgba(255,77,0,0.12);border:1px solid rgba(255,77,0,0.25);">
-              <svg viewBox="0 0 24 24" fill="#ff4d00" width="24" height="24">
-                <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
-              </svg>
-            </div>
-            <div class="stack-name">Automation</div>
-            <div class="stack-sub">Pipelines · Bots</div>
-          </div>
-        </div>
-      </div>
-    </div><!-- end skills section -->
-
-    <!-- ══ EXPERIENCE + EDUCATION ══ -->
-    <div class="bento-grid" id="experience" style="margin-top:60px;">
-
-      <!-- Experience -->
-      <div class="card card-dark exp-card">
-        <div class="section-tag" style="color:rgba(255,255,255,0.9);">Career</div>
-        <h2 style="color:#fff;">Experience</h2>
-        <div class="exp-item">
-          <div class="company" style="color:#fff;">KreativeTimebox</div>
-          <div class="role" style="color:rgba(255,255,255,0.7);">Machine Learning Intern · Sept 2024 – Sept 2025</div>
-          <div class="desc">
-            — Built duplicate detection pipeline using PaddleOCR and image hashing for document deduplication.<br>
-            — Integrated REST APIs for seamless data ingestion and annotation workflows.<br>
-            — Automated data annotation tasks, reducing manual labelling effort by 40%.
-          </div>
-        </div>
-      </div>
-
-      <!-- Education -->
-      <div class="card card-white edu-card">
-        <div class="section-tag">Academics</div>
-        <h2>Education</h2>
-        <div class="exp-item exp-item-light" style="border-color:rgba(0,0,0,0.1);margin-bottom:28px;">
-          <div class="company">Guru Nanak Institutions Technical Campus</div>
-          <div class="role">B.Tech – CSE (Data Science) · 2020 – 2024</div>
+        <!-- Category: Tools & Platforms -->
+        <div style="margin-bottom:12px;">
           <div
-            style="display:inline-flex;align-items:center;gap:8px;background:rgba(26,107,255,0.08);border:1px solid rgba(26,107,255,0.2);padding:6px 14px;border-radius:100px;font-size:12px;font-weight: 900;color:var(--accent);margin-top:12px;">
-            CGPA: 8.42</div>
-        </div>
-        <div class="exp-item exp-item-light" style="border-color:rgba(0,0,0,0.1);">
-          <div class="company">Narayana Junior College</div>
-          <div class="role">Intermediate (MPC) · 2018 – 2020</div>
-          <div
-            style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);padding:6px 14px;border-radius:100px;font-size:12px;font-weight: 900;margin-top:12px;">
-            CGPA: 9.78</div>
-        </div>
-      </div>
-
-      <!-- Achievements -->
-      <div class="card card-orange ach-card" style="background-color: var(--card-orange) !important; color: #fff;">
-        <div class="section-tag" style="color:rgba(255,255,255,0.8); opacity: 1;">Wins</div>
-        <div
-          style="font-family: var(--font-heading);font-weight: 900;font-size:38px;color:#fff;margin-bottom:16px;letter-spacing: -0.06em;">
-          Achievements
-        </div>
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div
-            style="background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;font-weight:600;backdrop-filter:blur(4px);">
-            🏆 Codekaze AIR 992 — Top 0.1% of 1M+ applicants</div>
-          <div
-            style="background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;font-weight:600;backdrop-filter:blur(4px);">
-            🎖️ NPTEL Python for Data Science — 73%</div>
-        </div>
-      </div>
-
-      <!-- Certifications -->
-      <div class="card card-white cert-card">
-        <div class="section-tag">Credentials</div>
-        <h3>Certifications</h3>
-        <ul class="cert-list">
-          <li>Codekaze Certificate</li>
-          <li>Python Completeness – Udemy</li>
-          <li>NPTEL IIT Python for Data Science</li>
-          <li>Machine Learning Fundamentals</li>
-        </ul>
-      </div>
-
-      <!-- Quote card -->
-      <div class="card card-dark quote-card">
-        <div
-          style="font-family: var(--font-heading); font-weight: 900; font-size: 42px; color: rgba(255,255,255,0.15); line-height: 1; letter-spacing: -0.06em; text-align: center; width: 100%;">
-          TURNING<br>DATA INTO<br>IMPACT
-        </div>
-      </div>
-
-
-    </div><!-- end exp grid -->
-
-    <!-- ══ CONTACT ══ -->
-    <div class="bento-grid" id="contact" style="margin-top:60px;">
-
-      <div class="card card-dark contact-card">
-        <div class="section-tag" style="color:rgba(255,255,255,0.9);">Let's Talk</div>
-        <h2 style="color:#fff;">Get In<br><span style="color:var(--accent);">Touch</span></h2>
-        <div class="contact-sub">Whether you have a role, a project, or just want to talk AI — I'm always open.</div>
-        <form class="contact-form" onsubmit="handleSubmit(event)">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input class="form-input" type="text" name="name" placeholder="Your name" required />
-          <input class="form-input" type="email" name="email" placeholder="your@email.com" required />
-          <textarea class="form-input form-full" name="message"
-            placeholder="Tell me about your project or opportunity..." required></textarea>
-          <div></div>
-          <button type="submit" class="btn-submit">Send Message ↗</button>
-        </form>
-        <div class="form-success-state"
-          style="display: none; align-items: center; justify-content: center; flex-direction: column; text-align: center; height: 100%; opacity: 0; transform: translateY(20px); transition: all 0.4s ease; padding: 40px 0;">
-          <div
-            style="width: 60px; height: 60px; border-radius: 50%; background: rgba(0, 232, 122, 0.15); color: #00e87a; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px;">
-            <i class="fas fa-check"></i>
+            style="font-family: var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
+            Tools & Platforms</div>
+          <div class="stack-row">
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#f05032;display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-git-alt" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">Git</div>
+              <div class="stack-sub">Version Control</div>
+            </div>
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#181717;display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-github" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">GitHub</div>
+              <div class="stack-sub">Code Hosting</div>
+            </div>
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#2496ed;display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-docker" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">Docker</div>
+              <div class="stack-sub">Containerisation</div>
+            </div>
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#232f3e;display:flex;align-items:center;justify-content:center;">
+                <i class="fab fa-aws" style="font-size:24px;color:#ff9900;"></i>
+              </div>
+              <div class="stack-name">AWS</div>
+              <div class="stack-sub">Cloud Platform</div>
+            </div>
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#4285f4;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-flask" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">Colab</div>
+              <div class="stack-sub">Notebooks</div>
+            </div>
+            <div class="stack-card">
+              <div class="stack-icon"
+                style="background:#f37626;display:flex;align-items:center;justify-content:center;">
+                <i class="fas fa-book" style="font-size:24px;color:#fff;"></i>
+              </div>
+              <div class="stack-name">Jupyter</div>
+              <div class="stack-sub">Notebooks</div>
+            </div>
           </div>
-          <h3 style="margin-bottom: 8px; color: #fff;">Message Sent!</h3>
-          <p style="color: var(--text-muted); font-size: 14px;">Thank you for reaching out. I'll get back to you within
-            24 hours.</p>
         </div>
-      </div>
 
-      <!-- Contact info + social -->
-      <div class="card card-blue social-card">
+        <!-- Category: Specialisations -->
         <div>
-          <div class="section-tag" style="color:rgba(255,255,255,0.9);">Find Me</div>
           <div
-            style="font-family: var(--font-heading);font-weight: 900;font-size:42px;color:#fff;margin-bottom:6px;letter-spacing: -0.06em;">
-            Gopikrishna<br>Chegoni</div>
-          <div style="font-size:13px;color:rgba(255,255,255,0.8);margin-bottom:28px;">Open to Opportunities</div>
+            style="font-family: var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:16px;">
+            Specialisations</div>
+          <div class="stack-row">
+            <div class="stack-card stack-card-accent">
+              <div class="stack-icon" style="background:rgba(26,107,255,0.15);border:1px solid rgba(26,107,255,0.3);">
+                <svg viewBox="0 0 24 24" fill="#1a6bff" width="24" height="24">
+                  <path
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" />
+                </svg>
+              </div>
+              <div class="stack-name">Computer Vision</div>
+              <div class="stack-sub">OCR · Detection</div>
+            </div>
+            <div class="stack-card stack-card-accent">
+              <div class="stack-icon" style="background:rgba(26,107,255,0.15);border:1px solid rgba(26,107,255,0.3);">
+                <svg viewBox="0 0 24 24" fill="#1a6bff" width="24" height="24">
+                  <path
+                    d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z" />
+                </svg>
+              </div>
+              <div class="stack-name">NLP</div>
+              <div class="stack-sub">Text · Sentiment</div>
+            </div>
+            <div class="stack-card stack-card-accent">
+              <div class="stack-icon" style="background:rgba(26,107,255,0.15);border:1px solid rgba(26,107,255,0.3);">
+                <svg viewBox="0 0 24 24" fill="#1a6bff" width="24" height="24">
+                  <path
+                    d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z" />
+                </svg>
+              </div>
+              <div class="stack-name">MLOps</div>
+              <div class="stack-sub">Deploy · Monitor</div>
+            </div>
+            <div class="stack-card stack-card-accent">
+              <div class="stack-icon" style="background:rgba(26,107,255,0.15);border:1px solid rgba(26,107,255,0.3);">
+                <svg viewBox="0 0 24 24" fill="#1a6bff" width="24" height="24">
+                  <path d="M4 9h4v11H4zm6-5h4v16h-4zm6 8h4v8h-4z" />
+                </svg>
+              </div>
+              <div class="stack-name">Data Analysis</div>
+              <div class="stack-sub">EDA · Insights</div>
+            </div>
+            <div class="stack-card stack-card-accent">
+              <div class="stack-icon" style="background:rgba(255,77,0,0.12);border:1px solid rgba(255,77,0,0.25);">
+                <svg viewBox="0 0 24 24" fill="#ff4d00" width="24" height="24">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <div class="stack-name">REST APIs</div>
+              <div class="stack-sub">FastAPI · Flask</div>
+            </div>
+            <div class="stack-card stack-card-accent">
+              <div class="stack-icon" style="background:rgba(255,77,0,0.12);border:1px solid rgba(255,77,0,0.25);">
+                <svg viewBox="0 0 24 24" fill="#ff4d00" width="24" height="24">
+                  <path
+                    d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" />
+                </svg>
+              </div>
+              <div class="stack-name">Automation</div>
+              <div class="stack-sub">Pipelines · Bots</div>
+            </div>
+          </div>
         </div>
-        <div class="social-links">
-          <a class="social-link" href="#">
-            <div class="social-icon" style="background:rgba(255,255,255,0.15);">in</div>
-            <span>LinkedIn</span>
-            <span style="margin-left:auto;opacity:.4;">↗</span>
-          </a>
-          <a class="social-link" href="#">
-            <div class="social-icon" style="background:rgba(255,255,255,0.15);">⌥</div>
-            <span>GitHub</span>
-            <span style="margin-left:auto;opacity:.4;">↗</span>
-          </a>
-          <a class="social-link" href="mailto:chegoni.gk@gmail.com">
-            <div class="social-icon" style="background:rgba(255,255,255,0.15);">✉</div>
-            <span style="font-size:12px;">chegoni.gk@gmail.com</span>
-          </a>
-          <a class="social-link" href="tel:+91-8184835291">
-            <div class="social-icon" style="background:rgba(255,255,255,0.15);">☏</div>
-            <span>+91-8184835291</span>
-          </a>
-        </div>
-      </div>
+      </div><!-- end skills section -->
 
-    </div><!-- end contact grid -->
+      <!-- ══ EXPERIENCE + EDUCATION ══ -->
+      <div class="bento-grid" id="experience" style="margin-top:60px;">
+
+        <!-- Experience -->
+        <div class="card card-dark exp-card">
+          <div class="section-tag" style="color:rgba(255,255,255,0.9);">Career</div>
+          <h2 style="color:#fff;">Experience</h2>
+          <div class="exp-item">
+            <div class="company" style="color:#fff;">KreativeTimebox</div>
+            <div class="role" style="color:rgba(255,255,255,0.7);">Machine Learning Intern · Sept 2024 – Sept 2025</div>
+            <div class="desc">
+              — Built duplicate detection pipeline using PaddleOCR and image hashing for document deduplication.<br>
+              — Integrated REST APIs for seamless data ingestion and annotation workflows.<br>
+              — Automated data annotation tasks, reducing manual labelling effort by 40%.
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="card card-white edu-card">
+          <div class="section-tag">Academics</div>
+          <h2>Education</h2>
+          <div class="exp-item exp-item-light" style="border-color:rgba(0,0,0,0.1);margin-bottom:28px;">
+            <div class="company">Guru Nanak Institutions Technical Campus</div>
+            <div class="role">B.Tech – CSE (Data Science) · 2020 – 2024</div>
+            <div
+              style="display:inline-flex;align-items:center;gap:8px;background:rgba(26,107,255,0.08);border:1px solid rgba(26,107,255,0.2);padding:6px 14px;border-radius:100px;font-size:12px;font-weight: 900;color:var(--accent);margin-top:12px;">
+              CGPA: 8.42</div>
+          </div>
+          <div class="exp-item exp-item-light" style="border-color:rgba(0,0,0,0.1);">
+            <div class="company">Narayana Junior College</div>
+            <div class="role">Intermediate (MPC) · 2018 – 2020</div>
+            <div
+              style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);padding:6px 14px;border-radius:100px;font-size:12px;font-weight: 900;margin-top:12px;">
+              CGPA: 9.78</div>
+          </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="card card-orange ach-card" style="background-color: var(--card-orange) !important; color: #fff;">
+          <div class="section-tag" style="color:rgba(255,255,255,0.8); opacity: 1;">Wins</div>
+          <div
+            style="font-family: var(--font-heading);font-weight: 900;font-size:38px;color:#fff;margin-bottom:16px;letter-spacing: -0.06em;">
+            Achievements
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div
+              style="background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;font-weight:600;backdrop-filter:blur(4px);">
+              🏆 Codekaze AIR 992 — Top 0.1% of 1M+ applicants</div>
+            <div
+              style="background:rgba(255,255,255,0.12);border-radius:12px;padding:12px 16px;font-size:14px;color:#fff;font-weight:600;backdrop-filter:blur(4px);">
+              🎖️ NPTEL Python for Data Science — 73%</div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="card card-white cert-card">
+          <div class="section-tag">Credentials</div>
+          <h3>Certifications</h3>
+          <ul class="cert-list">
+            <li>Codekaze Certificate</li>
+            <li>Python Completeness – Udemy</li>
+            <li>NPTEL IIT Python for Data Science</li>
+            <li>Machine Learning Fundamentals</li>
+          </ul>
+        </div>
+
+        <!-- Quote card -->
+        <div class="card card-dark quote-card">
+          <div
+            style="font-family: var(--font-heading); font-weight: 900; font-size: 42px; color: rgba(255,255,255,0.15); line-height: 1; letter-spacing: -0.06em; text-align: center; width: 100%;">
+            TURNING<br>DATA INTO<br>IMPACT
+          </div>
+        </div>
+
+
+      </div><!-- end exp grid -->
 
   </main>
 
-  <footer>
+  <footer id="contact">
     <div class="footer-container">
+      <!-- ══ FOOTER CTA ══ -->
+      <div class="footer-cta-section">
+        <h2 class="footer-cta-title">
+          I'm available for roles starting June 2026.
+          <span class="footer-cta-alt">Let's talk before that changes.</span>
+        </h2>
+        <a href="mailto:chegoni.gk@gmail.com" class="footer-big-btn">Get In Touch ↗</a>
+      </div>
+
       <div class="footer-main">
         <div class="footer-brand">
           <h2>Gopikrishna<br>Chegoni</h2>
           <div class="footer-status">
             <span class="status-dot"></span>
-            Available for new opportunities
+            Currently active & interviewing
           </div>
         </div>
         <div class="footer-nav-col">
@@ -976,11 +891,12 @@
       </div>
       <div class="footer-bottom">
         <div class="footer-credit">
-          © <span id="footerYear">2025</span> · Built by <strong>Gopikrishna</strong>
+          © <span id="footerYear">2026</span> · Handcrafted by <strong>Gopikrishna</strong>
         </div>
         <div class="footer-legal">
-          <a href="contact.html">Connect</a>
+          <a href="#contact">Connect</a>
           <a href="#">Privacy</a>
+          <a href="#">System Stats</a>
         </div>
       </div>
     </div>
@@ -1043,6 +959,9 @@
   <script src="js/chatbot.js"></script>
   <script src="js/shared.js"></script>
   <script src="js/index.js"></script>
+  <!-- Sticky Section Label -->
+  <div id="sticky-label" class="sticky-label">01 // HERO</div>
+
 </body>
 
 </html>
