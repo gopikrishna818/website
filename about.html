@@ -4,6 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+      }
+    })();
+  </script>
   <meta name="description"
     content="About Gopikrishna Chegoni — CS (Data Science) graduate, ML intern, and AI builder from Hyderabad. Available for AI/ML roles.">
   <meta property="og:title" content="About — Gopikrishna Chegoni">
@@ -103,170 +114,246 @@
   </div>
 
   <main>
-    <!-- PAGE TITLE -->
-    <div class="page-title">
-      <div class="hero-bg-text" aria-hidden="true">IDENTITY</div>
-      <h1
-        style="font-family: var(--font-heading); font-size: clamp(40px, 5vw, 72px); font-weight: 900; letter-spacing: -0.06em; line-height: 1.05;">
-        About Me</h1>
-      <p>I am the person who takes an AI idea from research paper to production system — and I measure success in <strong>business outcomes</strong>, not model metrics.</p>
-      <div class="bento-grid">
-        <!-- PROFILE CARD -->
-        <div class="card card-white profile-section">
-          <div class="profile-image-container">
-            <img src="images/profile-pic.png" alt="Gopikrishna Chegoni" loading="lazy" />
+    <!-- EDITORIAL PHILOSOPHY HERO (Upgrade 1) -->
+    <div class="editorial-hero">
+      <div class="hero-bg-text" aria-hidden="true">PHILOSOPHY</div>
+      <h1 class="editorial-philosophy">
+        Every AI model is useless until it's in production.<br>
+        <span class="editorial-highlight">I'm the engineer who gets it there.</span>
+      </h1>
+      <div class="scroll-indicator-down">
+        <span>Scroll to explore my identity</span>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+    </div>
+
+    <div class="bento-grid" style="margin-top: 40px;">
+      <!-- PROFILE CARD & BIO TERMINAL (Upgrade 2) -->
+      <div class="card card-white profile-section" style="grid-column: span 4; grid-row: span 4;">
+        <div class="profile-image-container">
+          <img src="images/profile-pic.png" alt="Gopikrishna Chegoni" loading="lazy" />
+        </div>
+        <div class="profile-name">Gopikrishna<br>Chegoni</div>
+        <div class="profile-title">Production AI Engineer</div>
+        
+        <!-- BIO TERMINAL -->
+        <div class="bio-terminal">
+          <div class="bio-term-header">
+            <span class="bio-term-dot"></span>
+            <span class="bio-term-dot"></span>
+            <span class="bio-term-dot"></span>
+            <span class="bio-term-title">bio.sh</span>
           </div>
-          <div class="profile-name">Gopikrishna<br>Chegoni</div>
-          <div class="profile-title">CS (Data Science) Graduate</div>
-          <div class="availability-widget" style="margin-top: 20px;">
-            <div class="availability-item">
-              <div class="availability-dot"></div>
-              <span>Available — Can join in 2 weeks</span>
-            </div>
-            <div class="availability-item">
-              <i class="fas fa-map-marker-alt" style="color: var(--accent); font-size: 10px;"></i>
-              <span>Hyderabad (Open to Remote & Relocation)</span>
-            </div>
-            <div class="availability-item">
-              <i class="fas fa-bolt" style="color: #ffcc00; font-size: 10px;"></i>
-              <span>Response time: &lt; 4 hours</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- ABOUT SECTION -->
-        <div class="card card-white content-card">
-          <div class="section-tag">Who I Am</div>
-          <h2>Background</h2>
-          <p>I'm a Computer Science (Data Science) graduate who specializes in bridging the gap between AI research and production reality. While many focus on the technical elegance of a model, my obsession is translating that elegance into high-performance systems that solve real-world bottlenecks.</p>
-          <p>My journey is defined by a "Production-First" mindset—ensuring every line of code serves a measurable business goal, whether it's automating document extraction or scaling lead generation.</p>
-        </div>
-
-        <!-- HIGHLIGHTS SECTION -->
-        <div class="card card-blue highlight-card">
-          <div class="section-tag" style="color:rgba(255,255,255,0.9);">Key Strengths</div>
-          <h3 style="color:#fff;">What I Bring</h3>
-          <ul class="highlight-list">
-            <li><strong>Production AI</strong> — Moving models from notebooks to scalable API services</li>
-            <li><strong>Reliable OCR</strong> — 98%+ accuracy systems that eliminate manual data entry</li>
-            <li><strong>Workflow Automation</strong> — End-to-end engines (n8n/Gemini) built for ROI</li>
-            <li><strong>System Architecture</strong> — Designing for stability, reliability, and scale</li>
-          </ul>
-        </div>
-
-        <!-- STATS -->
-        <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2;">
-          <div class="stat-number">8.42</div>
-          <div class="stat-label">College CGPA</div>
-        </div>
-
-        <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2;">
-          <div class="stat-number">992</div>
-          <div class="stat-label">Codekaze AIR Rank</div>
-        </div>
-
-        <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2;">
-          <div class="stat-number">4+</div>
-          <div class="stat-label">ML Projects</div>
-        </div>
-
-        <!-- INTERESTS SECTION -->
-        <div class="card card-white content-card" style="grid-column: span 6; grid-row: span 3;">
-          <div class="section-tag">Passions</div>
-          <h2>Interests & Focus</h2>
-          <p>I'm genuinely curious about Computer Vision, NLP, and automation. I enjoy exploring end-to-end ML workflows
-            — from understanding the data to seeing a working pipeline in action — and I like documenting what I learn
-            along the way.</p>
-          <p>Outside of projects, I keep up with AI research and try to build things that go beyond tutorials. I'm
-            always open to collaborating and learning from others who are working on interesting problems.</p>
-        </div>
-
-        <!-- APPROACH SECTION -->
-        <div class="card card-orange highlight-card"
-          style="grid-column: span 6; grid-row: span 3; background: var(--accent2); color: #fff;">
-          <div class="section-tag" style="color:rgba(255,255,255,0.9);">My Philosophy</div>
-          <h3 style="color:#fff;">Work Approach</h3>
-          <ul class="highlight-list" style="opacity: .9;">
-            <li>Data-driven decision making</li>
-            <li>Clean, maintainable code</li>
-            <li>Continuous optimization</li>
-            <li>Collaborative problem-solving</li>
-            <li>User-centric design</li>
-            <li>Transparent communication</li>
-          </ul>
-        </div>
-
-        <!-- REVERSE JOB DESCRIPTION SECTION -->
-        <div class="card card-dark content-card"
-          style="grid-column: span 12; background: #000; border: 1px solid rgba(255,255,255,0.1); margin-top: 20px;">
-          <div class="section-tag" style="color:rgba(255,255,255,0.6);">The Partnership</div>
-          <h2 style="color:#fff; font-size: clamp(32px, 4vw, 48px); margin-bottom: 24px;">Here's what I need from you
-          </h2>
-          <div
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 20px;">
-            <div class="need-item">
-              <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">01</div>
-              <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">A team that ships, not just plans</h4>
-              <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I thrive in high-velocity
-                environments where the goal is production, not just documentation. I value a "bias for action" over
-                endless meeting cycles.</p>
-            </div>
-            <div class="need-item">
-              <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">02</div>
-              <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">Access to real data</h4>
-              <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I'm useless with toy datasets.
-                I need the messy, unstructured, real-world data where AI can actually solve bottlenecks and create a
-                competitive edge.</p>
-            </div>
-            <div class="need-item">
-              <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">03</div>
-              <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">Freedom to suggest architecture</h4>
-              <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I don't just implement
-                tickets. I need the agency to suggest architectural improvements when I see a path to 10x efficiency or
-                98%+ reliability.</p>
+          <div class="bio-term-body">
+            <div class="bio-term-line">
+              <span class="bio-term-prompt">&gt;</span> <span class="bio-type-target"></span><span class="bio-term-cursor"></span>
             </div>
           </div>
-        </div>
-
-        <!-- TERMINAL THINKING SECTION - FULL WIDTH BOTTOM -->
-        <div class="dev-only" id="methodology" style="grid-column: span 12; margin-top: 40px; margin-bottom: 40px;">
-          <div style="text-align: center; margin-bottom: 40px;">
-            <div
-              style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: .4; margin-bottom: 12px;">
-              System Reasoning</div>
-            <h2
-              style="font-family: var(--font-heading); font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.06em; font-weight: 900;">
-              How I Think & Build</h2>
-          </div>
-
-          <div class="terminal-window">
-            <div class="terminal-header">
-              <div class="dot red"></div>
-              <div class="dot yellow"></div>
-              <div class="dot green"></div>
-              <div class="terminal-title">reasoning_process.sh</div>
-            </div>
-            <div class="terminal-body" id="terminalBody">
-              <div class="terminal-line">
-                <span class="terminal-prompt">bash$</span><span class="terminal-command" id="termCmd"></span><span
-                  class="terminal-cursor"></span>
-              </div>
-              <div id="termOutput" style="margin-top: 16px; color: rgba(255,255,255,0.7);"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- RESUME DOWNLOAD SECTION -->
-        <div style="grid-column: span 12; text-align: center; padding: 40px 24px;">
-          <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
-            rel="noopener noreferrer" class="nav-cta"
-            style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; text-decoration: none;">
-            <i class="fas fa-download" style="font-size: 16px;"></i>
-            Download Resume
-          </a>
         </div>
       </div>
 
+      <!-- ABOUT SECTION -->
+      <div class="card card-white content-card" style="grid-column: span 8; grid-row: span 2;">
+        <div class="section-tag">Who I Am</div>
+        <h2>Background & Worldview</h2>
+        <p>I'm a Computer Science (Data Science) graduate who specializes in bridging the gap between AI research and production reality. While many focus on the technical elegance of a model, my obsession is translating that elegance into high-performance systems that solve real-world bottlenecks.</p>
+        <p>My journey is defined by a "Production-First" mindset—ensuring every line of code serves a measurable business goal, whether it's automating document extraction or scaling lead generation.</p>
+      </div>
+
+      <!-- HIGHLIGHTS SECTION -->
+      <div class="card card-blue highlight-card" style="grid-column: span 4; grid-row: span 2;">
+        <div class="section-tag" style="color:rgba(255,255,255,0.9);">Key Capabilities</div>
+        <h3 style="color:#fff;">Production Focus</h3>
+        <ul class="highlight-list">
+          <li><strong>Production AI</strong> — Moving models from notebooks to scalable API services</li>
+          <li><strong>Reliable OCR</strong> — 98%+ accuracy systems that eliminate manual data entry</li>
+          <li><strong>Workflow Automation</strong> — End-to-end engines (n8n/Gemini) built for ROI</li>
+          <li><strong>System Architecture</strong> — Designing for stability, reliability, and scale</li>
+        </ul>
+      </div>
+
+      <!-- STATS WITH OUTCOME MICRO-CONTEXT (Upgrade 8) -->
+      <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2; background: #111;">
+        <div class="stat-number">8.42</div>
+        <div class="stat-label">CGPA → foundations applied to high-scale data pipelines</div>
+      </div>
+
+      <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2; background: #111;">
+        <div class="stat-number">#992</div>
+        <div class="stat-label">of 1M+ Devs → proved algorithmic speed in Codekaze</div>
+      </div>
+
+      <div class="card card-dark stat-grid" style="grid-column: span 4; grid-row: span 2; background: #111;">
+        <div class="stat-number">4+</div>
+        <div class="stat-label">Production Engines → ensembled in real workflows</div>
+      </div>
+
+      <!-- VALUES & ENGINEERING PRINCIPLES CARD (Upgrade 4) -->
+      <div class="card card-orange highlight-card values-principles-card"
+        style="grid-column: span 6; grid-row: span 3; background: var(--accent2); color: #fff;">
+        <div class="section-tag" style="color: rgba(255,255,255,0.95);">Engineering Creed</div>
+        <h2 style="color: #fff; font-size: clamp(22px, 3vw, 28px); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px;">My Core Operating Principles</h2>
+        <div class="principles-list">
+          <div class="principle-item" style="margin-bottom: 16px;">
+            <strong style="display: block; font-size: 14px; margin-bottom: 4px;">↳ Measure in business outcomes, not F1 scores.</strong>
+            <p style="font-size: 13px; opacity: 0.9; margin: 0; line-height: 1.5;">A 99% accuracy model that stays inside a Jupyter Notebook creates exactly $0 in business value. I optimize for production latency, cost, and active integration.</p>
+          </div>
+          <div class="principle-item" style="margin-bottom: 16px;">
+            <strong style="display: block; font-size: 14px; margin-bottom: 4px;">↳ If it can't run in production, it doesn't count.</strong>
+            <p style="font-size: 13px; opacity: 0.9; margin: 0; line-height: 1.5;">Engineering means planning for edge cases, retry loops, API rate-limits, database scaling, and deployment stability—not just training models on clean datasets.</p>
+          </div>
+          <div class="principle-item">
+            <strong style="display: block; font-size: 14px; margin-bottom: 4px;">↳ Read the paper. Reproduce the result. Then improve it.</strong>
+            <p style="font-size: 13px; opacity: 0.9; margin: 0; line-height: 1.5;">No black boxes. I audit model layouts, evaluate vector embedding pipelines at a systems level, and build custom router guards rather than relying on generic wrappers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- READING LIST CARD (Upgrade 3) -->
+      <div class="card card-dark reading-list-card" style="grid-column: span 6; grid-row: span 3; background: #0b0b0d; border: 1px solid rgba(255,255,255,0.06);">
+        <div class="section-tag" style="color: rgba(255,255,255,0.4);">Intellectual Depth</div>
+        <h2 style="color: #fff; font-size: clamp(22px, 3vw, 28px); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px;">5 Papers That Shaped My Engineering</h2>
+        <div class="reading-list-container" style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="paper-item" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+            <span class="paper-title" style="display: block; font-size: 13px; font-weight: 800; color: var(--accent); margin-bottom: 4px;">1. Retrieval-Augmented Generation (Lewis et al.)</span>
+            <p class="paper-takeaway" style="font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.4;">Takeaway: Proved parametric memory must be dynamically grounded with non-parametric retrieval to solve hallucination in production.</p>
+          </div>
+          <div class="paper-item" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+            <span class="paper-title" style="display: block; font-size: 13px; font-weight: 800; color: var(--accent); margin-bottom: 4px;">2. DocTR: Document Text Recognition (Mindee)</span>
+            <p class="paper-takeaway" style="font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.4;">Takeaway: Demonstrated ensembling deep CNN layout classifiers with transformer sequence decoders yields peak OCR reliability.</p>
+          </div>
+          <div class="paper-item" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+            <span class="paper-title" style="display: block; font-size: 13px; font-weight: 800; color: var(--accent); margin-bottom: 4px;">3. Attention Is All You Need (Vaswani et al.)</span>
+            <p class="paper-takeaway" style="font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.4;">Takeaway: Swapped sequential recurrence for parallelized self-attention, unlocking the transformer scaling era.</p>
+          </div>
+          <div class="paper-item" style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+            <span class="paper-title" style="display: block; font-size: 13px; font-weight: 800; color: var(--accent); margin-bottom: 4px;">4. Lost in the Middle: Long Contexts (Liu et al.)</span>
+            <p class="paper-takeaway" style="font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.4;">Takeaway: Proved LMs hallucinate when details sit in the middle of long prompts, rendering high-fidelity re-ranking indispensable.</p>
+          </div>
+          <div class="paper-item" style="padding-bottom: 2px;">
+            <span class="paper-title" style="display: block; font-size: 13px; font-weight: 800; color: var(--accent); margin-bottom: 4px;">5. PP-OCR: Practical Ultra-Lightweight OCR</span>
+            <p class="paper-takeaway" style="font-size: 12px; color: rgba(255,255,255,0.6); margin: 0; line-height: 1.4;">Takeaway: Demonstrated that aggressive pruning, quantization, and custom downsampling can shrink model sizes by 4x without sacrificing production accuracy.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CURRENTLY LEARNING LIVE FEED CARD (Upgrade 6) -->
+      <div class="card card-white learning-feed-card" style="grid-column: span 6; grid-row: span 3;">
+        <div class="section-tag">Compounding Knowledge</div>
+        <h2>What I'm Studying This Month</h2>
+        <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">The AI landscape moves at lightspeed. To build robust production engines, I invest time into auditing state-of-the-art frameworks and benchmarks:</p>
+        <div class="learning-list" style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="learning-item" style="border-left: 2px solid var(--accent); padding-left: 14px;">
+            <span class="learning-topic" style="display: block; font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 4px;">↳ Evaluation Frameworks for RAG</span>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.5;">Benchmarking Ragas and TruLens to calculate faithfulness and answer relevancy scores quantitatively in pipeline tests.</p>
+          </div>
+          <div class="learning-item" style="border-left: 2px solid var(--accent); padding-left: 14px;">
+            <span class="learning-topic" style="display: block; font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 4px;">↳ Direct Preference Optimization (DPO)</span>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.5;">Analyzing parameter-efficient fine-tuning protocols (DPO vs RLHF) for aligning open source LLMs without training reward layers.</p>
+          </div>
+          <div class="learning-item" style="border-left: 2px solid var(--accent); padding-left: 14px;">
+            <span class="learning-topic" style="display: block; font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 4px;">↳ Vector Database scale limits</span>
+            <p style="font-size: 13px; color: var(--text-muted); margin: 0; line-height: 1.5;">Benchmarking index-building latency (HNSW vs IVF) inside PGVector and Chroma at 10M+ chunk distributions.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLLABORATION STYLE CARD (Upgrade 7) -->
+      <div class="card card-blue collab-style-card" style="grid-column: span 6; grid-row: span 3; background: #0044ee;">
+        <div class="section-tag" style="color: rgba(255,255,255,0.85);">Professional Fit</div>
+        <h2 style="color: #fff; font-size: clamp(22px, 3vw, 28px); font-weight: 800; letter-spacing: -0.04em; margin-bottom: 20px;">My Collaboration Blueprint</h2>
+        <div class="collab-points" style="font-size: 13px; line-height: 1.6; display: flex; flex-direction: column; gap: 16px; opacity: 0.95; color: #fff;">
+          <p style="margin: 0;"><strong>Async-First, High Autonomy:</strong> I work best when given clear structural goals. I focus on execution rather than endless checking cycles.</p>
+          <p style="margin: 0;"><strong>Under-Communicate on Process, Over-Communicate on Blockers:</strong> I won't message you about minor changes, but I will immediately raise warning flags when data drift, latency spikes, or structural bottlenecks endanger deadlines.</p>
+          <p style="margin: 0;"><strong>High-Context Contributions:</strong> I write comprehensive PR descriptions and document trade-offs extensively, because future-me (and my teammates) deserve full operational clarity.</p>
+        </div>
+      </div>
+
+      <!-- REVERSE JOB DESCRIPTION SECTION -->
+      <div class="card card-dark content-card"
+        style="grid-column: span 12; background: #000; border: 1px solid rgba(255,255,255,0.1); margin-top: 20px;">
+        <div class="section-tag" style="color:rgba(255,255,255,0.6);">The Partnership</div>
+        <h2 style="color:#fff; font-size: clamp(32px, 4vw, 48px); margin-bottom: 24px;">Here's what I need from you</h2>
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 20px;">
+          <div class="need-item">
+            <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">01</div>
+            <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">A team that ships, not just plans</h4>
+            <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I thrive in high-velocity
+              environments where the goal is production, not just documentation. I value a "bias for action" over
+              endless meeting cycles.</p>
+          </div>
+          <div class="need-item">
+            <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">02</div>
+            <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">Access to real data</h4>
+            <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I'm useless with toy datasets.
+              I need the messy, unstructured, real-world data where AI can actually solve bottlenecks and create a
+              competitive edge.</p>
+          </div>
+          <div class="need-item">
+            <div style="font-size: 24px; color: var(--accent); margin-bottom: 12px; font-weight: 900;">03</div>
+            <h4 style="color: #fff; font-size: 18px; margin-bottom: 12px;">Freedom to suggest architecture</h4>
+            <p style="color: rgba(255,255,255,0.5); font-size: 15px; line-height: 1.6;">I don't just implement
+              tickets. I need the agency to suggest architectural improvements when I see a path to 10x efficiency or
+              98%+ reliability.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FULLY INTERACTIVE TERMINAL SECTION (Upgrade 5) -->
+      <div class="dev-only" id="methodology" style="grid-column: span 12; margin-top: 40px; margin-bottom: 40px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <div
+            style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: .4; margin-bottom: 12px;">
+            System Reasoning</div>
+          <h2
+            style="font-family: var(--font-heading); font-size: clamp(32px, 4vw, 48px); letter-spacing: -0.06em; font-weight: 900;">
+            How I Think & Build</h2>
+        </div>
+
+        <div class="terminal-window">
+          <div class="terminal-header">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+            <div class="terminal-title">interactive_cli.sh</div>
+          </div>
+          <div class="terminal-body" id="aboutTerminalBody" onclick="focusAboutTerminal()" style="height: 320px; overflow-y: auto; text-align: left; padding: 24px;">
+            <div id="aboutTerminalLogs">
+              <div style="color: rgba(255,255,255,0.4); font-size: 11px; margin-bottom: 4px;">SYSTEM INITIALIZED · CORE VERSION 4.1.0-STABLE</div>
+              <div style="font-weight: 900; margin-bottom: 12px;">Welcome to Gopikrishna's Interactive Systems CLI.</div>
+              <div style="margin-bottom: 16px; color: rgba(255,255,255,0.5);">Type <span style="color: var(--accent); font-weight: bold;">help</span> and press Enter to view all active system commands.</div>
+            </div>
+            <div class="terminal-input-row" style="display: flex; align-items: center; width: 100%;">
+              <span class="terminal-prompt" style="color: var(--accent); margin-right: 8px; font-weight: 900; font-family: 'JetBrains Mono', monospace; font-size: 14px; white-space: nowrap;">bash$</span>
+              <input type="text" id="terminalCliInput" autofocus style="background: transparent; border: none; outline: none; color: #fff; font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: 14px; flex: 1; padding: 0; width: 100%;" autocomplete="off" spellcheck="false" onkeydown="handleCliSubmit(event)">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESUME DOWNLOAD SECTION -->
+      <div style="grid-column: span 12; text-align: center; padding: 40px 24px;">
+        <a href="https://drive.google.com/file/d/1qpimX5-onhQbhAV3FSBI9DCZMolbyDps/view?usp=sharing" target="_blank"
+          rel="noopener noreferrer" class="nav-cta"
+          style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; text-decoration: none;">
+          <i class="fas fa-download" style="font-size: 16px;"></i>
+          Download Resume
+        </a>
+      </div>
+
+      <!-- ── NARRATIVE FUNNEL MICRO-CTA (About → Experience) ── -->
+      <div style="grid-column: span 12; text-align: center; margin-top: 10px; margin-bottom: 30px;">
+        <div class="funnel-micro-cta-wrap" style="margin: 0 auto;">
+          <a href="experience_new.html" class="funnel-micro-cta">
+            <span class="funnel-cta-text">See the career timeline</span>
+            <span class="funnel-cta-arrow">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts and CLI controls are now handled exclusively by js/about.js -->
   </main>
 
   <footer>
@@ -367,14 +454,9 @@
   </div>
   <div class="custom-cursor" id="customCursor"></div>
   <div class="page-transition-overlay" id="pageTransition"></div>
-
-
-
-
   <script src="js/chatbot.js"></script>
   <script src="js/shared.js"></script>
   <script src="js/about.js"></script>
-  <script src="js/index.js"></script> <!-- Included for Terminal Animation -->
 </body>
 
 </html>

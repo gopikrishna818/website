@@ -275,12 +275,7 @@
 
     /* ── ANIMATIONS ── */
     .card {
-      opacity: 0;
-      animation: fadeUp 0.6s cubic-bezier(.22, 1, .36, 1) forwards;
-    }
-
-    .card:nth-child(n) {
-      animation-delay: calc(var(--i, 0) * 0.05s);
+      /* Handled elegantly by GSAP scroll reveals inside js/about.js */
     }
 
     @media (max-width: 1100px) {
@@ -308,6 +303,8 @@
       width: 100%;
       max-width: 900px;
       margin: 0 auto;
+      position: relative;
+      z-index: 2;
     }
 
     .terminal-header {
@@ -337,5 +334,205 @@
     .terminal-cursor { display: inline-block; width: 8px; height: 18px; background: var(--accent); margin-left: 4px; animation: blink 1s infinite; vertical-align: middle; }
 
     @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── EDITORIAL HERO STYLES (Upgrade 1) ── */
+    .editorial-hero {
+      position: relative;
+      padding: 180px 24px 100px;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+
+    .editorial-philosophy {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 5.5vw, 68px);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 32px;
+      text-align: center;
+    }
+
+    .editorial-highlight {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .scroll-indicator-down {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.6;
+      margin-top: 20px;
+      animation: bounceUpDown 2s infinite ease-in-out;
+    }
+
+    @keyframes bounceUpDown {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ── BIO TERMINAL STYLES (Upgrade 2) ── */
+    .bio-terminal {
+      background: #0f0f11;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      text-align: left;
+      overflow: hidden;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .bio-term-header {
+      background: #19191c;
+      padding: 8px 12px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .bio-term-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+    }
+    .bio-term-dot:nth-child(1) { background: #ff5f56; }
+    .bio-term-dot:nth-child(2) { background: #ffbd2e; }
+    .bio-term-dot:nth-child(3) { background: #27c93f; }
+
+    .bio-term-title {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      margin-left: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .bio-term-body {
+      padding: 14px 16px;
+      min-height: 72px;
+    }
+
+    .bio-term-line {
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    .bio-term-prompt {
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .bio-term-cursor {
+      display: inline-block;
+      width: 6px;
+      height: 13px;
+      background: var(--accent);
+      margin-left: 3px;
+      animation: blink 1s infinite;
+      vertical-align: middle;
+    }
+
+    /* ── VALUES PRINCIPLES STYLES (Upgrade 4) ── */
+    .values-principles-card {
+      text-align: left;
+    }
+    .values-principles-card h2 {
+      margin-bottom: 24px;
+    }
+    .principles-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .principle-item strong {
+      color: #fff;
+    }
+
+    /* ── READING LIST STYLES (Upgrade 3) ── */
+    .reading-list-card {
+      text-align: left;
+    }
+    .paper-item {
+      transition: transform 0.2s ease;
+    }
+    .paper-item:hover {
+      transform: translateX(4px);
+    }
+
+    /* ── COLLAB STYLES (Upgrade 7) ── */
+    .collab-style-card {
+      text-align: left;
+    }
+
+    /* ── INTERACTIVE TERMINAL CLI STYLES (Upgrade 5) ── */
+    #aboutTerminalBody {
+      background: #0d0d0f;
+      border: 1px solid rgba(255,255,255,0.06);
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      cursor: text;
+    }
+    
+    #aboutTerminalLogs a {
+      color: var(--accent);
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    #aboutTerminalLogs a:hover {
+      color: #7ab3ff;
+    }
+
+    #terminalCliInput {
+      caret-color: var(--accent);
+      font-weight: 500;
+    }
+    
+    #terminalCliInput::placeholder {
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* ── WATERMARK DARK MODE AUDIT (Upgrade 9) ── */
+    .hero-bg-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-heading);
+      font-size: clamp(100px, 18vw, 280px);
+      letter-spacing: -0.06em;
+      color: rgba(0, 0, 0, 0.04);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 0;
+      user-select: none;
+    }
+
+    .dark-mode .hero-bg-text,
+    :root.dark-mode .hero-bg-text,
+    html.dark-mode .hero-bg-text,
+    body.dark-mode .hero-bg-text {
+      color: rgba(255, 255, 255, 0.025) !important;
+    }
 
     /* ── END OF PAGE ── */

@@ -88,17 +88,158 @@ function handleSubmit(event) {
     });
 }
 
+// ── COUNT UP ANIMATION ENGINE ──
+const animateCountUp = (counter) => {
+  if (counter.classList.contains('counted')) return;
+  counter.classList.add('counted');
+  const target = parseFloat(counter.dataset.target);
+  const decimals = parseInt(counter.dataset.decimals || '0');
+  const duration = 2000;
+  const startTime = performance.now();
+  const update = (now) => {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+    const current = target * eased;
+    counter.textContent = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+};
+
+// ── KINETIC WORD SWAP ──
+const initWordSwap = () => {
+  const words = ["Production AI Engineer", "OCR Specialist", "RAG Architect", "ML System Builder"];
+  const container = document.querySelector('.role-swap-container');
+  if (!container) return;
+  
+  container.innerHTML = '';
+  words.forEach((word, idx) => {
+    const span = document.createElement('span');
+    span.className = `role-swap-word ${idx === 0 ? 'active' : ''}`;
+    span.textContent = word;
+    container.appendChild(span);
+  });
+
+  let currentIdx = 0;
+  setInterval(() => {
+    const currentWord = container.children[currentIdx];
+    currentIdx = (currentIdx + 1) % words.length;
+    const nextWord = container.children[currentIdx];
+
+    if (currentWord && nextWord) {
+      currentWord.classList.remove('active');
+      currentWord.classList.add('exit');
+      
+      nextWord.classList.add('active');
+      nextWord.classList.remove('exit');
+
+      setTimeout(() => {
+        currentWord.classList.remove('exit');
+      }, 500);
+    }
+  }, 3000);
+};
+
+// ── SKILLS RADAR CHART ──
+const initRadarChart = () => {
+  const ctx = document.getElementById('radarChart');
+  if (!ctx || typeof Chart === 'undefined') return;
+
+  const gridColor = 'rgba(255, 255, 255, 0.08)';
+  const angleLineColor = 'rgba(255, 255, 255, 0.1)';
+  const labelColor = 'rgba(255, 255, 255, 0.7)';
+
+  const data = {
+    labels: ['Computer Vision', 'NLP/LLMs', 'MLOps', 'Data Eng', 'API Systems', 'Automation'],
+    datasets: [{
+      label: 'Capability',
+      data: [0, 0, 0, 0, 0, 0], // Start at 0 for visual entry flow
+      backgroundColor: 'rgba(0, 68, 238, 0.15)',
+      borderColor: 'rgba(0, 68, 238, 1)',
+      borderWidth: 2,
+      pointBackgroundColor: '#0044ee',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: '#0044ee',
+      pointRadius: 4,
+      pointHoverRadius: 6
+    }]
+  };
+
+  const config = {
+    type: 'radar',
+    data: data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0a0a0a',
+          titleFont: { family: 'DM Sans', size: 12, weight: 'bold' },
+          bodyFont: { family: 'DM Sans', size: 12 },
+          displayColors: false,
+          borderColor: 'rgba(0, 68, 238, 0.3)',
+          borderWidth: 1
+        }
+      },
+      scales: {
+        r: {
+          angleLines: { color: angleLineColor },
+          grid: { color: gridColor },
+          pointLabels: {
+            color: labelColor,
+            font: {
+              family: 'DM Sans',
+              size: 10,
+              weight: 'bold'
+            }
+          },
+          ticks: {
+            display: false,
+            stepSize: 20
+          },
+          suggestedMin: 0,
+          suggestedMax: 100
+        }
+      }
+    }
+  };
+
+  const chart = new Chart(ctx, config);
+
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.create({
+      trigger: ctx,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        chart.data.datasets[0].data = [90, 85, 80, 88, 92, 85];
+        chart.update();
+      }
+    });
+  } else {
+    chart.data.datasets[0].data = [90, 85, 80, 88, 92, 85];
+    chart.update();
+  }
+};
+
 // ── ALL PAGE ANIMATIONS ──
 const initAnimations = () => {
   if (typeof gsap === 'undefined') return;
   gsap.registerPlugin(ScrollTrigger);
 
+  // Initialize word swapper and radar chart
+  initWordSwap();
+  initRadarChart();
+
   // ── CINEMATIC ENTRANCE ──
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl
     .from('nav', { y: -40, opacity: 0, duration: 0.4, delay: 0.05 })
-    .from('.hero-available', { opacity: 0, y: 10, duration: 0.3 }, '-=0.15')
-    .from('.hero-role', { opacity: 0, y: 12, duration: 0.4 }, '-=0.15')
+    .from('.live-status-widget', { opacity: 0, y: -10, duration: 0.35 }, '-=0.15')
+    .from('.hero-role-wrapper', { opacity: 0, y: 12, duration: 0.4 }, '-=0.15')
     .from('.hero-name', { opacity: 0, y: 16, duration: 0.5 }, '-=0.2')
     .from('.hero-desc', { opacity: 0, y: 12, duration: 0.4 }, '-=0.2')
     .from('.hero-btns', { opacity: 0, y: 8, duration: 0.3 }, '-=0.15')
@@ -120,25 +261,14 @@ const initAnimations = () => {
 
   // ── COUNTER ANIMATION ──
   document.querySelectorAll('.count-up').forEach(counter => {
-    const target = parseFloat(counter.dataset.target);
-    const decimals = parseInt(counter.dataset.decimals || '0');
+    // If it is inside moments stack, let stacking timeline trigger it
+    if (counter.closest('.moment-section')) return;
+
     ScrollTrigger.create({
       trigger: counter,
       start: 'top 85%',
       once: true,
-      onEnter: () => {
-        const duration = 1800;
-        const startTime = performance.now();
-        const update = (now) => {
-          const elapsed = now - startTime;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const current = target * eased;
-          counter.textContent = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
-          if (progress < 1) requestAnimationFrame(update);
-        };
-        requestAnimationFrame(update);
-      }
+      onEnter: () => animateCountUp(counter)
     });
   });
 
@@ -157,7 +287,7 @@ const initAnimations = () => {
       scale: 0.98,
       duration: 1.0,
       ease: "power3.out",
-      clearProps: "all" // Important: clear opacity: 0 after animation
+      clearProps: "all"
     });
   });
 
@@ -185,10 +315,14 @@ const initAnimations = () => {
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: "+=60%", // Drastically reduced for nearly immediate clarity
+        end: "+=60%",
         pin: true,
-        scrub: 0.5, // Faster tracking
-        anticipatePin: 1
+        scrub: 0.5,
+        anticipatePin: 1,
+        onEnter: () => {
+          const counter = section.querySelector('.count-up');
+          if (counter) animateCountUp(counter);
+        }
       }
     });
 
@@ -197,7 +331,6 @@ const initAnimations = () => {
       .to(narrative, { opacity: 1, y: 0, duration: 0.3 }, "-=0.1")
       .to(flare, { opacity: i % 2 === 0 ? 0.1 : 0.2, scale: 1.1, duration: 0.5 }, 0);
 
-    // Fade out effect for all but the last section
     if (!isLast) {
       mt.to(content, { opacity: 0, y: -20, duration: 0.3 }, "+=0.1");
     }
@@ -211,7 +344,7 @@ const initAnimations = () => {
   if (rail && cards.length > 0 && dots.length > 0) {
     const observerOptions = {
       root: rail,
-      threshold: 0.6 // Card must be 60% visible to trigger
+      threshold: 0.6
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -263,16 +396,70 @@ const initAnimations = () => {
   });
 
   function updateLabel(text) {
-    stickyLabel.innerText = text;
-    stickyLabel.classList.add('active');
+    if (stickyLabel) {
+      stickyLabel.innerText = text;
+      stickyLabel.classList.add('active');
+    }
   }
 
   function hideLabelIfLast(id) {
-    if (id === '#contact') stickyLabel.classList.remove('active');
+    if (id === '#contact' && stickyLabel) stickyLabel.classList.remove('active');
   }
 
   function hideLabelIfFirst(id) {
-    if (id === '.moments-stack') stickyLabel.classList.remove('active');
+    if (id === '.moments-stack' && stickyLabel) stickyLabel.classList.remove('active');
+  }
+};
+
+// ── GITHUB DYNAMIC HEATMAP ──
+const initGitHubHeatmap = (events) => {
+  const container = document.getElementById('github-heatmap');
+  if (!container) return;
+
+  const activityMap = {};
+  events.forEach(event => {
+    if (event.created_at) {
+      const dateStr = event.created_at.split('T')[0];
+      activityMap[dateStr] = (activityMap[dateStr] || 0) + 1;
+    }
+  });
+
+  container.innerHTML = '';
+  const now = new Date();
+  const startDate = new Date();
+  startDate.setDate(now.getDate() - 83); // 12 weeks = 84 days
+
+  for (let w = 0; w < 12; w++) {
+    const col = document.createElement('div');
+    col.style.display = 'flex';
+    col.style.flexDirection = 'column';
+    col.style.gap = '3px';
+
+    for (let d = 0; d < 7; d++) {
+      const currentDate = new Date(startDate);
+      currentDate.setDate(startDate.getDate() + (w * 7) + d);
+      const dateStr = currentDate.toISOString().split('T')[0];
+      const count = activityMap[dateStr] || 0;
+
+      const cell = document.createElement('div');
+      cell.className = 'heatmap-cell';
+      cell.style.width = '10px';
+      cell.style.height = '10px';
+      cell.style.borderRadius = '2px';
+      cell.style.cursor = 'pointer';
+      cell.title = `${dateStr}: ${count} activity point${count !== 1 ? 's' : ''}`;
+      
+      let bgColor = 'var(--heatmap-bg-empty, #e5e5e7)';
+      if (count > 0) {
+        if (count === 1) bgColor = 'rgba(0, 68, 238, 0.25)';
+        else if (count <= 3) bgColor = 'rgba(0, 68, 238, 0.5)';
+        else if (count <= 6) bgColor = 'rgba(0, 68, 238, 0.75)';
+        else bgColor = 'rgba(0, 68, 238, 1.0)';
+      }
+      cell.style.background = bgColor;
+      col.appendChild(cell);
+    }
+    container.appendChild(col);
   }
 };
 
@@ -301,7 +488,7 @@ const initGitHubFeed = async () => {
   };
 
   try {
-    const res = await fetch(`https://api.github.com/users/${USER}/events/public?per_page=10`);
+    const res = await fetch(`https://api.github.com/users/${USER}/events/public?per_page=30`);
     if (!res.ok) throw new Error('API error');
     const events = await res.json();
 
@@ -310,19 +497,8 @@ const initGitHubFeed = async () => {
       return;
     }
 
-    // ── VELOCITY SIGNALS ──
-    const lastCommitTime = document.getElementById('last-commit-time');
-    const featuresShipped = document.getElementById('features-shipped');
-
-    if (lastCommitTime && events[0]) {
-      lastCommitTime.textContent = timeAgo(events[0].created_at);
-    }
-
-    if (featuresShipped) {
-      // Estimate "features" by counting unique repos pushed to in last 30 events or distinct PushEvents
-      const pushEvents = events.filter(e => e.type === 'PushEvent');
-      featuresShipped.textContent = `${Math.max(3, pushEvents.length)} Features`;
-    }
+    // Render Heatmap Grid
+    initGitHubHeatmap(events);
 
     feed.innerHTML = events.slice(0, 6).map(ev => {
       const t = typeLabel[ev.type] || typeLabel.default;

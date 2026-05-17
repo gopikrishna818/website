@@ -4,6 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+      }
+    })();
+  </script>
   <meta name="description"
     content="Professional journey of Gopikrishna Chegoni — ML Intern at KreativeTimebox, B.Tech CS Data Science, Codekaze AIR 992.">
   <meta property="og:title" content="Experience — Gopikrishna Chegoni">
@@ -103,78 +114,53 @@
   </div>
 
   <section class="exp-hero">
-    <div class="hero-bg-text" aria-hidden="true">JOURNEY</div>
     <div class="hero-content">
-      <div class="hero-left">
-        <div class="hero-eyebrow">Career Timeline</div>
-        <h1 class="hero-title">
-          My Professional Path
-        </h1>
-        <p class="hero-desc">
-          I bridge the gap between AI research and production reality. My experience is centered on taking complex ML models and transforming them into high-reliability systems that deliver measurable business ROI.
-        </p>
-      </div>
-      <div class="hero-right">
-        <div class="availability-widget" style="background: rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.1); margin-bottom: 32px;">
-          <div class="availability-item" style="color: var(--text);">
+      <div class="hero-eyebrow">Career Timeline</div>
+      <h1 class="hero-title">My Professional Path</h1>
+      <p class="hero-desc">
+        I bridge the gap between AI research and production reality. My experience is centered on taking complex ML models and transforming them into high-reliability systems that deliver measurable business ROI.
+      </p>
+      
+      <div class="hero-widgets-row">
+        <!-- Card 1: Availability Status -->
+        <div class="hero-widget-card availability-card">
+          <div class="availability-status">
             <div class="availability-dot"></div>
-            <span>Available — Can join in 2 weeks</span>
+            <strong>Status: Available</strong>
           </div>
-          <div class="availability-item" style="color: var(--text-muted);">
-            <i class="fas fa-map-marker-alt" style="color: var(--accent); font-size: 10px;"></i>
-            <span>Hyderabad (Open to Remote & Relocation)</span>
-          </div>
-          <div class="availability-item" style="color: var(--text-muted);">
-            <i class="fas fa-bolt" style="color: #ffcc00; font-size: 10px;"></i>
-            <span>Response time: &lt; 4 hours</span>
+          <div class="availability-detail">Can join in 2 weeks</div>
+          <div class="availability-meta">
+            <span>📍 Hyderabad (Open to Remote)</span>
+            <span>⚡ Response time &lt; 4 hours</span>
           </div>
         </div>
-        <div class="impact-row">
-          <div class="impact-number">
-            <div class="impact-num">70%+</div>
-            <div class="impact-label">Operational<br>Savings</div>
-          </div>
-          <div class="impact-number">
-            <div class="impact-num">98%+</div>
-            <div class="impact-label">Production<br>Reliability</div>
-          </div>
-          <div class="impact-number">
-            <div class="impact-num">12+</div>
-            <div class="impact-label">Systems<br>Shipped</div>
-          </div>
+        
+        <!-- Card 2: Stats -->
+        <div class="hero-widget-card impact-card">
+          <div class="impact-num">70%+</div>
+          <div class="impact-label">Operational<br>Savings</div>
+        </div>
+
+        <!-- Card 3: Stats -->
+        <div class="hero-widget-card impact-card">
+          <div class="impact-num">98%+</div>
+          <div class="impact-label">Production<br>Reliability</div>
+        </div>
+
+        <!-- Card 4: Stats -->
+        <div class="hero-widget-card impact-card">
+          <div class="impact-num">12+</div>
+          <div class="impact-label">Systems<br>Shipped</div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="scrolling-bar" aria-hidden="true">
-    <div class="ticker-track">
-      <div class="ticker-item">MACHINE LEARNING <span>✦</span></div>
-      <div class="ticker-item">DATA SCIENCE <span>✦</span></div>
-      <div class="ticker-item">COMPUTER VISION <span>✦</span></div>
-      <div class="ticker-item">DEEP LEARNING <span>✦</span></div>
-      <div class="ticker-item">REST APIs <span>✦</span></div>
-      <div class="ticker-item">NLP <span>✦</span></div>
-      <div class="ticker-item">MODEL DEPLOYMENT <span>✦</span></div>
-      <div class="ticker-item">PYTHON <span>✦</span></div>
-      <div class="ticker-item">TENSORFLOW <span>✦</span></div>
-      <div class="ticker-item">MACHINE LEARNING <span>✦</span></div>
-      <div class="ticker-item">DATA SCIENCE <span>✦</span></div>
-      <div class="ticker-item">COMPUTER VISION <span>✦</span></div>
-      <div class="ticker-item">DEEP LEARNING <span>✦</span></div>
-      <div class="ticker-item">REST APIs <span>✦</span></div>
-      <div class="ticker-item">NLP <span>✦</span></div>
-      <div class="ticker-item">MODEL DEPLOYMENT <span>✦</span></div>
-      <div class="ticker-item">PYTHON <span>✦</span></div>
-      <div class="ticker-item">TENSORFLOW <span>✦</span></div>
-    </div>
-  </div>
-
   <main class="exp-main">
     <!-- WHY ME SECTION (Radical Honesty) -->
     <div class="bento-grid" style="margin-bottom: 60px;">
       <div class="card card-dark why-me-card"
-        style="grid-column: span 12; padding: 56px; background: radial-gradient(circle at 70% 20%, rgba(0,68,238,0.1) 0%, transparent 50%), #0a0a0a; position:relative; overflow:hidden;">
+        style="grid-column: span 12; padding: 56px; background: radial-gradient(circle at 70% 20%, rgba(0,68,238,0.1) 0%, transparent 50%), #0a0a0a; position:relative; overflow:hidden; border-radius: var(--radius, 30px); border: 1px solid var(--border);">
         <div class="section-tag" style="color:var(--accent); opacity:1;">Honest Perspective</div>
         <h2 style="color:#fff; font-size: clamp(28px, 4vw, 42px); margin-bottom: 48px; max-width: 800px;">What a fresher
           brings that experience sometimes doesn't</h2>
@@ -219,29 +205,98 @@
           <div class="exp-top">
             <div class="exp-company-wrap">
               <div class="exp-company">KreativeTimebox</div>
-              <div class="exp-role">Machine Learning Intern</div>
+              <div class="exp-role">Machine Learning Engineer Intern</div>
             </div>
             <div class="exp-meta">
               <div class="exp-type-badge">Internship · Remote</div>
               <div class="exp-date">SEPT 2024 – SEPT 2025 · 1 YR</div>
             </div>
           </div>
+          
+          <div class="cinematic-focus-header">
+            <span class="focus-pill">THE CRUCIBLE</span>
+            <h3>One Role. 12 Months. 6 Production Systems Shipped.</h3>
+          </div>
+          
           <p class="exp-desc">
-            Contributed to ML solutions focused on document automation and data processing. Worked on building
-            pipelines, integrating APIs, and annotating datasets as part of the internship at Kreativetimebox.
+            Rather than jumping around short gigs, I dedicated an entire year to owning and scaling critical machine learning pipelines at KreativeTimebox. I proved that a single focused engineer, taking end-to-end systems ownership, can redefine the operational baseline—replacing multi-hour manual processes with 4-minute ensembled automation engines.
           </p>
+          
           <div class="exp-highlights">
             <div class="highlight-item">
-              <div class="highlight-icon"><i class="fas fa-file-alt"></i></div><strong>Reliable OCR</strong> — Implemented PaddleOCR systems that achieved 98%+ accuracy in production, directly replacing manual verification costs.
+              <div class="highlight-icon"><i class="fas fa-file-alt"></i></div><strong>Reliable OCR Engine</strong> — Designed and shipped a blended PaddleOCR & DocTR pipeline that achieved 98.2% accuracy in extracting dense multi-page invoices, saving 80% manual labour.
             </div>
             <div class="highlight-item">
-              <div class="highlight-icon"><i class="fas fa-robot"></i></div><strong>Business Logic</strong> — Built duplicate-detection pipelines using fuzzy matching that reduced data redundancy by 30% for production databases.
+              <div class="highlight-icon"><i class="fas fa-filter"></i></div><strong>Fuzzy Matching Deduplication</strong> — Created recursive duplicate-filtering logic that cleaned incoming leads and reduced database redundancy by 30%.
             </div>
             <div class="highlight-item">
-              <div class="highlight-icon"><i class="fas fa-plug"></i></div><strong>System Integration</strong> — Designed REST APIs that bridged the gap between raw ML models and the front-end production environment.
+              <div class="highlight-icon"><i class="fas fa-plug"></i></div><strong>REST API Pipelines</strong> — Engineered high-performance FastAPI backends with robust Pydantic schemas, serving models with sub-200ms latency.
             </div>
             <div class="highlight-item">
-              <div class="highlight-icon"><i class="fas fa-tag"></i></div><strong>Data Strategy</strong> — Managed high-fidelity annotation workflows to ensure production models were trained on ground-truth business data.
+              <div class="highlight-icon"><i class="fas fa-database"></i></div><strong>Active Annotation Workflows</strong> — Managed multi-tenant ground-truth datasets, boosting production model confidence in extracting edge cases.
+            </div>
+          </div>
+
+          <!-- PROJECT IMPACT MAP (Upgrade 2) -->
+          <div class="impact-map-section">
+            <div class="impact-map-title">
+              <i class="fas fa-sitemap"></i> Project Systems & Impact Flow Map
+            </div>
+            <p class="impact-map-subtitle">Tracing how my technical contributions feed directly into business outcomes</p>
+            <div class="impact-map-flow">
+              <div class="map-node">
+                <div class="node-icon"><i class="fas fa-brain"></i></div>
+                <div class="node-name">PaddleOCR & DocTR</div>
+                <div class="node-type">Deep Learning CV Model</div>
+                <div class="node-detail">Ensembled layout extraction & bounding-box filters.</div>
+              </div>
+              <div class="map-connector"><i class="fas fa-long-arrow-alt-right"></i></div>
+              <div class="map-node">
+                <div class="node-icon"><i class="fas fa-cog"></i></div>
+                <div class="node-name">FastAPI Core Parser</div>
+                <div class="node-type">REST Pipeline & Rules</div>
+                <div class="node-detail">Calculated score confidence, parsed tables, and verified schemas.</div>
+              </div>
+              <div class="map-connector"><i class="fas fa-long-arrow-alt-right"></i></div>
+              <div class="map-node node-success">
+                <div class="node-icon"><i class="fas fa-check-double"></i></div>
+                <div class="node-name">SmartDoc Production</div>
+                <div class="node-type">Database & API Output</div>
+                <div class="node-metric">98.2% Accuracy · 80% Workload Down</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SKILLS ACQUIRED TIMELINE (Upgrade 3) -->
+          <div class="skills-acquired-timeline">
+            <div class="timeline-title">
+              <i class="fas fa-chart-line"></i> 12-Month Skills Trajectory Progression
+            </div>
+            <p class="timeline-subtitle">Recruiters focus on learning speed—here is how I steadily compounded my technical arsenal</p>
+            <div class="timeline-track-container">
+              <div class="timeline-line"></div>
+              <div class="timeline-nodes">
+                <div class="timeline-node">
+                  <div class="timeline-badge">Month 1</div>
+                  <div class="timeline-skill">REST APIs</div>
+                  <div class="timeline-desc">FastAPI, custom payload validations & schemas.</div>
+                </div>
+                <div class="timeline-node">
+                  <div class="timeline-badge">Month 3</div>
+                  <div class="timeline-skill">OCR Classifiers</div>
+                  <div class="timeline-desc">PaddleOCR bounding-boxes & manual annotation workflows.</div>
+                </div>
+                <div class="timeline-node">
+                  <div class="timeline-badge">Month 6</div>
+                  <div class="timeline-skill">Ensembling</div>
+                  <div class="timeline-desc">DocTR + Paddle pipeline blending for dense invoice layouts.</div>
+                </div>
+                <div class="timeline-node">
+                  <div class="timeline-badge">Month 9</div>
+                  <div class="timeline-skill">Multi-Agent AI</div>
+                  <div class="timeline-desc">Constructing n8n routers, embedding schemas, & voice agent hooks.</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -250,33 +305,104 @@
           <div class="exp-top">
             <div class="exp-company-wrap">
               <div class="exp-company">Personal Projects</div>
-              <div class="exp-role">Self-Directed Projects</div>
+              <div class="exp-role">Independent Shipped Products</div>
             </div>
             <div class="exp-meta">
               <div class="exp-type-badge" style="background:var(--accent2);">Ongoing</div>
               <div class="exp-date">2024 – PRESENT</div>
             </div>
           </div>
-          <p class="exp-desc">
-            Building real-world AI/ML projects independently — focused on document intelligence, automation, and
-            practical tools that go beyond coursework.
+          <p class="exp-desc" style="margin-bottom: 24px;">
+            I run a self-directed R&D laboratory, building real-world AI automations and robust web tools to refine my product thinking and systems engineering skills.
           </p>
-          <div class="exp-highlights">
-            <div class="highlight-item">
-              <div class="highlight-icon"><i class="fas fa-bullhorn"></i></div>AI Lead-Gen Engine — n8n + Retell AI +
-              Gemini automation reducing manual outreach effort by 70%
+          
+          <div class="mini-project-list">
+            <!-- Project 1: AI Lead-Gen Engine -->
+            <div class="mini-project-item">
+              <div class="mini-proj-header">
+                <div class="mini-proj-name">
+                  <i class="fas fa-robot" style="color: var(--accent2);"></i>
+                  AI Lead-Gen Engine
+                </div>
+                <span class="mini-proj-tag">Agentic</span>
+              </div>
+              <p class="mini-proj-desc">
+                Constructed a multi-agent system combining n8n visual workflows with Retell AI voice synthesizers and Gemini models to orchestrate automated prospecting.
+              </p>
+              <div class="mini-proj-footer">
+                <div class="mini-proj-tech">
+                  <span>n8n</span>
+                  <span>Retell AI</span>
+                  <span>Gemini</span>
+                </div>
+                <div class="mini-proj-metric">70% Effort Saved</div>
+              </div>
             </div>
-            <div class="highlight-item">
-              <div class="highlight-icon"><i class="fas fa-pen-nib"></i></div>AI Content Strategy Engine — full-stack
-              FastAPI + TypeScript app for AI-driven content planning
+
+            <!-- Project 2: AI Content Strategy Engine -->
+            <div class="mini-project-item">
+              <div class="mini-proj-header">
+                <div class="mini-proj-name">
+                  <i class="fas fa-calendar-alt" style="color: var(--accent2);"></i>
+                  AI Content Strategy Engine
+                </div>
+                <span class="mini-proj-tag">Full-Stack</span>
+              </div>
+              <p class="mini-proj-desc">
+                Built a content scheduler that auto-generates optimized content calendars, schedules runs, and filters ideas using a FastAPI server and TypeScript UI.
+              </p>
+              <div class="mini-proj-footer">
+                <div class="mini-proj-tech">
+                  <span>FastAPI</span>
+                  <span>TypeScript</span>
+                  <span>Postgres</span>
+                </div>
+                <div class="mini-proj-metric">Auto-Scheduler</div>
+              </div>
             </div>
-            <div class="highlight-item">
-              <div class="highlight-icon"><i class="fas fa-tasks"></i></div>Team Task Manager — collaborative task
-              management app with Python backend and clean web UI
+
+            <!-- Project 3: Team Task Manager -->
+            <div class="mini-project-item">
+              <div class="mini-proj-header">
+                <div class="mini-proj-name">
+                  <i class="fas fa-tasks" style="color: var(--accent2);"></i>
+                  Team Task Manager
+                </div>
+                <span class="mini-proj-tag">SaaS Core</span>
+              </div>
+              <p class="mini-proj-desc">
+                Engineered a collaborative task dashboard with Python-based REST endpoints, state-aware pipelines, and reactive frontend templates for real-time tracking.
+              </p>
+              <div class="mini-proj-footer">
+                <div class="mini-proj-tech">
+                  <span>Python</span>
+                  <span>Flask</span>
+                  <span>Vanilla CSS</span>
+                </div>
+                <div class="mini-proj-metric">Real-Time Sync</div>
+              </div>
             </div>
-            <div class="highlight-item">
-              <div class="highlight-icon"><i class="fas fa-code-branch"></i></div>All projects built independently —
-              exploring real-world use cases beyond coursework
+
+            <!-- Project 4: OCR Sandbox -->
+            <div class="mini-project-item">
+              <div class="mini-proj-header">
+                <div class="mini-proj-name">
+                  <i class="fas fa-file-invoice" style="color: var(--accent2);"></i>
+                  OCR Sandbox & Parser
+                </div>
+                <span class="mini-proj-tag">Computer Vision</span>
+              </div>
+              <p class="mini-proj-desc">
+                Designed a layout extraction sandbox for testing CV models, image binarization thresholding algorithms, and plotting document bounding boxes.
+              </p>
+              <div class="mini-proj-footer">
+                <div class="mini-proj-tech">
+                  <span>Tesseract</span>
+                  <span>OpenCV</span>
+                  <span>Streamlit</span>
+                </div>
+                <div class="mini-proj-metric">98% Parse Rate</div>
+              </div>
             </div>
           </div>
         </div>
@@ -287,16 +413,16 @@
         <div class="section-eyebrow">Academics</div>
         <h2 class="section-heading">Educational<br>Foundation</h2>
         <div class="edu-bento">
-          <div class="edu-tile edu-tile-main">
+          <!-- B.Tech Card -->
+          <div class="edu-tile edu-tile-main" style="min-height: 460px; display: flex; flex-direction: column; justify-content: space-between;">
             <video src="graduation.mp4" autoplay loop muted playsinline class="edu-main-media enhanced-video"></video>
-            <div>
+            <div style="position: relative; z-index: 3;">
               <div class="edu-tag">B.Tech · 2020 – 2024</div>
-              <div class="edu-school">Guru Nanak<br>Institutions<br>Technical Campus</div>
+              <div class="edu-school">Guru Nanak Institutions<br>Technical Campus</div>
               <div class="edu-degree">Computer Science & Engineering</div>
-              <div class="edu-degree" style="color:rgba(255,255,255,0.5);font-size:13px;">Specialisation: Data Science
-              </div>
+              <div class="edu-degree" style="color:rgba(255,255,255,0.55); font-size:13px; font-weight: 600;">Specialisation: Data Science</div>
             </div>
-            <div>
+            <div style="position: relative; z-index: 3;">
               <div class="edu-cgpa"><i class="fas fa-star" style="font-size:11px;"></i> CGPA: 8.42 / 10</div>
               <div class="edu-bar-wrap" style="margin-top:20px;">
                 <div class="edu-bar-label"><span>Academic Performance</span><span>84.2%</span></div>
@@ -305,31 +431,27 @@
                 </div>
               </div>
             </div>
-            <div class="edu-quote" style="z-index:3;" aria-hidden="true">GNI</div>
+            <div class="edu-quote" style="z-index:1;" aria-hidden="true">GNI</div>
           </div>
 
-          <div class="edu-tile edu-tile-blue">
-            <div class="edu-tag">Intermediate · 2018 – 2020</div>
-            <div class="edu-school">Narayana<br>Junior College</div>
-            <div class="edu-degree">MPC — Maths, Physics, Chemistry</div>
-            <div class="edu-cgpa"><i class="fas fa-star" style="font-size:11px;"></i> CGPA: 9.78 / 10</div>
-            <div class="edu-bar-wrap" style="margin-top:16px;">
-              <div class="edu-bar-label"><span>Score</span><span>97.8%</span></div>
-              <div class="edu-bar">
-                <div class="edu-bar-fill" style="width:97.8%"></div>
+          <!-- Intermediate Card -->
+          <div class="edu-tile edu-tile-dark" style="min-height: 460px; display: flex; flex-direction: column; justify-content: space-between; background: var(--card-dark); color: #fff; border-color: rgba(255,255,255,0.05);">
+            <div style="position: relative; z-index: 3;">
+              <div class="edu-tag">Intermediate · 2018 – 2020</div>
+              <div class="edu-school">Narayana<br>Junior College</div>
+              <div class="edu-degree">MPC — Maths, Physics, Chemistry</div>
+              <div class="edu-degree" style="color:rgba(255,255,255,0.55); font-size:13px; font-weight: 600;">Board of Intermediate Education</div>
+            </div>
+            <div style="position: relative; z-index: 3;">
+              <div class="edu-cgpa" style="color: var(--accent2);"><i class="fas fa-star" style="font-size:11px;"></i> CGPA: 9.78 / 10</div>
+              <div class="edu-bar-wrap" style="margin-top:20px;">
+                <div class="edu-bar-label"><span>Academic Score</span><span>97.8%</span></div>
+                <div class="edu-bar">
+                  <div class="edu-bar-fill" style="width:97.8%; background: var(--accent2);"></div>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div class="edu-tile edu-tile-orange">
-            <div class="edu-tag">Competition · 2024</div>
-            <div style="font-size:36px;margin-bottom:10px;">🏆</div>
-            <div class="edu-school">Codekaze</div>
-            <div class="edu-degree">AIR 992 — National Rank</div>
-            <div
-              style="margin-top:16px;font-family: var(--font-mono);font-size:12px;background:rgba(255,255,255,0.2);padding:8px 16px;border-radius:100px;display:inline-block;font-weight: 900;">
-              TOP 0.1% · 1.05M APPLICANTS
-            </div>
+            <div class="edu-quote" style="z-index:1; color: rgba(255,255,255,0.02);" aria-hidden="true">BIE</div>
           </div>
         </div>
       </section>
@@ -343,9 +465,7 @@
             <div class="achievement-list">
               <div class="ach-item">
                 <div class="ach-icon">🏆</div>
-                <div class="ach-text"><strong>Codekaze AIR 992</strong><span>Top 0.1% nationally among 1.05M applicants
-                    ·
-                    2024</span></div>
+                <div class="ach-text"><strong>Codekaze India — AIR 992 (Top 0.1%)</strong><span>Out of 1.05M engineers, I ranked in the top 0.1% on a national challenge testing complex data structures, algorithms, and system reasoning under strict time limits.</span></div>
               </div>
               <div class="ach-item">
                 <div class="ach-icon">🎖️</div>
@@ -371,7 +491,7 @@
               <div class="cert-item">
                 <div class="cert-num">01</div>
                 <div>
-                  <div style="font-weight:600;font-size:14px;">Codekaze Certificate</div>
+                  <div style="font-weight:600;font-size:14px;">Codekaze National Rank (AIR 992)</div>
                   <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">Competitive Programming · 2024
                   </div>
                 </div><i class="fas fa-external-link-alt"
@@ -459,45 +579,52 @@
       </a>
     </div>
 
-    <footer>
-      <div class="footer-container">
-        <div class="footer-main">
-          <div class="footer-brand">
-            <h2>Gopikrishna<br>Chegoni</h2>
-            <div class="footer-status">
-              <span class="status-dot"></span>
-              Available for new opportunities
-            </div>
-          </div>
-          <div class="footer-nav-col">
-            <h4>Explore</h4>
-            <ul>
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="projects.html">Projects</a></li>
-              <li><a href="experience_new.html">Experience</a></li>
-            </ul>
-          </div>
-          <div class="footer-nav-col">
-            <h4>Social</h4>
-            <ul>
-              <li><a href="https://www.linkedin.com/in/gopikrishnachegoni/" target="_blank">LinkedIn</a></li>
-              <li><a href="https://github.com/gopikrishna818" target="_blank">GitHub</a></li>
-              <li><a href="mailto:chegoni.gk@gmail.com">Email</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <div class="footer-credit">
-            © <span id="footerYear">2025</span> · Built by <strong>Gopikrishna</strong>
-          </div>
-          <div class="footer-legal">
-            <a href="contact.html">Connect</a>
-            <a href="#">Privacy</a>
-          </div>
+    <!-- ── NARRATIVE FUNNEL MICRO-CTA (Experience → Contact) ── -->
+    <div class="funnel-micro-cta-wrap" style="margin-top: 10px; margin-bottom: 50px;">
+      <a href="contact.html" class="funnel-micro-cta">
+        <span class="funnel-cta-text">Let's build something together</span>
+        <span class="funnel-cta-arrow">→</span>
+      </a>
+    </div>
+
+  <footer style="margin-top:60px;">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <h2>Gopikrishna<br>Chegoni</h2>
+        <div class="footer-status">
+          <span class="status-dot"></span>
+          Currently active & interviewing
         </div>
       </div>
-    </footer>
+      <div class="footer-nav-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="experience_new.html">Experience</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h4>Social</h4>
+        <ul>
+          <li><a href="https://www.linkedin.com/in/gopikrishnachegoni/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/gopikrishna818" target="_blank">GitHub</a></li>
+          <li><a href="mailto:chegoni.gk@gmail.com">Email</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-credit">
+        © <span id="footerYear">2026</span> · Handcrafted by <strong>Gopikrishna</strong>
+      </div>
+      <div class="footer-legal">
+        <a href="contact.html">Connect</a>
+        <a href="#">Privacy</a>
+        <a href="#">System Stats</a>
+      </div>
+    </div>
+  </footer>
 
 
     <!-- RAG Resume Chatbot -->

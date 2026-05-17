@@ -4,6 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+      }
+    })();
+  </script>
   <meta name="description"
     content="Projects by Gopikrishna Chegoni — SmartDoc Parser (98% OCR accuracy), AI Lead-Gen Engine, Enterprise Multi-Agent RAG, and more.">
   <meta property="og:title" content="Projects — Gopikrishna Chegoni">
@@ -125,13 +136,25 @@
 
 
   <main style="background: #fff;">
-    <!-- PAGE TITLE -->
-    <div class="page-title" style="text-align: center; border-bottom: 1px solid #eee;">
-      <div class="page-grid-bg" aria-hidden="true"></div>
-      <h1 class="projects-h1" style="margin: 0 auto 24px; max-width: 900px;">I build AI systems that replace hours of
-        manual work</h1>
-      <p class="projects-sub" style="margin: 0 auto 48px; font-weight: 800; color: #000; font-size: 20px;">6 systems
-        shipped. 70% less manual work. Zero fluff.</p>
+    <!-- IMPACT TICKER (Upgrade 1) -->
+    <div class="impact-ticker-container">
+      <div class="impact-ticker-wrapper">
+        <div class="impact-ticker-track">
+          <span>→ 98.2% OCR Accuracy</span>
+          <span>→ 80% Less Manual Work</span>
+          <span>→ 70% Lead Gen ROI</span>
+          <span>→ 48hrs Delivery</span>
+          <span>→ 4mins Processing Time</span>
+          <span>→ #992 of 1M+ Developer Rank</span>
+          <!-- Duplicate for infinite seamless loop -->
+          <span>→ 98.2% OCR Accuracy</span>
+          <span>→ 80% Less Manual Work</span>
+          <span>→ 70% Lead Gen ROI</span>
+          <span>→ 48hrs Delivery</span>
+          <span>→ 4mins Processing Time</span>
+          <span>→ #992 of 1M+ Developer Rank</span>
+        </div>
+      </div>
     </div>
 
     <!-- CURRENTLY BUILDING (LIVE TRACKER) -->
@@ -169,6 +192,19 @@
             <div style="display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.5); font-weight: 700;">
               <i class="fas fa-arrow-right" style="color: var(--accent); font-size: 12px;"></i> Up Next → Hallucination
               Guard Layer
+            </div>
+          </div>
+          
+          <!-- REAL GIT PROGRESS LOG TERMINAL (Upgrade 4) -->
+          <div class="live-terminal-wrap" style="margin-top: 40px; border-radius: 12px; background: #0c0c0e; border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; font-family: var(--font-mono); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);">
+            <div class="terminal-header" style="background: rgba(255, 255, 255, 0.05); padding: 10px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: #ff5f56; display: inline-block;"></span>
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e; display: inline-block;"></span>
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f; display: inline-block;"></span>
+              <span style="margin-left: auto; font-size: 9px; color: rgba(255, 255, 255, 0.4); text-transform: uppercase; font-weight: 800; letter-spacing: 1px;">git log --recent</span>
+            </div>
+            <div id="git-log-terminal" class="terminal-body" style="padding: 20px; font-size: 12px; line-height: 1.6; color: #fff; max-height: 240px; overflow-y: auto; text-align: left;">
+              <div style="color: rgba(255, 255, 255, 0.4);">Initializing pipeline logs...</div>
             </div>
           </div>
         </div>
@@ -234,9 +270,11 @@
         </div>
         <div class="filter-tabs-wrapper">
           <div class="filter-tabs">
-            <button class="filter-tab active" data-filter="all">All Projects <span class="count">4</span></button>
-            <button class="filter-tab" data-filter="AI/ML">AI & ML <span class="count">3</span></button>
-            <button class="filter-tab" data-filter="Automation">Automation <span class="count">1</span></button>
+            <button class="filter-tab active" data-filter="all">All <span class="count">4</span></button>
+            <button class="filter-tab" data-filter="automation">Automation <span class="count">1</span></button>
+            <button class="filter-tab" data-filter="document ai">Document AI <span class="count">1</span></button>
+            <button class="filter-tab" data-filter="agentic">Agentic <span class="count">1</span></button>
+            <button class="filter-tab" data-filter="forecasting">Forecasting <span class="count">1</span></button>
           </div>
         </div>
       </div>
@@ -244,6 +282,14 @@
       <div id="projectsGrid">
         <!-- Projects will be rendered here as rows -->
       </div>
+    </div>
+
+    <!-- ── NARRATIVE FUNNEL MICRO-CTA (Projects → About) ── -->
+    <div class="funnel-micro-cta-wrap">
+      <a href="about.html" class="funnel-micro-cta">
+        <span class="funnel-cta-text">Here's who built these</span>
+        <span class="funnel-cta-arrow">→</span>
+      </a>
     </div>
 
     <!-- FINAL CTA SECTION -->

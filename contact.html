@@ -4,6 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (function () {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark-mode');
+      } else {
+        document.documentElement.classList.remove('dark-mode');
+      }
+    })();
+  </script>
   <meta name="description"
     content="Contact Gopikrishna Chegoni — chegoni.gk@gmail.com | +91-8184835291 | Hyderabad, India. Open to AI/ML roles and remote opportunities.">
   <meta property="og:title" content="Contact — Gopikrishna Chegoni">
@@ -20,8 +31,6 @@
   <!-- GSAP for Physics-Based Motion -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-  
   <link rel="stylesheet" href="css/shared.css">
 <link rel="stylesheet" href="css/contact.css">
   </head>
@@ -105,6 +114,18 @@
       <div class="hero-bg-text" aria-hidden="true">CONNECT</div>
       <h1>Get In Touch</h1>
       <p>Let's build something amazing together. Reach out and let's connect!</p>
+      
+      <!-- OPEN TO ROLES TAGS -->
+      <div class="open-roles-container">
+        <span class="open-roles-label">Actively Seeking / Open to:</span>
+        <div class="open-roles-tags">
+          <span class="role-tag"><i class="fas fa-brain"></i> AI/ML Engineer</span>
+          <span class="role-tag"><i class="fas fa-cog"></i> Production AI Engineer</span>
+          <span class="role-tag"><i class="fas fa-server"></i> MLOps Engineer</span>
+          <span class="role-tag"><i class="fas fa-robot"></i> AI Automation Engineer</span>
+          <span class="role-tag"><i class="fas fa-search"></i> RAG Specialist</span>
+        </div>
+      </div>
     </div>
 
     <!-- CONTACT GRID -->
@@ -129,20 +150,27 @@
         <a href="tel:+918184835291" class="contact-link">+91-8184835291</a>
       </div>
 
-      <!-- LOCATION CARD -->
-      <div class="card card-white contact-card">
-        <div class="contact-icon" style="background: rgba(0,210,106,0.15); color: #00d26a;">
-          <i class="fas fa-map-marker-alt"></i>
+      <!-- RESPONSE GUARANTEE CARD -->
+      <div class="card card-white contact-card guarantee-card">
+        <div class="contact-icon" style="background: rgba(123, 47, 247, 0.15); color: #7b2ff7;">
+          <i class="fas fa-clock"></i>
         </div>
-        <h3>Location</h3>
-        <p>Based in Hyderabad, India</p>
-        <span class="contact-link" style="color: var(--accent);">Open to remote</span>
+        <h3>Response Time</h3>
+        <p>I respond within 4 hours during IST hours. Always.</p>
+        <a href="https://www.linkedin.com/in/gopikrishnachegoni/" target="_blank" rel="noopener noreferrer" class="contact-link" style="color: #7b2ff7;">Message on LinkedIn →</a>
       </div>
 
       <!-- FORM CARD -->
       <div class="card card-white form-card">
         <h2>Send a Message</h2>
-        <p>I'll respond within 24 hours</p>
+        <p style="margin-bottom: 16px;">I'll respond within 24 hours</p>
+        
+        <!-- WHY HIRE ME CTA -->
+        <div class="why-hire-badge">
+          <span class="pulse-ring"></span>
+          <p class="why-hire-text">"I ship production AI. I have the metrics to prove it. Let's talk."</p>
+        </div>
+
         <form class="contact-form" onsubmit="handleSubmit(event)">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="_template" value="table">
@@ -185,11 +213,33 @@
             target="_blank" rel="noopener noreferrer">
             <i class="fab fa-linkedin-in"></i>
             <span>LinkedIn</span>
+            <div class="hover-card linkedin-hover-card">
+              <div class="hover-card-header">
+                <i class="fab fa-linkedin" style="color: #0077b5;"></i>
+                <strong>Gopikrishna Chegoni</strong>
+              </div>
+              <p class="hover-card-headline">ML Engineer | AI Automation & Production Systems</p>
+              <div class="hover-card-stats">
+                <span><i class="fas fa-users"></i> 500+ contacts</span>
+                <span class="active-badge"><span class="dot"></span> Active</span>
+              </div>
+            </div>
           </a>
           <a href="https://github.com/gopikrishna818" class="social-btn-large" title="GitHub" target="_blank"
             rel="noopener noreferrer">
             <i class="fab fa-github"></i>
             <span>GitHub</span>
+            <div class="hover-card github-hover-card">
+              <div class="hover-card-header">
+                <i class="fab fa-github" style="color: var(--text);"></i>
+                <strong>gopikrishna818</strong>
+              </div>
+              <p class="hover-card-headline">Shipping high-reliability AI & Deep Learning CV models</p>
+              <div class="hover-card-stats">
+                <span><i class="fas fa-code-branch"></i> 12+ Repos</span>
+                <span><i class="fas fa-star"></i> 20+ Stars</span>
+              </div>
+            </div>
           </a>
           <a href="https://twitter.com" class="social-btn-large" title="Twitter" target="_blank"
             rel="noopener noreferrer">
@@ -203,13 +253,41 @@
         </div>
       </div>
 
-      <!-- MAPS CARD -->
-      <div class="card maps-card">
-        <div id="map"></div>
-        <div class="location-overlay">
-          <h3>Based In</h3>
-          <div class="location-text">Hyderabad</div>
-          <div class="location-sub">Telangana, India</div>
+      <!-- LOCATION & TIMEZONE CARD -->
+      <div class="card card-dark maps-card location-timezone-card">
+        <!-- Stylized Recognizable Vector India Map with Hyderabad Geolocation Beacon -->
+        <div class="india-map-svg-wrap">
+          <svg viewBox="0 0 160 200" class="india-map-svg" xmlns="http://www.w3.org/2000/svg">
+            <!-- Concentric background grid lines for high-tech look -->
+            <circle cx="78" cy="130" r="50" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1" stroke-dasharray="3,3" />
+            <circle cx="78" cy="130" r="25" fill="none" stroke="rgba(255, 255, 255, 0.04)" stroke-width="1" />
+            <!-- Centered, High-Contrast Geographic India Map Outline -->
+            <path d="M 80,15 
+                     L 83,10 L 88,13 L 88,20 L 85,25 L 89,32 L 95,36 L 102,38 L 103,42 L 108,44 L 108,49 L 114,48 L 115,53 L 111,56 L 113,60 L 118,60 L 121,55 L 129,59 L 136,53 L 145,60 L 141,65 L 150,70 L 145,76 L 136,74 L 134,79 L 126,77 L 122,85 L 115,82 L 113,88 L 107,87 L 105,92 L 100,91 L 95,99 L 91,104 L 94,114 L 91,123 L 86,132 L 80,143 L 75,157 L 70,171 L 67,185 L 64,190 
+                     L 61,185 L 58,171 L 53,157 L 48,143 L 43,132 L 39,123 L 34,114 L 30,104 L 32,109 L 25,103 L 18,97 L 21,90 L 26,86 L 24,79 L 32,74 L 34,68 L 40,65 L 42,59 L 53,56 L 56,51 L 61,42 L 70,37 L 78,40 Z" 
+                  fill="rgba(255, 255, 255, 0.05)" 
+                  stroke="rgba(255, 255, 255, 0.3)" 
+                  stroke-width="1.5" />
+            <!-- Hyderabad Geolocation Pulse Beacon -->
+            <circle cx="78" cy="130" r="5" fill="var(--accent2)" />
+            <circle cx="78" cy="130" r="12" fill="none" stroke="var(--accent2)" stroke-width="1.5" class="pulsing-radar" />
+          </svg>
+        </div>
+
+        <div class="location-card-content">
+          <div class="location-country-badge">
+            <span class="flag-emoji">🇮🇳</span> India
+          </div>
+          <div>
+            <h3>Based in Hyderabad</h3>
+            <p class="location-status-badge"><i class="fas fa-plane-departure"></i> Open to Relocation</p>
+          </div>
+          
+          <div class="timezone-block">
+            <div class="timezone-label">Current Time (IST)</div>
+            <div id="local-time" class="timezone-clock">--:--:-- --</div>
+            <div class="timezone-utc">UTC+5:30</div>
+          </div>
         </div>
       </div>
 
@@ -292,12 +370,6 @@
   <button class="chatbot-toggle" id="chatbotToggle">
     <i class="fas fa-comment-dots"></i>
   </button>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-  
-
-
-  
 
   <div class="side-socials">
     <a href="https://www.linkedin.com/in/gopikrishnachegoni/" title="LinkedIn" target="_blank"
